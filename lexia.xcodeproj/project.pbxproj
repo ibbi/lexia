@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2806987829D0F51E007F5702 /* lexiaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2806987729D0F51E007F5702 /* lexiaApp.swift */; };
+		2806987A29D0F51E007F5702 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2806987929D0F51E007F5702 /* ContentView.swift */; };
+		2806987C29D0F51F007F5702 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2806987B29D0F51F007F5702 /* Assets.xcassets */; };
+		2806987F29D0F51F007F5702 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2806987E29D0F51F007F5702 /* Preview Assets.xcassets */; };
+		2806988929D0F520007F5702 /* lexiaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2806988829D0F520007F5702 /* lexiaTests.swift */; };
+		2806989329D0F520007F5702 /* lexiaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2806989229D0F520007F5702 /* lexiaUITests.swift */; };
+		2806989529D0F520007F5702 /* lexiaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2806989429D0F520007F5702 /* lexiaUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2806988529D0F520007F5702 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2806986C29D0F51E007F5702 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2806987329D0F51E007F5702;
+			remoteInfo = lexia;
+		};
+		2806988F29D0F520007F5702 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2806986C29D0F51E007F5702 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2806987329D0F51E007F5702;
+			remoteInfo = lexia;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2806987429D0F51E007F5702 /* lexia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lexia.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2806987729D0F51E007F5702 /* lexiaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lexiaApp.swift; sourceTree = "<group>"; };
+		2806987929D0F51E007F5702 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2806987B29D0F51F007F5702 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2806987E29D0F51F007F5702 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2806988429D0F520007F5702 /* lexiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lexiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2806988829D0F520007F5702 /* lexiaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lexiaTests.swift; sourceTree = "<group>"; };
+		2806988E29D0F520007F5702 /* lexiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lexiaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2806989229D0F520007F5702 /* lexiaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lexiaUITests.swift; sourceTree = "<group>"; };
+		2806989429D0F520007F5702 /* lexiaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lexiaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2806987129D0F51E007F5702 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2806988129D0F520007F5702 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2806988B29D0F520007F5702 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2806986B29D0F51E007F5702 = {
+			isa = PBXGroup;
+			children = (
+				2806987629D0F51E007F5702 /* lexia */,
+				2806988729D0F520007F5702 /* lexiaTests */,
+				2806989129D0F520007F5702 /* lexiaUITests */,
+				2806987529D0F51E007F5702 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2806987529D0F51E007F5702 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2806987429D0F51E007F5702 /* lexia.app */,
+				2806988429D0F520007F5702 /* lexiaTests.xctest */,
+				2806988E29D0F520007F5702 /* lexiaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2806987629D0F51E007F5702 /* lexia */ = {
+			isa = PBXGroup;
+			children = (
+				2806987729D0F51E007F5702 /* lexiaApp.swift */,
+				2806987929D0F51E007F5702 /* ContentView.swift */,
+				2806987B29D0F51F007F5702 /* Assets.xcassets */,
+				2806987D29D0F51F007F5702 /* Preview Content */,
+			);
+			path = lexia;
+			sourceTree = "<group>";
+		};
+		2806987D29D0F51F007F5702 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				2806987E29D0F51F007F5702 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2806988729D0F520007F5702 /* lexiaTests */ = {
+			isa = PBXGroup;
+			children = (
+				2806988829D0F520007F5702 /* lexiaTests.swift */,
+			);
+			path = lexiaTests;
+			sourceTree = "<group>";
+		};
+		2806989129D0F520007F5702 /* lexiaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2806989229D0F520007F5702 /* lexiaUITests.swift */,
+				2806989429D0F520007F5702 /* lexiaUITestsLaunchTests.swift */,
+			);
+			path = lexiaUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2806987329D0F51E007F5702 /* lexia */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2806989829D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexia" */;
+			buildPhases = (
+				2806987029D0F51E007F5702 /* Sources */,
+				2806987129D0F51E007F5702 /* Frameworks */,
+				2806987229D0F51E007F5702 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lexia;
+			productName = lexia;
+			productReference = 2806987429D0F51E007F5702 /* lexia.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2806988329D0F520007F5702 /* lexiaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2806989B29D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexiaTests" */;
+			buildPhases = (
+				2806988029D0F520007F5702 /* Sources */,
+				2806988129D0F520007F5702 /* Frameworks */,
+				2806988229D0F520007F5702 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2806988629D0F520007F5702 /* PBXTargetDependency */,
+			);
+			name = lexiaTests;
+			productName = lexiaTests;
+			productReference = 2806988429D0F520007F5702 /* lexiaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2806988D29D0F520007F5702 /* lexiaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2806989E29D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexiaUITests" */;
+			buildPhases = (
+				2806988A29D0F520007F5702 /* Sources */,
+				2806988B29D0F520007F5702 /* Frameworks */,
+				2806988C29D0F520007F5702 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2806989029D0F520007F5702 /* PBXTargetDependency */,
+			);
+			name = lexiaUITests;
+			productName = lexiaUITests;
+			productReference = 2806988E29D0F520007F5702 /* lexiaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2806986C29D0F51E007F5702 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					2806987329D0F51E007F5702 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					2806988329D0F520007F5702 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 2806987329D0F51E007F5702;
+					};
+					2806988D29D0F520007F5702 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 2806987329D0F51E007F5702;
+					};
+				};
+			};
+			buildConfigurationList = 2806986F29D0F51E007F5702 /* Build configuration list for PBXProject "lexia" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2806986B29D0F51E007F5702;
+			productRefGroup = 2806987529D0F51E007F5702 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2806987329D0F51E007F5702 /* lexia */,
+				2806988329D0F520007F5702 /* lexiaTests */,
+				2806988D29D0F520007F5702 /* lexiaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2806987229D0F51E007F5702 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2806987F29D0F51F007F5702 /* Preview Assets.xcassets in Resources */,
+				2806987C29D0F51F007F5702 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2806988229D0F520007F5702 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2806988C29D0F520007F5702 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2806987029D0F51E007F5702 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2806987A29D0F51E007F5702 /* ContentView.swift in Sources */,
+				2806987829D0F51E007F5702 /* lexiaApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2806988029D0F520007F5702 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2806988929D0F520007F5702 /* lexiaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2806988A29D0F520007F5702 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2806989529D0F520007F5702 /* lexiaUITestsLaunchTests.swift in Sources */,
+				2806989329D0F520007F5702 /* lexiaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2806988629D0F520007F5702 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2806987329D0F51E007F5702 /* lexia */;
+			targetProxy = 2806988529D0F520007F5702 /* PBXContainerItemProxy */;
+		};
+		2806989029D0F520007F5702 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2806987329D0F51E007F5702 /* lexia */;
+			targetProxy = 2806988F29D0F520007F5702 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2806989629D0F520007F5702 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2806989729D0F520007F5702 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2806989929D0F520007F5702 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"lexia/Preview Content\"";
+				DEVELOPMENT_TEAM = HTUYV24UTH;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ibbi.lexia;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2806989A29D0F520007F5702 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"lexia/Preview Content\"";
+				DEVELOPMENT_TEAM = HTUYV24UTH;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ibbi.lexia;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2806989C29D0F520007F5702 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HTUYV24UTH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ibbi.lexiaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lexia.app/lexia";
+			};
+			name = Debug;
+		};
+		2806989D29D0F520007F5702 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HTUYV24UTH;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ibbi.lexiaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/lexia.app/lexia";
+			};
+			name = Release;
+		};
+		2806989F29D0F520007F5702 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HTUYV24UTH;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ibbi.lexiaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = lexia;
+			};
+			name = Debug;
+		};
+		280698A029D0F520007F5702 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HTUYV24UTH;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ibbi.lexiaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = lexia;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2806986F29D0F51E007F5702 /* Build configuration list for PBXProject "lexia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2806989629D0F520007F5702 /* Debug */,
+				2806989729D0F520007F5702 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2806989829D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexia" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2806989929D0F520007F5702 /* Debug */,
+				2806989A29D0F520007F5702 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2806989B29D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexiaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2806989C29D0F520007F5702 /* Debug */,
+				2806989D29D0F520007F5702 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2806989E29D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexiaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2806989F29D0F520007F5702 /* Debug */,
+				280698A029D0F520007F5702 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2806986C29D0F51E007F5702 /* Project object */;
+}
