@@ -1,0 +1,6 @@
+framework module Pods_lexia_lexiaUITests {
+  umbrella header "Pods-lexia-lexiaUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

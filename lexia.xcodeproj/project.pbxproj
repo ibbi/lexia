@@ -14,6 +14,11 @@
 		2806988929D0F520007F5702 /* lexiaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2806988829D0F520007F5702 /* lexiaTests.swift */; };
 		2806989329D0F520007F5702 /* lexiaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2806989229D0F520007F5702 /* lexiaUITests.swift */; };
 		2806989529D0F520007F5702 /* lexiaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2806989429D0F520007F5702 /* lexiaUITestsLaunchTests.swift */; };
+		280698A829D0F680007F5702 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280698A729D0F680007F5702 /* KeyboardViewController.swift */; };
+		280698AC29D0F680007F5702 /* LexiaKeyboard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 280698A529D0F680007F5702 /* LexiaKeyboard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D269996E777ED6C0E26373A /* Pods_lexia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB3716749B12E7C1161195D /* Pods_lexia.framework */; };
+		56156B25D5612748495AF781 /* Pods_lexia_lexiaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8698FD5D69D123000F47A7 /* Pods_lexia_lexiaUITests.framework */; };
+		B7142F74FDE22FA5F24C758A /* Pods_lexiaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F74C69DBB4EB95ADFC1DF67 /* Pods_lexiaTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,9 +36,32 @@
 			remoteGlobalIDString = 2806987329D0F51E007F5702;
 			remoteInfo = lexia;
 		};
+		280698AA29D0F680007F5702 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2806986C29D0F51E007F5702 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 280698A429D0F680007F5702;
+			remoteInfo = LexiaKeyboard;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		280698B029D0F680007F5702 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				280698AC29D0F680007F5702 /* LexiaKeyboard.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0BD28E69964C2CF855520259 /* Pods-lexiaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lexiaTests.debug.xcconfig"; path = "Target Support Files/Pods-lexiaTests/Pods-lexiaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		272D85C590A3411963EE8427 /* Pods-lexiaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lexiaTests.release.xcconfig"; path = "Target Support Files/Pods-lexiaTests/Pods-lexiaTests.release.xcconfig"; sourceTree = "<group>"; };
 		2806987429D0F51E007F5702 /* lexia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lexia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2806987729D0F51E007F5702 /* lexiaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lexiaApp.swift; sourceTree = "<group>"; };
 		2806987929D0F51E007F5702 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +72,16 @@
 		2806988E29D0F520007F5702 /* lexiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lexiaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2806989229D0F520007F5702 /* lexiaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lexiaUITests.swift; sourceTree = "<group>"; };
 		2806989429D0F520007F5702 /* lexiaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = lexiaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		280698A529D0F680007F5702 /* LexiaKeyboard.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LexiaKeyboard.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		280698A729D0F680007F5702 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		280698A929D0F680007F5702 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EB6EBED8E3A954612E5D0AA /* Pods-lexia-lexiaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lexia-lexiaUITests.release.xcconfig"; path = "Target Support Files/Pods-lexia-lexiaUITests/Pods-lexia-lexiaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4DC8CD8AEFB4C3C32207C1F9 /* Pods-lexia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lexia.debug.xcconfig"; path = "Target Support Files/Pods-lexia/Pods-lexia.debug.xcconfig"; sourceTree = "<group>"; };
+		6DB3716749B12E7C1161195D /* Pods_lexia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lexia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F9BAFC862C03608796D26F0 /* Pods-lexia-lexiaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lexia-lexiaUITests.debug.xcconfig"; path = "Target Support Files/Pods-lexia-lexiaUITests/Pods-lexia-lexiaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		8F74C69DBB4EB95ADFC1DF67 /* Pods_lexiaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lexiaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CEF5C98AE38FD6EF4D9850 /* Pods-lexia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lexia.release.xcconfig"; path = "Target Support Files/Pods-lexia/Pods-lexia.release.xcconfig"; sourceTree = "<group>"; };
+		CC8698FD5D69D123000F47A7 /* Pods_lexia_lexiaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lexia_lexiaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D269996E777ED6C0E26373A /* Pods_lexia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,10 +97,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7142F74FDE22FA5F24C758A /* Pods_lexiaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2806988B29D0F520007F5702 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56156B25D5612748495AF781 /* Pods_lexia_lexiaUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		280698A229D0F680007F5702 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -77,7 +125,10 @@
 				2806987629D0F51E007F5702 /* lexia */,
 				2806988729D0F520007F5702 /* lexiaTests */,
 				2806989129D0F520007F5702 /* lexiaUITests */,
+				280698A629D0F680007F5702 /* LexiaKeyboard */,
 				2806987529D0F51E007F5702 /* Products */,
+				B67E0BBDFB314DF099110EB4 /* Pods */,
+				4402033E17525864EF763CCA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +138,7 @@
 				2806987429D0F51E007F5702 /* lexia.app */,
 				2806988429D0F520007F5702 /* lexiaTests.xctest */,
 				2806988E29D0F520007F5702 /* lexiaUITests.xctest */,
+				280698A529D0F680007F5702 /* LexiaKeyboard.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,6 +179,39 @@
 			path = lexiaUITests;
 			sourceTree = "<group>";
 		};
+		280698A629D0F680007F5702 /* LexiaKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				280698A729D0F680007F5702 /* KeyboardViewController.swift */,
+				280698A929D0F680007F5702 /* Info.plist */,
+			);
+			path = LexiaKeyboard;
+			sourceTree = "<group>";
+		};
+		4402033E17525864EF763CCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6DB3716749B12E7C1161195D /* Pods_lexia.framework */,
+				CC8698FD5D69D123000F47A7 /* Pods_lexia_lexiaUITests.framework */,
+				8F74C69DBB4EB95ADFC1DF67 /* Pods_lexiaTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B67E0BBDFB314DF099110EB4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4DC8CD8AEFB4C3C32207C1F9 /* Pods-lexia.debug.xcconfig */,
+				B6CEF5C98AE38FD6EF4D9850 /* Pods-lexia.release.xcconfig */,
+				6F9BAFC862C03608796D26F0 /* Pods-lexia-lexiaUITests.debug.xcconfig */,
+				2EB6EBED8E3A954612E5D0AA /* Pods-lexia-lexiaUITests.release.xcconfig */,
+				0BD28E69964C2CF855520259 /* Pods-lexiaTests.debug.xcconfig */,
+				272D85C590A3411963EE8427 /* Pods-lexiaTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,13 +219,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2806989829D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexia" */;
 			buildPhases = (
+				6BAA84AC46ED3A0A261513F6 /* [CP] Check Pods Manifest.lock */,
 				2806987029D0F51E007F5702 /* Sources */,
 				2806987129D0F51E007F5702 /* Frameworks */,
 				2806987229D0F51E007F5702 /* Resources */,
+				280698B029D0F680007F5702 /* Embed App Extensions */,
+				D83316367CA615B3AE06ACAE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				280698AB29D0F680007F5702 /* PBXTargetDependency */,
 			);
 			name = lexia;
 			productName = lexia;
@@ -151,6 +240,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2806989B29D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexiaTests" */;
 			buildPhases = (
+				68A5FBC303126FD26EC1EC10 /* [CP] Check Pods Manifest.lock */,
 				2806988029D0F520007F5702 /* Sources */,
 				2806988129D0F520007F5702 /* Frameworks */,
 				2806988229D0F520007F5702 /* Resources */,
@@ -169,9 +259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2806989E29D0F520007F5702 /* Build configuration list for PBXNativeTarget "lexiaUITests" */;
 			buildPhases = (
+				E8589C37EF4ED48E7C54D236 /* [CP] Check Pods Manifest.lock */,
 				2806988A29D0F520007F5702 /* Sources */,
 				2806988B29D0F520007F5702 /* Frameworks */,
 				2806988C29D0F520007F5702 /* Resources */,
+				14B9F572C6A6712D20E3F087 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -182,6 +274,23 @@
 			productName = lexiaUITests;
 			productReference = 2806988E29D0F520007F5702 /* lexiaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		280698A429D0F680007F5702 /* LexiaKeyboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 280698AD29D0F680007F5702 /* Build configuration list for PBXNativeTarget "LexiaKeyboard" */;
+			buildPhases = (
+				280698A129D0F680007F5702 /* Sources */,
+				280698A229D0F680007F5702 /* Frameworks */,
+				280698A329D0F680007F5702 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LexiaKeyboard;
+			productName = LexiaKeyboard;
+			productReference = 280698A529D0F680007F5702 /* LexiaKeyboard.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -204,6 +313,9 @@
 						CreatedOnToolsVersion = 13.1;
 						TestTargetID = 2806987329D0F51E007F5702;
 					};
+					280698A429D0F680007F5702 = {
+						CreatedOnToolsVersion = 13.1;
+					};
 				};
 			};
 			buildConfigurationList = 2806986F29D0F51E007F5702 /* Build configuration list for PBXProject "lexia" */;
@@ -222,6 +334,7 @@
 				2806987329D0F51E007F5702 /* lexia */,
 				2806988329D0F520007F5702 /* lexiaTests */,
 				2806988D29D0F520007F5702 /* lexiaUITests */,
+				280698A429D0F680007F5702 /* LexiaKeyboard */,
 			);
 		};
 /* End PBXProject section */
@@ -250,7 +363,117 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		280698A329D0F680007F5702 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		14B9F572C6A6712D20E3F087 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-lexia-lexiaUITests/Pods-lexia-lexiaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-lexia-lexiaUITests/Pods-lexia-lexiaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lexia-lexiaUITests/Pods-lexia-lexiaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		68A5FBC303126FD26EC1EC10 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-lexiaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6BAA84AC46ED3A0A261513F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-lexia-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D83316367CA615B3AE06ACAE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-lexia/Pods-lexia-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-lexia/Pods-lexia-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lexia/Pods-lexia-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8589C37EF4ED48E7C54D236 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-lexia-lexiaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2806987029D0F51E007F5702 /* Sources */ = {
@@ -279,6 +502,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		280698A129D0F680007F5702 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				280698A829D0F680007F5702 /* KeyboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -291,6 +522,11 @@
 			isa = PBXTargetDependency;
 			target = 2806987329D0F51E007F5702 /* lexia */;
 			targetProxy = 2806988F29D0F520007F5702 /* PBXContainerItemProxy */;
+		};
+		280698AB29D0F680007F5702 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 280698A429D0F680007F5702 /* LexiaKeyboard */;
+			targetProxy = 280698AA29D0F680007F5702 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -413,7 +649,9 @@
 		};
 		2806989929D0F520007F5702 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DC8CD8AEFB4C3C32207C1F9 /* Pods-lexia.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -442,7 +680,9 @@
 		};
 		2806989A29D0F520007F5702 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6CEF5C98AE38FD6EF4D9850 /* Pods-lexia.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -471,6 +711,7 @@
 		};
 		2806989C29D0F520007F5702 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BD28E69964C2CF855520259 /* Pods-lexiaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -496,6 +737,7 @@
 		};
 		2806989D29D0F520007F5702 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 272D85C590A3411963EE8427 /* Pods-lexiaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -521,6 +763,7 @@
 		};
 		2806989F29D0F520007F5702 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F9BAFC862C03608796D26F0 /* Pods-lexia-lexiaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -544,6 +787,7 @@
 		};
 		280698A029D0F520007F5702 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EB6EBED8E3A954612E5D0AA /* Pods-lexia-lexiaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -562,6 +806,56 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = lexia;
+			};
+			name = Release;
+		};
+		280698AE29D0F680007F5702 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HTUYV24UTH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LexiaKeyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LexiaKeyboard;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ibbi.lexia.LexiaKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		280698AF29D0F680007F5702 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HTUYV24UTH;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LexiaKeyboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LexiaKeyboard;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ibbi.lexia.LexiaKeyboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -600,6 +894,15 @@
 			buildConfigurations = (
 				2806989F29D0F520007F5702 /* Debug */,
 				280698A029D0F520007F5702 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		280698AD29D0F680007F5702 /* Build configuration list for PBXNativeTarget "LexiaKeyboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				280698AE29D0F680007F5702 /* Debug */,
+				280698AF29D0F680007F5702 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
