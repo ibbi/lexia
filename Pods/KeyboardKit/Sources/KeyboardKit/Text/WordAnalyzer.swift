@@ -14,16 +14,20 @@ import Foundation
 
  Implementing the protocol will extend the implementing type
  with functions that use public `String` extensions with the
- same name as these extensions. You can use these extensions
- directly and ignore this protocol, but the protocol exposes
- this functionality to the library documentation.
-
- `UITextDocumentProxy` uses the native extensions as well to
- implement its public, word-related functionality.
+ same names. While you can use the protocol, the main reason
+ for having it is to expose these extensions to DocC.
  */
 public protocol WordAnalyzer {}
 
 public extension WordAnalyzer {
+
+    /**
+     Check whether or not the last character in the provided
+     string is a word delimiter.
+     */
+    func hasWordDelimiterSuffix(in string: String) -> Bool {
+        string.hasWordDelimiterSuffix
+    }
 
     /// Get the word or fragment at the start of the string.
     func wordFragmentAtStart(in string: String) -> String {
@@ -55,6 +59,14 @@ public extension WordAnalyzer {
 // MARK: - String
 
 public extension String {
+
+    /**
+     Check whether or not the last character within a string
+     is a word delimiter.
+     */
+    var hasWordDelimiterSuffix: Bool {
+        String(last ?? Character("")).isWordDelimiter
+    }
 
     /// Get the word or fragment at the start of the string.
     var wordFragmentAtStart: String {

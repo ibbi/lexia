@@ -1,4 +1,4 @@
-framework module KeyboardKit {
+module KeyboardKit {
   umbrella header "KeyboardKit-umbrella.h"
 
   export *

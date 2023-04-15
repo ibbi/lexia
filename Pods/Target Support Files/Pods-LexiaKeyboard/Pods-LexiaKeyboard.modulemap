@@ -1,0 +1,6 @@
+module Pods_LexiaKeyboard {
+  umbrella header "Pods-LexiaKeyboard-umbrella.h"
+
+  export *
+  module * { export * }
+}

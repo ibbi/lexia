@@ -3,18 +3,12 @@
 
 target 'lexia' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for lexia
+  # use_frameworks!
   pod 'KeyboardKit'
 
-  target 'lexiaTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  # Pods for lexia
+end
 
-  target 'lexiaUITests' do
-    # Pods for testing
-  end
-
+target 'LexiaKeyboard' do
+  pod 'KeyboardKit'
 end

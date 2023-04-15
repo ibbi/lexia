@@ -10,17 +10,20 @@ import SwiftUI
 
 /**
  This style defines the background of a keyboard.
+
+ You can modify the ``standard`` style to change the default,
+ global background style.
  */
-public struct KeyboardBackgroundStyle {
+public struct KeyboardBackgroundStyle: Codable, Equatable {
 
     /**
      Create a keyboard background style.
 
      - Parameters:
-       - type: The background type to use, by default `.color(_:)` with a clear color.
+        - type: The background type to use, by default `.clear`.
      */
     public init(
-        type: BackgroundType = .color(.clear)
+        _ type: KeyboardBackgroundType = .clear
     ) {
         self.backgroundType = type
     }
@@ -28,24 +31,8 @@ public struct KeyboardBackgroundStyle {
     /**
      The background type to use.
      */
-    public var backgroundType: BackgroundType
-
-    /**
-     This enum defines supported keyboard background types.
-     */
-    public enum BackgroundType {
-
-        /// A plain color background.
-        case color(Color)
-
-        /// An image background.
-        case image(Image)
-
-        /// A linear gradient color background.
-        case linearGradient(LinearGradient)
-    }
+    public var backgroundType: KeyboardBackgroundType
 }
-
 
 public extension KeyboardBackgroundStyle {
 
@@ -61,10 +48,6 @@ public extension KeyboardBackgroundStyle {
      */
     @ViewBuilder
     var backgroundView: some View {
-        switch backgroundType {
-        case .color(let color): color
-        case .linearGradient(let gradient): gradient
-        case .image(let image): image
-        }
+        backgroundType.view
     }
 }

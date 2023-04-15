@@ -14,16 +14,20 @@ import Foundation
 
  Implementing the protocol will extend the implementing type
  with functions that use public `String` extensions with the
- same name as these extensions. You can use these extensions
- directly and ignore this protocol, but the protocol exposes
- this functionality to the library documentation.
-
- `UITextDocumentProxy` uses the native extensions as well to
- implement its public, quotation-related functionality.
+ same names. While you can use the protocol, the main reason
+ for having it is to expose these extensions to DocC.
  */
 public protocol SentenceAnalyzer {}
 
 public extension SentenceAnalyzer {
+
+    /**
+     Check whether or not the last character in the provided
+     string is a sentence delimiter.
+     */
+    func hasSentenceDelimiterSuffix(in string: String) -> Bool {
+        string.hasSentenceDelimiterSuffix
+    }
 
     /**
      Check whether or not the last sentence in the string is
@@ -54,6 +58,14 @@ public extension SentenceAnalyzer {
 // MARK: - String
 
 public extension String {
+
+    /**
+     Check whether or not the last character within a string
+     is a sentence delimiter.
+     */
+    var hasSentenceDelimiterSuffix: Bool {
+        String(last ?? Character("")).isSentenceDelimiter
+    }
 
     /**
      Check whether or not the last sentence in the string is

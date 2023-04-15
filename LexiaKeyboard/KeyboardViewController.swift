@@ -5,56 +5,41 @@
 //  Created by ibbi on 3/26/23.
 //
 
-import UIKit
+import KeyboardKit
+import SwiftUI
 
-class KeyboardViewController: UIInputViewController {
+class KeyboardViewController: KeyboardInputViewController {
 
-    @IBOutlet var nextKeyboardButton: UIButton!
-    
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        
-        // Add custom view sizing constraints here
-    }
-    
     override func viewDidLoad() {
+
+        keyboardContext.setLocale(.english)
+        keyboardContext.keyboardDictationReplacement = .keyboardType(.emojis)
+        keyboardAppearance = KeyboardAppearance(
+            keyboardContext: keyboardContext)
+        keyboardActionHandler = KeyboardActionHandler(
+            inputViewController: self)
+        keyboardLayoutProvider = KeyboardLayoutProvider(
+            keyboardContext: keyboardContext,
+            inputSetProvider: inputSetProvider)
+
+        /// 💡 Call super to perform the base initialization.
         super.viewDidLoad()
-        
-        // Perform custom UI setup here
-        self.nextKeyboardButton = UIButton(type: .system)
-        
-        self.nextKeyboardButton.setTitle(NSLocalizedString("Next Keyboard", comment: "Title for 'Next Keyboard' button"), for: [])
-        self.nextKeyboardButton.sizeToFit()
-        self.nextKeyboardButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.nextKeyboardButton.addTarget(self, action: #selector(handleInputModeList(from:with:)), for: .allTouchEvents)
-        
-        self.view.addSubview(self.nextKeyboardButton)
-        
-        self.nextKeyboardButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        self.nextKeyboardButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    }
-    
-    override func viewWillLayoutSubviews() {
-        self.nextKeyboardButton.isHidden = !self.needsInputModeSwitchKey
-        super.viewWillLayoutSubviews()
-    }
-    
-    override func textWillChange(_ textInput: UITextInput?) {
-        // The app is about to change the document's contents. Perform any preparation here.
-    }
-    
-    override func textDidChange(_ textInput: UITextInput?) {
-        // The app has just changed the document's contents, the document context has been updated.
-        
-        var textColor: UIColor
-        let proxy = self.textDocumentProxy
-        if proxy.keyboardAppearance == UIKeyboardAppearance.dark {
-            textColor = UIColor.white
-        } else {
-            textColor = UIColor.black
-        }
-        self.nextKeyboardButton.setTitleColor(textColor, for: [])
     }
 
+    /**
+     This function is called whenever the keyboard should be
+     created or updated. Here, we setup a system keyboard as
+     the main keyboard view.
+     */
+    override func viewWillSetupKeyboard() {
+        super.viewWillSetupKeyboard()
+
+        /// 💡 Make the demo use a ``SystemKeyboard``.
+        ///
+        /// This is actually not needed. The controller will
+        /// by default setup a `SystemKeyboard`, so you only
+        /// have to override this function to setup a custom
+        /// view, which we do in `KeyboardCustom`.
+        setup { SystemKeyboard(controller: $0) }
+    }
 }
