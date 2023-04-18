@@ -1,6 +1,0 @@
-module Pods_lexia {
-  umbrella header "Pods-lexia-umbrella.h"
-
-  export *
-  module * { export * }
-}
