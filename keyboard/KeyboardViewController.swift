@@ -13,7 +13,6 @@ class KeyboardViewController: KeyboardInputViewController {
     override func viewDidLoad() {
 
         keyboardContext.setLocale(.english)
-        keyboardContext.keyboardDictationReplacement = .keyboardType(.emojis)
         keyboardAppearance = KeyboardAppearance(
             keyboardContext: keyboardContext)
         keyboardActionHandler = KeyboardActionHandler(
@@ -21,6 +20,8 @@ class KeyboardViewController: KeyboardInputViewController {
         keyboardLayoutProvider = KeyboardLayoutProvider(
             keyboardContext: keyboardContext,
             inputSetProvider: inputSetProvider)
+        keyboardContext.keyboardDictationReplacement = .keyboardType(.emojis)
+
 
         /// 💡 Call super to perform the base initialization.
         super.viewDidLoad()

@@ -394,7 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"dyslexia/Preview Content\"";
-				DEVELOPMENT_TEAM = HTUYV24UTH;
+				DEVELOPMENT_TEAM = 372X4548N8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -424,7 +424,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"dyslexia/Preview Content\"";
-				DEVELOPMENT_TEAM = HTUYV24UTH;
+				DEVELOPMENT_TEAM = 372X4548N8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -450,7 +450,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HTUYV24UTH;
+				DEVELOPMENT_TEAM = 372X4548N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = keyboard/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = keyboard;
@@ -475,7 +475,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HTUYV24UTH;
+				DEVELOPMENT_TEAM = 372X4548N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = keyboard/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = keyboard;
