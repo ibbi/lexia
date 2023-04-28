@@ -10,40 +10,31 @@ import UIKit
 
 class KeyboardActionHandler: StandardKeyboardActionHandler {
     
-    
-    
 //    override func action(
 //        for gesture: KeyboardGesture,
 //        on action: KeyboardAction
 //    ) -> KeyboardAction.GestureAction? {
-//        switch (gesture, action) {
-//        case (.release, .dictation):
-//            return replacementDictation(for: action)
+//        let standard = super.action(for: gesture, on: action)
+//        
+//        
+//        switch gesture {
+//        case .release:
+//            return releaseAction(for: action) ?? standard
 //        default:
-//            return super.action(for: gesture, on: action)
+//            return standard
 //        }
 //    }
 //    
 //    
-//    
-//    
-//    func replacementDictation(for action: KeyboardAction) -> KeyboardAction? {
-//        return KeyboardAction.character("j")
+//    func releaseAction(for action: KeyboardAction) -> KeyboardAction.GestureAction? {
+//        switch action {
+//        case .custom(named: "lexia"):
+//            return { _ in  }
+//        default:
+//            return nil
+//        }
 //    }
-    
-    //    override func action(
-    //        for gesture: KeyboardGesture,
-    //        on action: KeyboardAction
-    //    ) -> KeyboardAction? {
-    //        let standard = super.action(for: gesture, on: action)
-    //        switch action {
-    //        case .dictation: return replacementDictation(for: gesture, on: action) ?? standard
-    //        default: return standard
-    //        }
-    //
-    //    }
-    //
-    //
+//    
 }
 
 
