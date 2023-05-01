@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+
+
+'''
+Always assume this is running on shariq's machine.
+'''
+
+import sys, os
+
+def get_command():
+    return sys.argv[-1].strip().lower()
+
+if __name__ == '__main__':
+    shariq = '699C7N75PQ'
+    ibrahim = '372X4548N8'
+    project_path = 'dyslexia.xcodeproj/project.pbxproj'
+    if not os.path.exists(project_path):
+        print('Warning: could not find project path. Please ensure you run this script from the root directory.')
+        sys.exit(-1)
+    valid_commands = ['pull', 'add', 'push']
+    if get_command() not in valid_commands:
+        print(f'Warning: sys.argv[-1] did not contain a valid command (sys.argv={sys.argv})')
+        print('Hint: run ./dit pull or ./dit add followed by ./dit push')
+        sys.exit(-1)
+
+    command = get_command()
+
+    if command == 'pull':
+        project_contents = open(project_path).read()
+        temp_project_contents = project_contents.replace(shariq, ibrahim)
+        print('Overwriting project contents temporarily...')
+        open(project_path, 'w').write(temp_project_contents)
+        print('Now pulling from git...')
+        result = os.system('git pull --rebase')
+        if result != 0:
+            print('Warning: git pull --rebase failed?')
+            open(project_path, 'w').write(project_contents)
+            print('Overwrote original project contents back into the project file.')
+        else:
+            print('Successfully pulled. Now overwriting the pulled file.')
+            new_project_contents = open(project_path).read()
+            temp_new_project_contents = new_project_contents.replace(ibrahim, shariq)
+            open(project_path, 'w').write(temp_new_project_contents)
+            print('Successfully overwrote file.')
+    if command == 'add':
+        project_contents = open(project_path).read()
+        temp_project_contents = project_contents.replace(shariq, ibrahim)
+        print('Overwriting project contents temporarily...')
+        open(project_path, 'w').write(temp_project_contents)
+        print('Now adding project to git...')
+        os.system(f'git add {project_path}')
+    if command == 'push':
+        project_contents = open(project_path).read()
+        if shariq in project_contents:
+            print('Warning: first add the file with ./dit add.')
+            sys.exit(-1)
+        result = os.system('git push')
+        if result != 0:
+            print('Warning: no idea why git push failed. Fix manually.')
+            sys.exit(-1)
+        else:
+            print('Pushed successfully; now reverting back.')
+            open(project_path, 'w').write(project_contents.replace(ibrahim, shariq))
+            print('Successfully replaced.')

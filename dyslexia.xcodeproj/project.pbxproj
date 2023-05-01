@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553D29EE34B600CEF0C6 /* KeyboardKit */; };
 		28EE554029EE35BD00CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553F29EE35BD00CEF0C6 /* KeyboardKit */; };
-		28EE554229EE35DD00CEF0C6 /* KeyboardAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EE554129EE35DD00CEF0C6 /* KeyboardAppearance.swift */; };
 		28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */; };
 		28EE554629EE361300CEF0C6 /* KeyboardLayoutProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */; };
 		28F11CA429EE2E6700ED00D9 /* dyslexiaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F11CA329EE2E6700ED00D9 /* dyslexiaApp.swift */; };
@@ -45,7 +44,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		28EE554129EE35DD00CEF0C6 /* KeyboardAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAppearance.swift; sourceTree = "<group>"; };
 		28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardActionHandler.swift; sourceTree = "<group>"; };
 		28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
 		28F11CA029EE2E6700ED00D9 /* dyslexia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dyslexia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,7 +119,6 @@
 			children = (
 				28F11CBA29EE312600ED00D9 /* KeyboardViewController.swift */,
 				28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */,
-				28EE554129EE35DD00CEF0C6 /* KeyboardAppearance.swift */,
 				28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */,
 				28F11CBC29EE312600ED00D9 /* Info.plist */,
 			);
@@ -256,7 +253,6 @@
 				28F11CBB29EE312600ED00D9 /* KeyboardViewController.swift in Sources */,
 				28EE554629EE361300CEF0C6 /* KeyboardLayoutProvider.swift in Sources */,
 				28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */,
-				28EE554229EE35DD00CEF0C6 /* KeyboardAppearance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,8 +13,6 @@ class KeyboardViewController: KeyboardInputViewController {
     override func viewDidLoad() {
 
         keyboardContext.setLocale(.english)
-        keyboardAppearance = KeyboardAppearance(
-            keyboardContext: keyboardContext)
         keyboardActionHandler = KeyboardActionHandler(
             inputViewController: self)
         keyboardLayoutProvider = KeyboardLayoutProvider(
