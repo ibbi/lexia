@@ -29,6 +29,9 @@ class KeyboardActionHandler: StandardKeyboardActionHandler {
     func releaseAction(for action: KeyboardAction) -> KeyboardAction.GestureAction? {
         switch action {
         case .custom(named: "lexia"):
+            if let t = textDocumentProxy.selectedText {
+                textDocumentProxy.insertText("you highlighted " + t)
+            }
             textDocumentProxy.insertText("yo sup")
             return nil
         default:
