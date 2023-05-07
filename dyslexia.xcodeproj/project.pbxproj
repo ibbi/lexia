@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28741D6E2A06F5EC00D29899 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28741D6D2A06F5EC00D29899 /* Helper.swift */; };
 		28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553D29EE34B600CEF0C6 /* KeyboardKit */; };
 		28EE554029EE35BD00CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553F29EE35BD00CEF0C6 /* KeyboardKit */; };
 		28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		28741D6D2A06F5EC00D29899 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardActionHandler.swift; sourceTree = "<group>"; };
 		28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
 		28F11CA029EE2E6700ED00D9 /* dyslexia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dyslexia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,7 @@
 			children = (
 				28F11CA329EE2E6700ED00D9 /* dyslexiaApp.swift */,
 				28F11CA529EE2E6700ED00D9 /* ContentView.swift */,
+				28741D6D2A06F5EC00D29899 /* Helper.swift */,
 				28F11CA729EE2E6900ED00D9 /* Assets.xcassets */,
 				28F11CA929EE2E6900ED00D9 /* Preview Content */,
 			);
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28F11CA629EE2E6700ED00D9 /* ContentView.swift in Sources */,
+				28741D6E2A06F5EC00D29899 /* Helper.swift in Sources */,
 				28F11CA429EE2E6700ED00D9 /* dyslexiaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
