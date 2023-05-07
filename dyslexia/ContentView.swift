@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isKeyboardExtensionEnabled: Bool = Helper.isKeyboardExtensionEnabled()
+    @State private var isLexiaEnabled: Bool = Helper.isLexiaEnabled()
     
     var body: some View {
         Group {
-            if isKeyboardExtensionEnabled {
-                Intructions2()
+            if isLexiaEnabled {
+                PostInstall()
             } else {
-                Intructions1()
+                PreInstall()
             }
         }
         .onAppear {
@@ -23,21 +23,21 @@ struct ContentView: View {
         }
     }
     func updateState() {
-            isKeyboardExtensionEnabled = Helper.isKeyboardExtensionEnabled()
+        isLexiaEnabled = Helper.isLexiaEnabled()
         }
     
 }
 
-struct Intructions1: View {
-    let items: [(image: Image, text: String)] = [
+struct PreInstall: View {
+    let installTodos: [(image: Image, text: String)] = [
         (Image("SettingsIcon"), "Go to settings"),
         (Image("SettingsIcon"), "Lexia"),
         (Image("KeyboardIcon"), "Keyboards"),
         (Image("ToggleIcon"), "Enable Lexia"),
         (Image("ToggleIcon"), "Allow Full Access"),
-        (Image(systemName: "diamond.fill"), "Come back here to finish installing")
+        (Image(systemName: "return"), "Come back here to finish installing")
     ]
-
+    
     var body: some View {
         VStack {
             // Header text
@@ -47,8 +47,8 @@ struct Intructions1: View {
 
             // Vertical list of HStack items
             List {
-                ForEach(0..<items.count, id: \.self) { index in
-                    TodoItem(index: index, image: items[index].image, text: items[index].text)
+                ForEach(0..<installTodos.count, id: \.self) { index in
+                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text)
                 }
             }
 
@@ -85,11 +85,14 @@ struct TodoItem: View {
     }
 }
 
-struct Intructions2: View {
+struct PostInstall: View {
     let items: [(image: Image, text: String)] = [
         (Image("SettingsIcon"), "Tap the globe icon"),
         (Image("SettingsIcon"), "Select Lexia"),
     ]
+    
+    @FocusState private var isInputFocused: Bool
+    @State private var inputText: String = ""
 
     var body: some View {
         VStack {
@@ -98,22 +101,34 @@ struct Intructions2: View {
                 .font(.largeTitle)
                 .padding()
 
+            
             // Vertical list of HStack items
-            List {
-                ForEach(0..<items.count, id: \.self) { index in
-                    TodoItem(index: index, image: items[index].image, text: items[index].text)
-                }
+            HStack {
+                Image(systemName: "arrow.down")
+                                .imageScale(.small)
+                                .foregroundColor(.accentColor)
+                Text("Tap and hold the globe")
+                Image(systemName: "globe")
+                                .imageScale(.small)
+                                .foregroundColor(.accentColor)
+                Text(" key below, and select Lexia")
             }
 
-            // Button at the end
-            Button("Button", action: {
-                print("Button tapped")
+            TextField("Enter text", text: $inputText)
+                .padding()
+                .frame(width: 0.0, height: 0.0)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .focused($isInputFocused)
+            Button("Next", action: {
+                print("Push playground view")
             })
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
         }
+        .onAppear {
+           isInputFocused = true
+       }
     }
 }
 

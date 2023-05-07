@@ -10,7 +10,7 @@ import UIKit
 
 
 class Helper{
-    static func isKeyboardExtensionEnabled() -> Bool {
+    static func isLexiaEnabled() -> Bool {
         guard let appBundleIdentifier = Bundle.main.bundleIdentifier else {
             fatalError("isKeyboardExtensionEnabled(): Cannot retrieve bundle identifier.")
         }
@@ -36,5 +36,16 @@ class Helper{
             // Ask the system to open that URL.
             UIApplication.shared.open(url)
         }
+    }
+    
+    static func isLexiaSelected() -> Bool {
+        let inputMode = UIApplication.shared.delegate?.window??.textInputMode
+        if inputMode?.responds(to: NSSelectorFromString("identifier")) ?? false {
+             let identifier = inputMode?.perform(NSSelectorFromString("identifier")).takeRetainedValue() as? String
+            print("identifier as Any")
+            print(identifier as Any) // Current keyboard identifier.
+        }
+        else {print("false")}
+        return false
     }
 }
