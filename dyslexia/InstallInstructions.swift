@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InstallInstructions: View {
     @Binding var shouldShowInstallFlow: Bool
-    @State private var isInstalled: Bool = false
+    @State private var isInstalled: Bool = Helper.isLexiaInstalled()
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
 
