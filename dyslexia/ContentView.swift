@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Changing permissions relaunches the app, so we need to store the state of install in a proxy UserDefault instead of just state (state would re-initialize)
     @State private var shouldShowInstallFlow: Bool = Helper.getShouldShowInstallFlow()
     
     var body: some View {
@@ -20,7 +21,6 @@ struct ContentView: View {
             }
         }
         .onAppear {
-//            Helper.saveShouldShowInstallFlow(Helper.isLexiaInstalled())
             shouldShowInstallFlow = Helper.getShouldShowInstallFlow()
         }
     }

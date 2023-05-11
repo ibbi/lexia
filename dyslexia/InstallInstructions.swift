@@ -9,7 +9,6 @@ import SwiftUI
 
 struct InstallInstructions: View {
     @Binding var shouldShowInstallFlow: Bool
-    @State private var isInstalled: Bool = Helper.isLexiaInstalled()
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
 
@@ -30,7 +29,7 @@ struct InstallInstructions: View {
     ]
     
     var body: some View {
-        if isInstalled {
+        if Helper.isLexiaInstalled() {
             VStack {
 
                 Text("Select Lexia")
@@ -73,9 +72,6 @@ struct InstallInstructions: View {
                     Helper.openAppSettings()
                 })
                 .padding()
-            }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                isInstalled = Helper.isLexiaInstalled()
             }
         }
 
