@@ -12,25 +12,25 @@ import SwiftUI
 
 class Helper{
 
-    static func isLexiaInstalled() -> Bool {
-        guard let appBundleIdentifier = Bundle.main.bundleIdentifier else {
-            fatalError("isKeyboardExtensionEnabled(): Cannot retrieve bundle identifier.")
-        }
-
-        guard let keyboards = UserDefaults.standard.dictionaryRepresentation()["AppleKeyboards"] as? [String] else {
-            // There is no key `AppleKeyboards` in NSUserDefaults. That happens sometimes.
-            return false
-        }
-
-        let keyboardExtensionBundleIdentifierPrefix = appBundleIdentifier + "."
-        for keyboard in keyboards {
-            if keyboard.hasPrefix(keyboardExtensionBundleIdentifierPrefix) {
-                return true
-            }
-        }
-
-        return false
-    }
+//    static func isLexiaInstalled() -> Bool {
+//        guard let appBundleIdentifier = Bundle.main.bundleIdentifier else {
+//            fatalError("isKeyboardExtensionEnabled(): Cannot retrieve bundle identifier.")
+//        }
+//
+//        guard let keyboards = UserDefaults.standard.dictionaryRepresentation()["AppleKeyboards"] as? [String] else {
+//            // There is no key `AppleKeyboards` in NSUserDefaults. That happens sometimes.
+//            return false
+//        }
+//
+//        let keyboardExtensionBundleIdentifierPrefix = appBundleIdentifier + "."
+//        for keyboard in keyboards {
+//            if keyboard.hasPrefix(keyboardExtensionBundleIdentifierPrefix) {
+//                return true
+//            }
+//        }
+//
+//        return false
+//    }
     
     static func openAppSettings() {
         // Create the URL that deep links to your app's custom settings.

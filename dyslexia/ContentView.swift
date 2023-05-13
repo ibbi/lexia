@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import KeyboardKit
 
 struct ContentView: View {
-    @State private var shouldShowInstallFlow: Bool = !Helper.isLexiaInstalled()
+    @State private var shouldShowInstallFlow: Bool = !KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardEnabled
+
     
     var body: some View {
         Group {
@@ -20,10 +22,10 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            shouldShowInstallFlow = !Helper.isLexiaInstalled()
+            shouldShowInstallFlow = !KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardEnabled
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            shouldShowInstallFlow = !Helper.isLexiaInstalled()
+            shouldShowInstallFlow = !KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardEnabled
         }
     }
 }

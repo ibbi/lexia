@@ -6,33 +6,39 @@
 //
 
 import SwiftUI
+import KeyboardKit
 
 struct Playground: View {
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
+    @State private var isLexiaActive: Bool = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardActive
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Tap and hold the ")
-                Image(systemName: "globe")
-                Text(" and ensure Lexia is selected")
+            // this bool seems flipped in practice?
+            if isLexiaActive {
+                HStack {
+                    Text("Tap and hold the ")
+                    Image(systemName: "globe")
+                    Text(" below and select Lexia")
+                }
+                Spacer()                
             }
-            Spacer()
             Text("Try yelling")
             Text("Now try whisper")
             
             TextEditor( text: $inputText)
                 .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .focused($isInputFocused)
-                .frame(maxHeight: .infinity)
             
             Spacer()
         }
         .onAppear {
-           isInputFocused = true
-       }
+            NotificationCenter.default.addObserver(forName: UITextInputMode.currentInputModeDidChangeNotification, object: nil, queue: .main) { _ in
+                isLexiaActive = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardActive
+            }
+            isInputFocused = true
+        }
     }
 }
 struct Playground_Previews: PreviewProvider {
