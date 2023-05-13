@@ -15,8 +15,8 @@ struct Playground: View {
     
     var body: some View {
         VStack {
-            // this bool seems flipped in practice?
-            if isLexiaActive {
+            // this bit seems broken havent figured out repro
+            if !isLexiaActive {
                 HStack {
                     Text("Tap and hold the ")
                     Image(systemName: "globe")
@@ -36,6 +36,7 @@ struct Playground: View {
         .onAppear {
             NotificationCenter.default.addObserver(forName: UITextInputMode.currentInputModeDidChangeNotification, object: nil, queue: .main) { _ in
                 isLexiaActive = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardActive
+                print("changed")
             }
             isInputFocused = true
         }
