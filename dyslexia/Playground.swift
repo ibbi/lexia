@@ -13,16 +13,20 @@ struct Playground: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Text("Tap and hold the ")
+                Image(systemName: "globe")
+                Text(" and ensure Lexia is selected")
+            }
+            Spacer()
             Text("Try yelling")
-                .font(.title)
+            Text("Now try whisper")
             
-            Text("Now try to whisper")
-                .font(.title)
-            
-            TextField("Enter text", text: $inputText)
+            TextEditor( text: $inputText)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .focused($isInputFocused)
+                .frame(maxHeight: .infinity)
             
             Spacer()
         }

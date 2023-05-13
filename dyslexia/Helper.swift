@@ -10,21 +10,6 @@ import UIKit
 
 
 class Helper{
-    
-    static let shouldShowInstallFlowKey = "ShouldShowInstallFlow"
-
-        static func saveShouldShowInstallFlow(_ value: Bool) {
-            UserDefaults.standard.set(value, forKey: shouldShowInstallFlowKey)
-        }
-
-        static func getShouldShowInstallFlow() -> Bool {
-            if UserDefaults.standard.object(forKey: shouldShowInstallFlowKey) == nil {
-                saveShouldShowInstallFlow(!isLexiaInstalled())
-                return !isLexiaInstalled()
-            } else {
-                return UserDefaults.standard.bool(forKey: shouldShowInstallFlowKey)
-            }
-        }
 
     static func isLexiaInstalled() -> Bool {
         guard let appBundleIdentifier = Bundle.main.bundleIdentifier else {

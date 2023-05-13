@@ -8,11 +8,6 @@
 import SwiftUI
 
 struct InstallInstructions: View {
-    @Binding var shouldShowInstallFlow: Bool
-    @FocusState private var isInputFocused: Bool
-    @State private var inputText: String = ""
-
-
     
     let installTodos: [(image: Image, text: String)] = [
         (Image("SettingsIcon"), "Go to settings"),
@@ -20,61 +15,27 @@ struct InstallInstructions: View {
         (Image("KeyboardIcon"), "Keyboards"),
         (Image("ToggleIcon"), "Enable Lexia"),
         (Image("ToggleIcon"), "Allow Full Access"),
-        (Image(systemName: "return"), "Come back here to finish setup")
-    ]
-    
-    let selectTodos: [(image: Image, text: String)] = [
-        (Image(systemName: "globe"), "Tap and hold the globe icon below your keyboard"),
-        (Image(systemName: "hand.point.up.left.fill"), "Select Lexia from the dropdown"),
+        (Image(systemName: "return"), "Come back here!")
     ]
     
     var body: some View {
-        if Helper.isLexiaInstalled() {
-            VStack {
+        VStack {
 
-                Text("Select Lexia")
-                    .font(.largeTitle)
-                    .padding()
-
-                List {
-                    ForEach(0..<selectTodos.count, id: \.self) { index in
-                        TodoItem(index: index, image: selectTodos[index].image, text: selectTodos[index].text)
-                    }
-                }
-                TextField("Enter text", text: $inputText)
-                    .padding()
-                    .frame(width: 0.0, height: 0.0)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .focused($isInputFocused)
-                Button("All done!", action: {
-                    Helper.saveShouldShowInstallFlow(false)
-                    shouldShowInstallFlow = false
-                })
+            Text("Enable Lexia")
+                .font(.largeTitle)
                 .padding()
-            }
-            .onAppear {
-               isInputFocused = true
-           }
-        } else {
-            VStack {
 
-                Text("Enable Lexia")
-                    .font(.largeTitle)
-                    .padding()
-
-                List {
-                    ForEach(0..<installTodos.count, id: \.self) { index in
-                        TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text)
-                    }
+            List {
+                ForEach(0..<installTodos.count, id: \.self) { index in
+                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text)
                 }
-
-                Button("Take me to settings", action: {
-                    Helper.openAppSettings()
-                })
-                .padding()
             }
+
+            Button("Take me to settings", action: {
+                Helper.openAppSettings()
+            })
+            .padding()
         }
-
     }
 }
 
@@ -89,7 +50,7 @@ struct TodoItem: View {
             image
             Text(text)
             if text == "Lexia" {
-                Button("Take me there", action: {
+                Button("Just take me there", action: {
                     Helper.openAppSettings()
                 })
                 .padding(8)
@@ -98,9 +59,10 @@ struct TodoItem: View {
         }
     }
 }
-//
-//struct InstallInstructions_Previews: PreviewProvider {
-//    static var previews: some View {
-//        InstallInstructions(shouldShowInstallFlow: true)
-//    }
-//}
+
+
+struct InstallInstructions_Previews: PreviewProvider {
+    static var previews: some View {
+        InstallInstructions()
+    }
+}
