@@ -28,13 +28,21 @@ struct InstallInstructions: View {
             List {
                 ForEach(0..<installTodos.count, id: \.self) { index in
                     TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text)
+                        .frame(height: 60)
+                        .padding(.horizontal)
                 }
             }
+            .listStyle(PlainListStyle())
 
             Button("Take me to settings", action: {
                 Helper.openAppSettings()
             })
             .padding()
+            .background(Color.pastelBlue)
+            .foregroundColor(.white)
+            .cornerRadius(8)
+            .padding(.horizontal)
+            .shadow(color: .gray, radius: 5, x: 0, y: 2)
         }
     }
 }
@@ -47,22 +55,32 @@ struct TodoItem: View {
     var body: some View {
         HStack {
             Text("\(index + 1)")
+                .font(.headline)
+                .padding(.trailing)
             image
+                .resizable()
+                .frame(width: 24, height: 24)
+                .foregroundColor(.pastelBlue)
             Text(text)
+                .font(.body)
+            Spacer()
             if text == "Lexia" {
                 Button("Just take me there", action: {
                     Helper.openAppSettings()
                 })
                 .padding(8)
-                .background(RoundedRectangle(cornerRadius: 8).stroke(Color.blue))
+                .background(Color.pastelBlue)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+                .shadow(color: .gray, radius: 5, x: 0, y: 2)
             }
         }
     }
 }
-
 
 struct InstallInstructions_Previews: PreviewProvider {
     static var previews: some View {
         InstallInstructions()
     }
 }
+
