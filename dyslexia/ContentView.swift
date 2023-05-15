@@ -9,23 +9,18 @@ import SwiftUI
 import KeyboardKit
 
 struct ContentView: View {
-    @State private var shouldShowInstallFlow: Bool = !KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardEnabled
+    @StateObject private var keyboardState = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*")
+
 
     
     var body: some View {
         Group {
-            if shouldShowInstallFlow {
-                InstallInstructions()
+            if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
+                InstallInstructions(isOnlyMissingFullAccess: !keyboardState.isFullAccessEnabled && keyboardState.isKeyboardEnabled)
             }
             else {
-                Playground()
+                Playground(isKeyboardActive: keyboardState.isKeyboardActive)
             }
-        }
-        .onAppear {
-            shouldShowInstallFlow = !KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardEnabled
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            shouldShowInstallFlow = !KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardEnabled
         }
     }
 }

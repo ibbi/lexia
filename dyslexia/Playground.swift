@@ -9,14 +9,14 @@ import SwiftUI
 import KeyboardKit
 
 struct Playground: View {
+    let isKeyboardActive: Bool
+    
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
-    @State private var isLexiaActive: Bool = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardActive
     
     var body: some View {
         VStack {
-            // this bit seems broken havent figured out repro
-            if !isLexiaActive {
+            if !isKeyboardActive {
                 HStack {
                     Text("Tap and hold the ")
                     Image(systemName: "globe")
@@ -34,16 +34,12 @@ struct Playground: View {
             Spacer()
         }
         .onAppear {
-            NotificationCenter.default.addObserver(forName: UITextInputMode.currentInputModeDidChangeNotification, object: nil, queue: .main) { _ in
-                isLexiaActive = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardActive
-                print("changed")
-            }
             isInputFocused = true
         }
     }
 }
 struct Playground_Previews: PreviewProvider {
     static var previews: some View {
-        Playground()
+        Playground(isKeyboardActive: true)
     }
 }

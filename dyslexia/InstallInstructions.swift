@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct InstallInstructions: View {
+    let isOnlyMissingFullAccess: Bool
     
     let installTodos: [(image: Image, text: String)] = [
         (Image("SettingsIcon"), "Go to settings"),
@@ -21,13 +22,13 @@ struct InstallInstructions: View {
     var body: some View {
         VStack {
 
-            Text("Enable Lexia")
+            Text(isOnlyMissingFullAccess ? "You're missing Full Access!" : "Enable Lexia")
                 .font(.largeTitle)
                 .padding()
 
             List {
                 ForEach(0..<installTodos.count, id: \.self) { index in
-                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text)
+                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text, isOnlyMissingFullAccess: isOnlyMissingFullAccess)
                         .frame(height: 60)
                         .padding(.horizontal)
                 }
@@ -51,6 +52,7 @@ struct TodoItem: View {
     let index: Int
     let image: Image
     let text: String
+    let isOnlyMissingFullAccess: Bool
 
     var body: some View {
         HStack {
@@ -63,6 +65,7 @@ struct TodoItem: View {
                 .foregroundColor(.pastelBlue)
             Text(text)
                 .font(.body)
+                .foregroundColor(isOnlyMissingFullAccess && text == "Allow Full Access" ? Color.red.opacity(0.8) : Color.primary)
             Spacer()
             if text == "Lexia" {
                 Button("Just take me there", action: {
@@ -80,7 +83,7 @@ struct TodoItem: View {
 
 struct InstallInstructions_Previews: PreviewProvider {
     static var previews: some View {
-        InstallInstructions()
+        InstallInstructions(isOnlyMissingFullAccess: false)
     }
 }
 
