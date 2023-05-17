@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		285A81752A12E46A00ED7608 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A81742A12E46A00ED7608 /* KeyboardView.swift */; };
+		285A81782A12E77F00ED7608 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A81772A12E77F00ED7608 /* Constants.swift */; };
+		285A81792A12E77F00ED7608 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A81772A12E77F00ED7608 /* Constants.swift */; };
+		285A817B2A12E93100ED7608 /* TranscribeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A817A2A12E93100ED7608 /* TranscribeButton.swift */; };
+		285A817C2A12E93100ED7608 /* TranscribeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A817A2A12E93100ED7608 /* TranscribeButton.swift */; };
 		28741D6E2A06F5EC00D29899 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28741D6D2A06F5EC00D29899 /* Helper.swift */; };
 		2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023D2A0C3B5200045F40 /* InstallInstructions.swift */; };
 		288002402A0C3BB600045F40 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023F2A0C3BB600045F40 /* Playground.swift */; };
@@ -49,6 +54,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		285A81742A12E46A00ED7608 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		285A81772A12E77F00ED7608 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		285A817A2A12E93100ED7608 /* TranscribeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeButton.swift; sourceTree = "<group>"; };
 		28741D6D2A06F5EC00D29899 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		2880023D2A0C3B5200045F40 /* InstallInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallInstructions.swift; sourceTree = "<group>"; };
 		2880023F2A0C3BB600045F40 /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
@@ -112,6 +120,7 @@
 				28F11CA529EE2E6700ED00D9 /* ContentView.swift */,
 				2880023D2A0C3B5200045F40 /* InstallInstructions.swift */,
 				2880023F2A0C3BB600045F40 /* Playground.swift */,
+				285A81772A12E77F00ED7608 /* Constants.swift */,
 				28741D6D2A06F5EC00D29899 /* Helper.swift */,
 				28F11CA729EE2E6900ED00D9 /* Assets.xcassets */,
 				28F11CA929EE2E6900ED00D9 /* Preview Content */,
@@ -132,6 +141,8 @@
 			children = (
 				28F11CBA29EE312600ED00D9 /* KeyboardViewController.swift */,
 				28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */,
+				285A817A2A12E93100ED7608 /* TranscribeButton.swift */,
+				285A81742A12E46A00ED7608 /* KeyboardView.swift */,
 				28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */,
 				28F11CBC29EE312600ED00D9 /* Info.plist */,
 			);
@@ -257,7 +268,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */,
+				285A81782A12E77F00ED7608 /* Constants.swift in Sources */,
 				288002402A0C3BB600045F40 /* Playground.swift in Sources */,
+				285A817B2A12E93100ED7608 /* TranscribeButton.swift in Sources */,
 				28F11CA629EE2E6700ED00D9 /* ContentView.swift in Sources */,
 				28741D6E2A06F5EC00D29899 /* Helper.swift in Sources */,
 				28F11CA429EE2E6700ED00D9 /* dyslexiaApp.swift in Sources */,
@@ -268,7 +281,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				285A817C2A12E93100ED7608 /* TranscribeButton.swift in Sources */,
+				285A81792A12E77F00ED7608 /* Constants.swift in Sources */,
 				28F11CBB29EE312600ED00D9 /* KeyboardViewController.swift in Sources */,
+				285A81752A12E46A00ED7608 /* KeyboardView.swift in Sources */,
 				28EE554629EE361300CEF0C6 /* KeyboardLayoutProvider.swift in Sources */,
 				28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */,
 			);

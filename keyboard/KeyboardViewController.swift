@@ -15,13 +15,14 @@ class KeyboardViewController: KeyboardInputViewController {
         keyboardContext.setLocale(.english)
         keyboardActionHandler = KeyboardActionHandler(
             inputViewController: self)
-        keyboardLayoutProvider = KeyboardLayoutProvider(
-            keyboardContext: keyboardContext,
-            inputSetProvider: inputSetProvider)
+//        keyboardLayoutProvider = KeyboardLayoutProvider(
+//            keyboardContext: keyboardContext,
+//            inputSetProvider: inputSetProvider)
 
         /// 💡 Call super to perform the base initialization.
         super.viewDidLoad()
     }
+
 
     /**
      This function is called whenever the keyboard should be
@@ -37,6 +38,8 @@ class KeyboardViewController: KeyboardInputViewController {
         /// by default setup a `SystemKeyboard`, so you only
         /// have to override this function to setup a custom
         /// view, which we do in `KeyboardCustom`.
-        setup { SystemKeyboard(controller: $0) }
+//        setup { SystemKeyboard(controller: $0, autocompleteToolbar: .none) }
+        setup { KeyboardView(controller: $0) }
+
     }
 }
