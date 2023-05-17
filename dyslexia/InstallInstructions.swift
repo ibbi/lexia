@@ -35,16 +35,16 @@ struct InstallInstructions: View {
             }
             .listStyle(PlainListStyle())
 
-            Button("Take me to settings", action: {
-                Helper.openAppSettings()
-            })
-            .padding()
-            .background(Color.pastelBlue)
-            .foregroundColor(.white)
-            .cornerRadius(8)
-            .padding(.horizontal)
-            .shadow(color: .gray, radius: 5, x: 0, y: 2)
-        }
+//            Button("Take me to settings", action: {
+//                Helper.openAppSettings()
+//            })
+//            .padding()
+//            .background(Color.pastelBlue)
+//            .foregroundColor(.white)
+//            .cornerRadius(8)
+//            .padding(.horizontal)
+//            .shadow(color: .gray, radius: 5, x: 0, y: 2)
+//        }
     }
 }
 
