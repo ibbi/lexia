@@ -10,17 +10,26 @@ import KeyboardKit
 
 struct ContentView: View {
     @StateObject private var keyboardState = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*")
+    @State private var deeplinkedURL: String?
 
 
     
     var body: some View {
         Group {
-            if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
+            if deeplinkedURL != nil {
+                let p = print(deeplinkedURL)
+                Dictation()
+            }
+            else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
                 InstallInstructions(isOnlyMissingFullAccess: !keyboardState.isFullAccessEnabled && keyboardState.isKeyboardEnabled)
             }
             else {
                 Playground(isKeyboardActive: keyboardState.isKeyboardActive)
             }
+        }
+        .onOpenURL { url in
+            guard let host = url.host else { return }
+            deeplinkedURL = host
         }
     }
 }
