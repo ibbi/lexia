@@ -14,6 +14,7 @@ struct TranscribeButton: View {
     var body: some View {
             Button("Boop", action: {
                 if let t = controller.textDocumentProxy.selectedText {
+                    // TODO: Open the Dictation() deeplink
                     controller.textDocumentProxy.insertText("Let's GPT " + t)
                 } else {
                     controller.textDocumentProxy.insertText("Talk to me")

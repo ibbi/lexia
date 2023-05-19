@@ -17,6 +17,7 @@ struct ContentView: View {
     var body: some View {
         Group {
             if deeplinkedURL != nil {
+                // TODO: Make sure URL matches with expected scheme
                 let p = print(deeplinkedURL)
                 Dictation()
             }
