@@ -62,6 +62,9 @@
 		2880023D2A0C3B5200045F40 /* InstallInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallInstructions.swift; sourceTree = "<group>"; };
 		2880023F2A0C3BB600045F40 /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		289584D92A182FB7001425B8 /* Dictation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictation.swift; sourceTree = "<group>"; };
+		289584DB2A18309E001425B8 /* dyslexia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dyslexia.entitlements; sourceTree = "<group>"; };
+		289584DC2A1830A6001425B8 /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = keyboard.entitlements; sourceTree = "<group>"; };
+		289584DD2A1830B8001425B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28C14E782A0D7E7C00106EA3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardActionHandler.swift; sourceTree = "<group>"; };
 		28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 		28F11CA229EE2E6700ED00D9 /* dyslexia */ = {
 			isa = PBXGroup;
 			children = (
+				289584DD2A1830B8001425B8 /* Info.plist */,
+				289584DB2A18309E001425B8 /* dyslexia.entitlements */,
 				28F11CA329EE2E6700ED00D9 /* dyslexiaApp.swift */,
 				28C14E782A0D7E7C00106EA3 /* Settings.bundle */,
 				28F11CA529EE2E6700ED00D9 /* ContentView.swift */,
@@ -142,6 +147,7 @@
 		28F11CB929EE312600ED00D9 /* keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				289584DC2A1830A6001425B8 /* keyboard.entitlements */,
 				28F11CBA29EE312600ED00D9 /* KeyboardViewController.swift */,
 				28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */,
 				285A817A2A12E93100ED7608 /* TranscribeButton.swift */,
@@ -425,12 +431,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = dyslexia/dyslexia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"dyslexia/Preview Content\"";
 				DEVELOPMENT_TEAM = 372X4548N8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dyslexia/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -455,12 +463,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = dyslexia/dyslexia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"dyslexia/Preview Content\"";
 				DEVELOPMENT_TEAM = 372X4548N8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dyslexia/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -482,6 +492,7 @@
 		28F11CC129EE312600ED00D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = keyboard/keyboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 372X4548N8;
@@ -507,6 +518,7 @@
 		28F11CC229EE312600ED00D9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = keyboard/keyboard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 372X4548N8;
