@@ -16,6 +16,11 @@
 		2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023D2A0C3B5200045F40 /* InstallInstructions.swift */; };
 		288002402A0C3BB600045F40 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023F2A0C3BB600045F40 /* Playground.swift */; };
 		289584DA2A182FB7001425B8 /* Dictation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289584D92A182FB7001425B8 /* Dictation.swift */; };
+		289584DF2A215684001425B8 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289584DE2A215684001425B8 /* Recorder.swift */; };
+		289585142A22F889001425B8 /* URLProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; };
+		289585152A22F889001425B8 /* URLProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		289585172A22FA2A001425B8 /* URLProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; };
+		289585182A22FA2A001425B8 /* URLProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28C14E792A0D7E7C00106EA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28C14E782A0D7E7C00106EA3 /* Settings.bundle */; };
 		28C14E7A2A0D7E7C00106EA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28C14E782A0D7E7C00106EA3 /* Settings.bundle */; };
 		28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553D29EE34B600CEF0C6 /* KeyboardKit */; };
@@ -31,6 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		289585102A22F847001425B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2895850C2A22F847001425B8 /* URLProxy.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 289585022A22F847001425B8;
+			remoteInfo = URLProxy;
+		};
 		28F11CBD29EE312600ED00D9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 28F11C9829EE2E6700ED00D9 /* Project object */;
@@ -41,6 +53,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		289585162A22F889001425B8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				289585152A22F889001425B8 /* URLProxy.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		289585192A22FA2A001425B8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				289585182A22FA2A001425B8 /* URLProxy.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		28F11CC329EE312600ED00D9 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,6 +99,8 @@
 		289584DB2A18309E001425B8 /* dyslexia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dyslexia.entitlements; sourceTree = "<group>"; };
 		289584DC2A1830A6001425B8 /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = keyboard.entitlements; sourceTree = "<group>"; };
 		289584DD2A1830B8001425B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		289584DE2A215684001425B8 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		2895850C2A22F847001425B8 /* URLProxy.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = URLProxy.xcodeproj; path = URLProxy/URLProxy.xcodeproj; sourceTree = SOURCE_ROOT; };
 		28C14E782A0D7E7C00106EA3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardActionHandler.swift; sourceTree = "<group>"; };
 		28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
@@ -84,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */,
+				289585172A22FA2A001425B8 /* URLProxy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,12 +129,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				28EE554029EE35BD00CEF0C6 /* KeyboardKit in Frameworks */,
+				289585142A22F889001425B8 /* URLProxy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2895850D2A22F847001425B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				289585112A22F847001425B8 /* URLProxy.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		28F11C9729EE2E6700ED00D9 = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +174,7 @@
 				2880023D2A0C3B5200045F40 /* InstallInstructions.swift */,
 				2880023F2A0C3BB600045F40 /* Playground.swift */,
 				289584D92A182FB7001425B8 /* Dictation.swift */,
+				289584DE2A215684001425B8 /* Recorder.swift */,
 				285A81772A12E77F00ED7608 /* Constants.swift */,
 				28741D6D2A06F5EC00D29899 /* Helper.swift */,
 				28F11CA729EE2E6900ED00D9 /* Assets.xcassets */,
@@ -147,6 +194,7 @@
 		28F11CB929EE312600ED00D9 /* keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				2895850C2A22F847001425B8 /* URLProxy.xcodeproj */,
 				289584DC2A1830A6001425B8 /* keyboard.entitlements */,
 				28F11CBA29EE312600ED00D9 /* KeyboardViewController.swift */,
 				28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */,
@@ -176,6 +224,7 @@
 				28F11C9D29EE2E6700ED00D9 /* Frameworks */,
 				28F11C9E29EE2E6700ED00D9 /* Resources */,
 				28F11CC329EE312600ED00D9 /* Embed Foundation Extensions */,
+				289585192A22FA2A001425B8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -197,6 +246,7 @@
 				28F11CB429EE312600ED00D9 /* Sources */,
 				28F11CB529EE312600ED00D9 /* Frameworks */,
 				28F11CB629EE312600ED00D9 /* Resources */,
+				289585162A22F889001425B8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -242,6 +292,12 @@
 			);
 			productRefGroup = 28F11CA129EE2E6700ED00D9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2895850D2A22F847001425B8 /* Products */;
+					ProjectRef = 2895850C2A22F847001425B8 /* URLProxy.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				28F11C9F29EE2E6700ED00D9 /* dyslexia */,
@@ -249,6 +305,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		289585112A22F847001425B8 /* URLProxy.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = URLProxy.framework;
+			remoteRef = 289585102A22F847001425B8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		28F11C9E29EE2E6700ED00D9 /* Resources */ = {
@@ -276,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289584DF2A215684001425B8 /* Recorder.swift in Sources */,
 				2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */,
 				289584DA2A182FB7001425B8 /* Dictation.swift in Sources */,
 				285A81782A12E77F00ED7608 /* Constants.swift in Sources */,

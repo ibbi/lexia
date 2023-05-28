@@ -7,18 +7,21 @@
 
 import SwiftUI
 import KeyboardKit
+import URLProxy
 
 struct TranscribeButton: View {
     let controller: KeyboardInputViewController
 
     var body: some View {
             Button("Boop", action: {
-                if let t = controller.textDocumentProxy.selectedText {
-                    // TODO: Open the Dictation() deeplink
-                    controller.textDocumentProxy.insertText("Let's GPT " + t)
-                } else {
-                    controller.textDocumentProxy.insertText("Talk to me")
-                }
+//                if let t = controller.textDocumentProxy.selectedText {
+//                    // TODO: Open the Dictation() deeplink
+//                    controller.textDocumentProxy.insertText("Let's GPT " + t)
+//                } else {
+//                    controller.textDocumentProxy.insertText("Talk to me")
+//                }
+                let urlHandler = URLHandler()
+                urlHandler.openURL("dyslexia://dictation")
             })
                 .frame(maxWidth: .infinity)
                 .padding()

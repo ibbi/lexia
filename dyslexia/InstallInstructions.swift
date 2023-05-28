@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct InstallInstructions: View {
     let isOnlyMissingFullAccess: Bool
@@ -46,6 +47,7 @@ struct InstallInstructions: View {
             //            .shadow(color: .gray, radius: 5, x: 0, y: 2)
             //        }
         }
+        .onAppear(perform: requestMicPermissions)
     }
     
     struct TodoItem: View {
@@ -77,6 +79,18 @@ struct InstallInstructions: View {
                     .cornerRadius(8)
                     .shadow(color: .gray, radius: 5, x: 0, y: 2)
                 }
+            }
+        }
+    }
+    
+    func requestMicPermissions() {
+        let audioSession = AVAudioSession.sharedInstance()
+        audioSession.requestRecordPermission { granted in
+            if granted {
+                print("Mic permissions granted")
+            } else {
+                print("Mic permissions denied")
+                // TODO: Add microphone access todo if they don't grant it, deeplinked into settings
             }
         }
     }
