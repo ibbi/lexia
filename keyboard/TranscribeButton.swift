@@ -21,6 +21,7 @@ struct TranscribeButton: View {
 //                    controller.textDocumentProxy.insertText("Talk to me")
 //                }
                 let urlHandler = URLHandler()
+                // TODO: If already in container app - just run ditation function.
                 urlHandler.openURL("dyslexia://dictation")
             })
                 .frame(maxWidth: .infinity)

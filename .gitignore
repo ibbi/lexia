@@ -4,6 +4,7 @@
 ### Xcode ###
 ## User settings
 xcuserdata/
+**/Keys.swift
 
 ## Xcode 8 and earlier
 *.xcscmblueprint

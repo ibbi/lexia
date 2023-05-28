@@ -6,19 +6,20 @@
 //
 
 import SwiftUI
-
-// TODO: Activate microphone and immediately pop back to previous (host) where keyboard was used.
-// Keep audio in shared context in app group, send to whisper, and return. Or use native.
-import SwiftUI
 import AVFoundation
 
 struct Dictation: View {
     @State private var audioRecorder: AVAudioRecorder!
+    @State private var webSocket = AssemblySocket()
     
     var body: some View {
         Text("Recording...")
             .onAppear {
                 startRecording()
+                webSocket.connect()
+            }
+            .onDisappear {
+                webSocket.disconnect()
             }
     }
     
