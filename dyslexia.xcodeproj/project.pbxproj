@@ -16,7 +16,6 @@
 		2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023D2A0C3B5200045F40 /* InstallInstructions.swift */; };
 		288002402A0C3BB600045F40 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023F2A0C3BB600045F40 /* Playground.swift */; };
 		289584DA2A182FB7001425B8 /* Dictation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289584D92A182FB7001425B8 /* Dictation.swift */; };
-		289584DF2A215684001425B8 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289584DE2A215684001425B8 /* Recorder.swift */; };
 		289585142A22F889001425B8 /* URLProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; };
 		289585152A22F889001425B8 /* URLProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		289585172A22FA2A001425B8 /* URLProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; };
@@ -99,7 +98,6 @@
 		289584DB2A18309E001425B8 /* dyslexia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dyslexia.entitlements; sourceTree = "<group>"; };
 		289584DC2A1830A6001425B8 /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = keyboard.entitlements; sourceTree = "<group>"; };
 		289584DD2A1830B8001425B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		289584DE2A215684001425B8 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		2895850C2A22F847001425B8 /* URLProxy.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = URLProxy.xcodeproj; path = URLProxy/URLProxy.xcodeproj; sourceTree = SOURCE_ROOT; };
 		28C14E782A0D7E7C00106EA3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardActionHandler.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 				2880023D2A0C3B5200045F40 /* InstallInstructions.swift */,
 				2880023F2A0C3BB600045F40 /* Playground.swift */,
 				289584D92A182FB7001425B8 /* Dictation.swift */,
-				289584DE2A215684001425B8 /* Recorder.swift */,
 				285A81772A12E77F00ED7608 /* Constants.swift */,
 				28741D6D2A06F5EC00D29899 /* Helper.swift */,
 				28F11CA729EE2E6900ED00D9 /* Assets.xcassets */,
@@ -342,7 +339,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				289584DF2A215684001425B8 /* Recorder.swift in Sources */,
 				2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */,
 				289584DA2A182FB7001425B8 /* Dictation.swift in Sources */,
 				285A81782A12E77F00ED7608 /* Constants.swift in Sources */,
