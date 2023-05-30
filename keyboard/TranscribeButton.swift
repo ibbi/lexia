@@ -14,15 +14,21 @@ struct TranscribeButton: View {
 
     var body: some View {
             Button("Boop", action: {
+                if controller.hostBundleId != "ibbi.dyslexia" {
+                    let urlHandler = URLHandler()
+                    urlHandler.openURL("dyslexia://dictation")
+                }
+                else {
+                    // TODO: Handle dictation on this page
+                }
+                
 //                if let t = controller.textDocumentProxy.selectedText {
 //                    // TODO: Open the Dictation() deeplink
 //                    controller.textDocumentProxy.insertText("Let's GPT " + t)
 //                } else {
 //                    controller.textDocumentProxy.insertText("Talk to me")
 //                }
-                let urlHandler = URLHandler()
-                // TODO: If already in container app - just run ditation function.
-                urlHandler.openURL("dyslexia://dictation")
+                
             })
                 .frame(maxWidth: .infinity)
                 .padding()
