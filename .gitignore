@@ -5,6 +5,7 @@
 ## User settings
 xcuserdata/
 **/Keys.swift
+**/node_modules/
 
 ## Xcode 8 and earlier
 *.xcscmblueprint
