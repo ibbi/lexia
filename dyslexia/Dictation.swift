@@ -14,8 +14,13 @@ struct Dictation: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Button("Start socket") {
                 webSocket.startConnection()
+            }
+            Spacer()
+            Button("send hello") {
+                webSocket.sendMessage("Hello")
             }
             Spacer()
             Button("Stop socket"){
@@ -25,6 +30,7 @@ struct Dictation: View {
             if let message = webSocket.latestMessage {
                 Text("Latest message: \(message)")
             }
+            Spacer()
         }
             .onAppear {
 //                startRecording()

@@ -53,10 +53,15 @@ class WebSocketManager: ObservableObject {
     }
     
     func sendMessage(_ message: String) {
-        webSocketTask?.send(.string(message)) { error in
-            if let error = error {
-                print("WebSocket couldn’t send message because: \(error)")
+        let audioData: [String: Any] = ["audio_data": message]
+        if let jsonData = try? JSONSerialization.data(withJSONObject: audioData, options: []) {
+            webSocketTask?.send(.data(jsonData)) { error in
+                if let error = error {
+                    print("WebSocket couldn’t send message because: \(error)")
+                }
             }
+        } else {
+            print("Failed to encode message as JSON.")
         }
     }
     
