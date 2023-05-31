@@ -17,8 +17,8 @@ struct ContentView: View {
     var body: some View {
         Group {
             if deeplinkedURL == "dictation" {
-//                Dictation()
-                SwiftUIView()
+                Dictation()
+//                SwiftUIView()
             }
             else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
                 InstallInstructions(isOnlyMissingFullAccess: !keyboardState.isFullAccessEnabled && keyboardState.isKeyboardEnabled)

@@ -8,24 +8,31 @@
 import SwiftUI
 import AVFoundation
 
-@objc private protocol PrivateSelectors: NSObjectProtocol {
-    var destinations: [NSNumber] { get }
-    func sendResponseForDestination(_ destination: NSNumber)
-}
-
 struct Dictation: View {
     @State private var audioRecorder: AVAudioRecorder!
-    @State private var webSocket = WebSocketManager()
+    @StateObject private var webSocket = WebSocketManager()
     
     var body: some View {
-        Text("Recording...")
+        VStack {
+            Button("Start socket") {
+                webSocket.startConnection()
+            }
+            Spacer()
+            Button("Stop socket"){
+                webSocket.disconnect()
+            }
+            Spacer()
+            if let message = webSocket.latestMessage {
+                Text("Latest message: \(message)")
+            }
+        }
             .onAppear {
-                startRecording()
-//                webSocket.connect()
+//                startRecording()
+//                webSocket.startConnection()
 //                jumpBackToPreviousApp()
             }
             .onDisappear {
-                webSocket.disconnect()
+//                webSocket.disconnect()
             }
     }
     
