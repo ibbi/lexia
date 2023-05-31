@@ -10,23 +10,23 @@ import SwiftUI
 struct SwiftUIView: View {
     @StateObject private var wsManager = WebSocketManager()
 
-        var body: some View {
-            VStack {
-                Button("Send Message") {
-                    wsManager.sendMessage("Hello WebSocket!")
-                }
+    var body: some View {
+        VStack {
+            Button("Send Message") {
+                wsManager.sendMessage("Hello WebSocket!")
+            }
 
-                if let message = wsManager.latestMessage {
-                    Text("Latest message: \(message)")
-                }
-            }
-            .onAppear {
-                wsManager.connect()
-            }
-            .onDisappear {
-                wsManager.disconnect()
+            if let message = wsManager.latestMessage {
+                Text("Latest message: \(message)")
             }
         }
+        .onAppear {
+            wsManager.startConnection()
+        }
+        .onDisappear {
+            wsManager.disconnect()
+        }
+    }
 }
 
 struct SwiftUIView_Previews: PreviewProvider {

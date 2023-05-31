@@ -21,7 +21,7 @@ struct Dictation: View {
         Text("Recording...")
             .onAppear {
                 startRecording()
-                webSocket.connect()
+//                webSocket.connect()
 //                jumpBackToPreviousApp()
             }
             .onDisappear {
