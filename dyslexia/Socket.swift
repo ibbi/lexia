@@ -53,38 +53,50 @@ class WebSocketManager: ObservableObject {
     }
     
     func sendMessage(_ message: String) {
-        let audioData: [String: Any] = ["audio_data": message]
-        if let jsonData = try? JSONSerialization.data(withJSONObject: audioData, options: []) {
-            webSocketTask?.send(.data(jsonData)) { error in
-                if let error = error {
-                    print("WebSocket couldn’t send message because: \(error)")
-                }
+            guard let webSocketTask = webSocketTask, webSocketTask.state == .running else {
+                print("WebSocket isn't connected.")
+                return
             }
-        } else {
-            print("Failed to encode message as JSON.")
-        }
-    }
-    
-    private func receiveMessage() {
-        webSocketTask?.receive { [weak self] result in
-            switch result {
-            case .failure(let error):
-                print("Error in receiving message: \(error)")
-            case .success(let message):
-                switch message {
-                case .string(let text):
-                    DispatchQueue.main.async {
-                        self?.latestMessage = text
+
+            let audioData: [String: Any] = ["audio_data": message]
+            if let jsonData = try? JSONSerialization.data(withJSONObject: audioData, options: []) {
+                webSocketTask.send(.data(jsonData)) { error in
+                    if let error = error {
+                        print("WebSocket couldn’t send message because: \(error)")
                     }
-                case .data(let data):
-                    print("Received data: \(data)")
-                @unknown default:
-                    print("Unknown data received.")
+                }
+            } else {
+                print("Failed to encode message as JSON.")
+            }
+        }
+
+        private func receiveMessage() {
+            webSocketTask?.receive { [weak self] result in
+                switch result {
+                case .failure(let error):
+                    print("Error in receiving message: \(error)")
+                    if (self?.webSocketTask?.state != .running) {
+                        print("WebSocket connection isn't running.")
+                    }
+                case .success(let message):
+                    switch message {
+                    case .string(let text):
+                        DispatchQueue.main.async {
+                            self?.latestMessage = text
+                        }
+                    case .data(let data):
+                        print("Received data: \(data)")
+                    @unknown default:
+                        print("Unknown data received.")
+                    }
+                }
+
+                if (self?.webSocketTask?.state == .running) {
+                    // Listening for the next message.
+                    self?.receiveMessage()
+                } else {
+                    print("Stop receiving because WebSocket isn't running.")
                 }
             }
-            
-            // Listening for the next message.
-            self?.receiveMessage()
         }
-    }
 }
