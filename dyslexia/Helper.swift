@@ -21,3 +21,21 @@ class Helper{
     }
 }
 
+@objc private protocol PrivateSelectors: NSObjectProtocol {
+    var destinations: [NSNumber] { get }
+    func sendResponseForDestination(_ destination: NSNumber)
+}
+
+func jumpBackToPreviousApp() -> Bool {
+    guard
+        let sysNavIvar = class_getInstanceVariable(UIApplication.self, "_systemNavigationAction"),
+        let action = object_getIvar(UIApplication.shared, sysNavIvar) as? NSObject,
+        let destinations = action.perform(#selector(getter: PrivateSelectors.destinations)).takeUnretainedValue() as? [NSNumber],
+        let firstDestination = destinations.first
+    else {
+        return false
+    }
+    action.perform(#selector(PrivateSelectors.sendResponseForDestination), with: firstDestination)
+    return true
+}
+

@@ -15,7 +15,7 @@ import AVFoundation
 
 struct Dictation: View {
     @State private var audioRecorder: AVAudioRecorder!
-    @State private var webSocket = AssemblySocket()
+    @State private var webSocket = WebSocketManager()
     
     var body: some View {
         Text("Recording...")
@@ -60,18 +60,6 @@ struct Dictation: View {
         return paths[0]
     }
     
-    func jumpBackToPreviousApp() -> Bool {
-        guard
-            let sysNavIvar = class_getInstanceVariable(UIApplication.self, "_systemNavigationAction"),
-            let action = object_getIvar(UIApplication.shared, sysNavIvar) as? NSObject,
-            let destinations = action.perform(#selector(getter: PrivateSelectors.destinations)).takeUnretainedValue() as? [NSNumber],
-            let firstDestination = destinations.first
-        else {
-            return false
-        }
-        action.perform(#selector(PrivateSelectors.sendResponseForDestination), with: firstDestination)
-        return true
-    }
 }
 
 struct Dictation_Previews: PreviewProvider {
