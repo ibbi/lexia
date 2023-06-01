@@ -46,7 +46,7 @@ class WebSocketManager: ObservableObject {
         // TODO: Set correct sample rate. For some reason, this is diff from the actual sample rate of buffer audio.
 //        let sampleRate = AVAudioSession.sharedInstance().sampleRate
 //        print("Grrraa\(sampleRate)")
-        let url = URL(string: "wss://api.assemblyai.com/v2/realtime/ws?sample_rate=44100&token=\(token)")!
+        let url = URL(string: "wss://api.assemblyai.com/v2/realtime/ws?sample_rate=16000&token=\(token)")!
         let urlSession = URLSession(configuration: .default)
         webSocketTask = urlSession.webSocketTask(with: url)
         webSocketTask?.resume()
@@ -55,6 +55,14 @@ class WebSocketManager: ObservableObject {
     
     func disconnect() {
         webSocketTask?.cancel(with: .normalClosure, reason: nil)
+    }
+    
+    func sendData(_ data: Data) {
+        webSocketTask?.send(.data(data)) { error in
+            if let error = error {
+                print("WebSocket couldn’t send message because: \(error)")
+            }
+        }
     }
     
     func sendMessage(_ message: String) {
