@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import AVFoundation
 
 class WebSocketManager: ObservableObject {
     private var webSocketTask: URLSessionWebSocketTask?
     @Published var latestMessage: String?
+    
     
     func startConnection() {
         getToken { [weak self] token in
@@ -41,7 +43,10 @@ class WebSocketManager: ObservableObject {
     
 
     private func connect(with token: String) {
-        let url = URL(string: "wss://api.assemblyai.com/v2/realtime/ws?sample_rate=16000&token=\(token)")!
+        // TODO: Set correct sample rate. For some reason, this is diff from the actual sample rate of buffer audio.
+//        let sampleRate = AVAudioSession.sharedInstance().sampleRate
+//        print("Grrraa\(sampleRate)")
+        let url = URL(string: "wss://api.assemblyai.com/v2/realtime/ws?sample_rate=44100&token=\(token)")!
         let urlSession = URLSession(configuration: .default)
         webSocketTask = urlSession.webSocketTask(with: url)
         webSocketTask?.resume()

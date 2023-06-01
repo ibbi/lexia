@@ -14,7 +14,6 @@ class AudioCapture: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate, Obse
     
     override init() {
         super.init()
-        
         guard let audioDevice = AVCaptureDevice.default(for: .audio) else {
             print("Could not get audio device.")
             return
@@ -61,6 +60,15 @@ class AudioCapture: NSObject, AVCaptureAudioDataOutputSampleBufferDelegate, Obse
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // Handle audio sample buffer here
         print("Received audio sample buffer.")
+        // Get the audio stream description
+        if let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer),
+            let audioStreamBasicDescription = CMAudioFormatDescriptionGetStreamBasicDescription(formatDescription)?.pointee {
+            
+            // The sample rate is in the mSampleRate field of the audio stream basic description
+            let sampleRate = audioStreamBasicDescription.mSampleRate
+            
+            print("Sample rate: \(sampleRate)")
+        }
     }
     
     func captureOutput(_ output: AVCaptureOutput, didDrop sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
