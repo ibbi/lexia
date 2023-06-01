@@ -54,7 +54,20 @@ class WebSocketManager: ObservableObject {
     }
     
     func disconnect() {
-        webSocketTask?.cancel(with: .normalClosure, reason: nil)
+        // Send terminate_session message
+        let terminateMessage: [String: Any] = ["terminate_session": true]
+        if let jsonData = try? JSONSerialization.data(withJSONObject: terminateMessage, options: []) {
+            webSocketTask?.send(.data(jsonData)) { [weak self] error in
+                if let error = error {
+                    print("WebSocket couldn’t send termination message because: \(error)")
+                } else {
+                    // If termination message sent successfully, then close the connection
+                    self?.webSocketTask?.cancel(with: .normalClosure, reason: nil)
+                }
+            }
+        } else {
+            print("Failed to encode termination message as JSON.")
+        }
     }
     
     func sendData(_ data: Data) {
