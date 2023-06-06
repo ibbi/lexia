@@ -35,6 +35,7 @@ struct Dictation: View {
                 Spacer()
                 if let message = webSocket.latestMessage {
                     Text("Latest message: \(message)")
+                    let thing = print(message)
                 }
                 Spacer()
             }

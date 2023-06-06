@@ -87,18 +87,22 @@ class WebSocketManager: ObservableObject {
             print("WebSocket isn't connected.")
             return
         }
-        // Not using standard JSON library because it adds escape \ chars
 
-        let jsonString = "{\"audio_data\":\"\(message)\"}"
-        if let jsonData = jsonString.data(using: .utf8) {
-            print("JSON object: \(jsonString)")
-            webSocketTask.send(.data(jsonData)) { error in
-                if let error = error {
-                    print("WebSocket couldn’t send message because: \(error)")
+        let audioData = AudioData(audio_data: message)
+        let jsonEncoder = JSONEncoder()
+
+        do {
+            let jsonData = try jsonEncoder.encode(audioData)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("JSON object: \(jsonString)")
+                webSocketTask.send(.string(jsonString)) { error in
+                    if let error = error {
+                        print("WebSocket couldn’t send message because: \(error)")
+                    }
                 }
             }
-        } else {
-            print("Failed to convert JSON string to Data.")
+        } catch {
+            print("Failed to encode message as JSON: \(error.localizedDescription)")
         }
     }
 
@@ -117,6 +121,7 @@ class WebSocketManager: ObservableObject {
                         self?.latestMessage = text
                     }
                     print("Received message: \(text)") // Print the entire received message
+                    
                 case .data(let data):
                     print("Received data: \(data)")
                 @unknown default:
