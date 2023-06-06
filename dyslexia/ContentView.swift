@@ -15,18 +15,17 @@ struct ContentView: View {
 // TODO: Revert paths
     
     var body: some View {
-        Dictation()
-//        Group {
-//            if deeplinkedURL == "dictation" {
-//                Dictation()
-//            }
-//            else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
-//                InstallInstructions(isOnlyMissingFullAccess: !keyboardState.isFullAccessEnabled && keyboardState.isKeyboardEnabled)
-//            }
-//            else {
-//                Playground(isKeyboardActive: keyboardState.isKeyboardActive)
-//            }
-//        }
+        Group {
+            if deeplinkedURL == "dictation" {
+                Dictation()
+            }
+            else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
+                InstallInstructions(isOnlyMissingFullAccess: !keyboardState.isFullAccessEnabled && keyboardState.isKeyboardEnabled)
+            }
+            else {
+                Playground(isKeyboardActive: keyboardState.isKeyboardActive)
+            }
+        }
         .onOpenURL { url in
             guard let host = url.host else { return }
             deeplinkedURL = host

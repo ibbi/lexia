@@ -11,17 +11,14 @@ class AudioRecorder: ObservableObject {
     private let audioEngine = AVAudioEngine()
     private var audioConverter: AVAudioConverter?
     private var recordingFormat: AVAudioFormat!
-//    private let sampleRate: Double = 16000
     private let webSocketManager: WebSocketManager
     private var chunkCounter = 0
 
-
     init(webSocketManager: WebSocketManager) {
         self.webSocketManager = webSocketManager
-//        recordingFormat = AVAudioFormat(commonFormat: .pcmFormatInt16, sampleRate: inputSampleRate, channels: 1, interleaved: true)!
     }
 
-    func startRecording() {
+    func startRecording(completion: @escaping (Bool) -> Void = { _ in }) {
         let inputNode = audioEngine.inputNode
         let inputFormat = inputNode.outputFormat(forBus: 0)
         let inputSampleRate = inputFormat.sampleRate
@@ -47,7 +44,7 @@ class AudioRecorder: ObservableObject {
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
     }
-    
+
     func createWAVHeader(dataSize: Int, sampleRate: Int) -> Data {
         let headerSize = 44
         let totalSize = dataSize + headerSize
@@ -92,33 +89,12 @@ class AudioRecorder: ObservableObject {
         if let error = error {
             print("Error converting audio buffer: \(error.localizedDescription)")
         } else {
-            // The audio buffer is now converted to the desired format.
-            // You can now process the pcmBuffer for further use.
-            
-            // Print input and output audio properties
-            print("Input format: \(inputFormat)")
-            print("Input sample rate: \(inputFormat.sampleRate)")
-            print("Output format: \(recordingFormat)")
-            print("Output sample rate: \(recordingFormat.sampleRate)")
-            
-            // Convert AVAudioPCMBuffer to Data
             let audioData = pcmBuffer.toData()
             let wavHeader = createWAVHeader(dataSize: audioData.count, sampleRate: Int(recordingFormat.sampleRate))
             var wavData = wavHeader
-                wavData.append(audioData)
+            wavData.append(audioData)
             let base64String = wavData.base64EncodedString()
 
-
-            
-            // Encode the PCM binary chunk as a base64 string
-//            let base64String = audioData.base64EncodedString()
-            chunkCounter += 1
-            if chunkCounter < 2 {
-                print("\(chunkCounter)")
-                print("Base64 chunk: \(base64String)")
-            }
-
-            // Now you can use the base64String to send it over the WebSocket
             if webSocketManager.isConnected {
                 webSocketManager.sendMessage(base64String)
             } else {
@@ -128,7 +104,6 @@ class AudioRecorder: ObservableObject {
     }
 }
 
-// Add this extension to convert AVAudioPCMBuffer to Data
 extension AVAudioPCMBuffer {
     func toData() -> Data {
         let channelCount = 1

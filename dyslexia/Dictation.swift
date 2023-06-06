@@ -10,7 +10,7 @@ import AVFoundation
 
 struct Dictation: View {
 
-    @State private var isRecording = false
+    @State private var isConnected = false
     
     @StateObject private var webSocket = WebSocketManager()
     @StateObject private var audioRecorder: AudioRecorder
@@ -23,42 +23,33 @@ struct Dictation: View {
 
     var body: some View {
         VStack {
-            Group {
-                Spacer()
-                Button("Start socket") {
-                    webSocket.startConnection()
+            VStack {
+                ForEach(webSocket.transcriptions.indices, id: \.self) { index in
+                    Text(webSocket.transcriptions[index])
                 }
-                Spacer()
-                Button("Stop socket"){
-                    webSocket.disconnect()
+                if let transcription = webSocket.latestTranscription {
+                    Text(transcription)
                 }
-                Spacer()
-                if let message = webSocket.latestMessage {
-                    Text("Latest message: \(message)")
-                    let thing = print(message)
-                }
-                Spacer()
             }
-            Group {
-                Text(isRecording ? "Recording..." : "Not Recording")
-                Spacer()
-                Button(action: {
-                    if isRecording {
-                        audioRecorder.stopRecording()
-                    } else {
-                        audioRecorder.startRecording()
-                    }
-                    
-                    isRecording.toggle()
-                }) {
-                    Text(isRecording ? "Stop Recording" : "Start Recording")
-                        .font(.title2)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+            .padding()
+            Button(action: {
+                audioRecorder.stopRecording()
+            }) {
+                Text("Stop Recording")
+                    .font(.title2)
+                    .padding()
+                    .background(Color.red)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding()
+        }
+        .onAppear {
+            webSocket.startConnection { success in
+                isConnected = success
+                if success {
+                    audioRecorder.startRecording()
                 }
-                Spacer()
             }
         }
     }
