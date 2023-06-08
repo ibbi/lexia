@@ -34,6 +34,7 @@ struct Dictation: View {
             .padding()
             Button(action: {
                 audioRecorder.stopRecording()
+                Helper.jumpBackToPreviousApp()
             }) {
                 Text("Stop Recording")
                     .font(.title2)

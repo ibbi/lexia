@@ -17,17 +17,17 @@ class WebSocketManager: ObservableObject {
     @Published var latestMessage: String?
     @Published var latestTranscription: String?
     @Published var transcriptions: [String] = []
-
+    
     var isConnected: Bool {
         return webSocketTask?.state == .running
     }
-
+    
     func startConnection(completion: @escaping (Bool) -> Void) {
         getToken { [weak self] token in
             self?.connect(with: token, completion: completion)
         }
     }
-
+    
     private func getToken(completion: @escaping (String) -> Void) {
         let url = URL(string: "https://basic-bundle-long-queen-51be.ibm456.workers.dev/")!
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -35,20 +35,20 @@ class WebSocketManager: ObservableObject {
                 print("Failed to fetch token: \(error)")
                 return
             }
-
+            
             guard let data = data,
                   let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                   let token = json["token"] as? String else {
                 print("Failed to parse token from response.")
                 return
             }
-
+            
             completion(token)
         }
-
+        
         task.resume()
     }
-
+    
     private func connect(with token: String, completion: @escaping (Bool) -> Void) {
         let url = URL(string: "wss://api.assemblyai.com/v2/realtime/ws?sample_rate=48000&token=\(token)")!
         let urlSession = URLSession(configuration: .default)
@@ -57,7 +57,7 @@ class WebSocketManager: ObservableObject {
         receiveMessage()
         completion(true)
     }
-
+    
     func disconnect() {
         let terminateMessage: [String: Any] = ["terminate_session": true]
         if let jsonData = try? JSONSerialization.data(withJSONObject: terminateMessage, options: []) {
@@ -72,7 +72,7 @@ class WebSocketManager: ObservableObject {
             print("Failed to encode termination message as JSON.")
         }
     }
-
+    
     func sendData(_ data: Data) {
         webSocketTask?.send(.data(data)) { error in
             if let error = error {
@@ -80,16 +80,16 @@ class WebSocketManager: ObservableObject {
             }
         }
     }
-
+    
     func sendMessage(_ message: String) {
         guard let webSocketTask = webSocketTask, webSocketTask.state == .running else {
             print("WebSocket isn't connected.")
             return
         }
-
+        
         let audioData = AudioData(audio_data: message)
         let jsonEncoder = JSONEncoder()
-
+        
         do {
             let jsonData = try jsonEncoder.encode(audioData)
             if let jsonString = String(data: jsonData, encoding: .utf8) {
@@ -103,7 +103,7 @@ class WebSocketManager: ObservableObject {
             print("Failed to encode message as JSON: \(error.localizedDescription)")
         }
     }
-
+    
     private func receiveMessage() {
         webSocketTask?.receive { [weak self] result in
             switch result {
@@ -125,7 +125,7 @@ class WebSocketManager: ObservableObject {
                     print("Unknown data received.")
                 }
             }
-
+            
             if (self?.webSocketTask?.state == .running) {
                 self?.receiveMessage()
             } else {
@@ -133,7 +133,7 @@ class WebSocketManager: ObservableObject {
             }
         }
     }
-
+    
     private func handleTranscription(_ jsonObject: [String: Any]) {
         if let messageType = jsonObject["message_type"] as? String,
            let transcription = jsonObject["text"] as? String {
