@@ -1,0 +1,20 @@
+{
+  "name": "basic-bundle-long-queen-51be",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler publish",
+    "start": "wrangler dev"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230419.0",
+    "typescript": "^5.0.4",
+    "wrangler": "^3.0.0"
+  },
+  "dependencies": {
+    "@vespaiach/axios-fetch-adapter": "^0.3.1",
+    "openai": "^3.2.1",
+    "webpack": "^5.86.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

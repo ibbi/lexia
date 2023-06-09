@@ -12,6 +12,7 @@ struct AudioData: Codable {
     let audio_data: String
 }
 
+
 class WebSocketManager: ObservableObject {
     private var webSocketTask: URLSessionWebSocketTask?
     @Published var latestMessage: String?
@@ -23,30 +24,15 @@ class WebSocketManager: ObservableObject {
     }
     
     func startConnection(completion: @escaping (Bool) -> Void) {
-        getToken { [weak self] token in
-            self?.connect(with: token, completion: completion)
-        }
-    }
-    
-    private func getToken(completion: @escaping (String) -> Void) {
-        let url = URL(string: "https://basic-bundle-long-queen-51be.ibm456.workers.dev/assembly")!
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Failed to fetch token: \(error)")
-                return
+        API.getAssemblyToken { [weak self] result in
+            switch result {
+            case .success(let token):
+                self?.connect(with: token, completion: completion)
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+                completion(false)
             }
-            
-            guard let data = data,
-                  let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                  let token = json["token"] as? String else {
-                print("Failed to parse token from response.")
-                return
-            }
-            
-            completion(token)
         }
-        
-        task.resume()
     }
     
     private func connect(with token: String, completion: @escaping (Bool) -> Void) {
