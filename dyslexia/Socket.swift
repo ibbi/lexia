@@ -29,7 +29,7 @@ class WebSocketManager: ObservableObject {
     }
     
     private func getToken(completion: @escaping (String) -> Void) {
-        let url = URL(string: "https://basic-bundle-long-queen-51be.ibm456.workers.dev/")!
+        let url = URL(string: "https://basic-bundle-long-queen-51be.ibm456.workers.dev/assembly")!
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Failed to fetch token: \(error)")
