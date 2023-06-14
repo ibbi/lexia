@@ -12,6 +12,8 @@ struct DictationWhisper: View {
     @State private var transcription: String?
     
     @StateObject private var audioRecorder = AudioRecorder()
+    @Environment(\.scenePhase) private var scenePhase
+
     
     func transcribeAudio() {
         audioRecorder.transcribeAudio { result in
@@ -36,6 +38,10 @@ struct DictationWhisper: View {
             
             do {
                 try transcription.write(to: transcriptionURL!, atomically: true, encoding: .utf8)
+                
+                // Clear the transcription state
+                self.transcription = nil
+                
                 Helper.jumpBackToPreviousApp()
             } catch {
                 print("Error: \(error)")
@@ -65,8 +71,10 @@ struct DictationWhisper: View {
             }
             .padding()
         }
-        .onAppear {
-            audioRecorder.startRecording()
+        .onChange(of: scenePhase) { newScenePhase in
+            if newScenePhase == .active {
+                audioRecorder.startRecording()
+            }
         }
     }
 }
