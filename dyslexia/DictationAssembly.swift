@@ -8,16 +8,16 @@
 import SwiftUI
 import AVFoundation
 
-struct Dictation: View {
+struct DictationAssembly: View {
     @State private var isConnected = false
     @State private var transformedText: String?
     
     @StateObject private var webSocket = WebSocketManager()
-    @StateObject private var audioRecorder: AudioRecorder
+    @StateObject private var audioRecorder: StreamingAudioRecorder
     init() {
         let webSocket = WebSocketManager()
         _webSocket = StateObject(wrappedValue: webSocket)
-        _audioRecorder = StateObject(wrappedValue: AudioRecorder(webSocketManager: webSocket))
+        _audioRecorder = StateObject(wrappedValue: StreamingAudioRecorder(webSocketManager: webSocket))
     }
     
     func sendTranscribedText() {
@@ -84,8 +84,8 @@ struct Dictation: View {
     }
 }
 
-struct Dictation_Previews: PreviewProvider {
+struct DictationAssembly_Previews: PreviewProvider {
     static var previews: some View {
-        Dictation()
+        DictationAssembly()
     }
 }

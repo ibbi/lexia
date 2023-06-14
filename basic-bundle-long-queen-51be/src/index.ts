@@ -25,6 +25,11 @@ async function handleRequest(request: Request): Promise<Response> {
       return new Response('Method not allowed', { status: 405 });
     }
     return handleTransformerRequest(request);
+  } else if (url.pathname === '/whisper') {
+    if (request.method !== 'POST') {
+      return new Response('Method not allowed', { status: 405 });
+    }
+    return handleWhisperRequest(request);
   } else {
     return new Response('Not found', { status: 404 });
   }
@@ -63,6 +68,34 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
     const assistantMessage = response.data.choices[0].message?.content;
     return new Response(assistantMessage, {
       headers: { 'Content-Type': 'text/plain' },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+}
+
+async function handleWhisperRequest(request: Request): Promise<Response> {
+  try {
+    const formData = await request.formData();
+    const audioFile = formData.get('file');
+
+    if (!(audioFile instanceof File)) {
+      return new Response('Invalid file', { status: 400 });
+    }
+
+    formData.append('model', 'whisper-1');
+
+    const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${OPENAI_KEY}`,
+      },
+    });
+
+    const data = await response.json();
+    return new Response(JSON.stringify(data), {
+      headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
