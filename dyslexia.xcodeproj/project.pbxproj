@@ -16,10 +16,6 @@
 		2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023D2A0C3B5200045F40 /* InstallInstructions.swift */; };
 		288002402A0C3BB600045F40 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023F2A0C3BB600045F40 /* Playground.swift */; };
 		289584DA2A182FB7001425B8 /* DictationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289584D92A182FB7001425B8 /* DictationAssembly.swift */; };
-		289585142A22F889001425B8 /* URLProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; };
-		289585152A22F889001425B8 /* URLProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		289585172A22FA2A001425B8 /* URLProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; };
-		289585182A22FA2A001425B8 /* URLProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2895851B2A23D88C001425B8 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895851A2A23D88C001425B8 /* Socket.swift */; };
 		289585212A273B6A001425B8 /* StreamingAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289585202A273B6A001425B8 /* StreamingAudioRecorder.swift */; };
 		28C14E792A0D7E7C00106EA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28C14E782A0D7E7C00106EA3 /* Settings.bundle */; };
@@ -28,6 +24,8 @@
 		28CF45092A38E5B800B8F52C /* DictationWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF45082A38E5B800B8F52C /* DictationWhisper.swift */; };
 		28CF450B2A38EA4800B8F52C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF450A2A38EA4800B8F52C /* AudioRecorder.swift */; };
 		28CF450E2A3A249600B8F52C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF45062A33D08B00B8F52C /* API.swift */; };
+		28CF450F2A3A397200B8F52C /* URLProxy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; };
+		28CF45102A3A397200B8F52C /* URLProxy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 289585112A22F847001425B8 /* URLProxy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553D29EE34B600CEF0C6 /* KeyboardKit */; };
 		28EE554029EE35BD00CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553F29EE35BD00CEF0C6 /* KeyboardKit */; };
 		28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */; };
@@ -58,24 +56,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		289585162A22F889001425B8 /* Embed Frameworks */ = {
+		28CF45112A3A397300B8F52C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				289585152A22F889001425B8 /* URLProxy.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		289585192A22FA2A001425B8 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				289585182A22FA2A001425B8 /* URLProxy.framework in Embed Frameworks */,
+				28CF45102A3A397200B8F52C /* URLProxy.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,7 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */,
-				289585172A22FA2A001425B8 /* URLProxy.framework in Frameworks */,
+				28CF450F2A3A397200B8F52C /* URLProxy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +125,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28EE554029EE35BD00CEF0C6 /* KeyboardKit in Frameworks */,
-				289585142A22F889001425B8 /* URLProxy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +161,7 @@
 		28F11CA229EE2E6700ED00D9 /* dyslexia */ = {
 			isa = PBXGroup;
 			children = (
+				2895850C2A22F847001425B8 /* URLProxy.xcodeproj */,
 				289584DD2A1830B8001425B8 /* Info.plist */,
 				289584DB2A18309E001425B8 /* dyslexia.entitlements */,
 				28F11CA329EE2E6700ED00D9 /* dyslexiaApp.swift */,
@@ -207,7 +194,6 @@
 		28F11CB929EE312600ED00D9 /* keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				2895850C2A22F847001425B8 /* URLProxy.xcodeproj */,
 				289584DC2A1830A6001425B8 /* keyboard.entitlements */,
 				28F11CBA29EE312600ED00D9 /* KeyboardViewController.swift */,
 				28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */,
@@ -237,7 +223,7 @@
 				28F11C9D29EE2E6700ED00D9 /* Frameworks */,
 				28F11C9E29EE2E6700ED00D9 /* Resources */,
 				28F11CC329EE312600ED00D9 /* Embed Foundation Extensions */,
-				289585192A22FA2A001425B8 /* Embed Frameworks */,
+				28CF45112A3A397300B8F52C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,7 +245,6 @@
 				28F11CB429EE312600ED00D9 /* Sources */,
 				28F11CB529EE312600ED00D9 /* Frameworks */,
 				28F11CB629EE312600ED00D9 /* Resources */,
-				289585162A22F889001425B8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -515,7 +500,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = dyslexia/dyslexia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -547,7 +534,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = dyslexia/dyslexia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
