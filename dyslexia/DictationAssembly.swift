@@ -52,7 +52,7 @@ struct DictationAssembly: View {
             Button(action: {
                 sendTranscribedText()
             }) {
-                Text("Send Transcribed Text")
+                Text("Rewrite")
                     .font(.title2)
                     .padding()
                     .background(Color.green)

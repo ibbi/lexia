@@ -10,6 +10,8 @@ import AVFoundation
 
 class AudioRecorder: ObservableObject {
     private var audioRecorder: AVAudioRecorder!
+    @Published var transcription: String?
+
     
     func startRecording() {
         let audioSession = AVAudioSession.sharedInstance()
