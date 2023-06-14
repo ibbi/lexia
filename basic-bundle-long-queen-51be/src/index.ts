@@ -62,7 +62,7 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
 
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: promptWrapped }],
+      messages: [{ role: 'user', content: promptWrapped.replace(/^"(.*)"$/, '$1') }],
     });
 
     const assistantMessage = response.data.choices[0].message?.content;
