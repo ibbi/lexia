@@ -10,6 +10,7 @@ import SwiftUI
 import KeyboardKit
 
 struct TranscribeButton: View {
+    @State private var transformedText: String?
     let controller: KeyboardInputViewController
 
     func pasteTranscription() {
@@ -18,10 +19,29 @@ struct TranscribeButton: View {
         
         do {
             let storedTranscription = try String(contentsOf: transcriptionURL!, encoding: .utf8)
-            controller.textDocumentProxy.insertText(storedTranscription)
             
-            // Clear the shared container's text
-            try "".write(to: transcriptionURL!, atomically: true, encoding: .utf8)
+            if !storedTranscription.isEmpty {
+                controller.textDocumentProxy.insertText(storedTranscription)
+                
+                // Send transcribed text to API only if storedTranscription is not empty
+                if !storedTranscription.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    API.sendTranscribedText(storedTranscription) { result in
+                        switch result {
+                        case .success(let transformed):
+                            DispatchQueue.main.async {
+                                transformedText = transformed
+                                // Insert transformedText after receiving a response
+                                controller.textDocumentProxy.insertText("\n\n\(transformed)")
+                            }
+                        case .failure(let error):
+                            print("Error: \(error.localizedDescription)")
+                        }
+                    }
+                }
+                
+                // Clear the shared container's text
+                try "".write(to: transcriptionURL!, atomically: true, encoding: .utf8)
+            }
         } catch {
             print("Error: \(error)")
         }

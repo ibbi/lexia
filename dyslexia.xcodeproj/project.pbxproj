@@ -27,6 +27,7 @@
 		28CF45072A33D08B00B8F52C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF45062A33D08B00B8F52C /* API.swift */; };
 		28CF45092A38E5B800B8F52C /* DictationWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF45082A38E5B800B8F52C /* DictationWhisper.swift */; };
 		28CF450B2A38EA4800B8F52C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF450A2A38EA4800B8F52C /* AudioRecorder.swift */; };
+		28CF450E2A3A249600B8F52C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF45062A33D08B00B8F52C /* API.swift */; };
 		28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553D29EE34B600CEF0C6 /* KeyboardKit */; };
 		28EE554029EE35BD00CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553F29EE35BD00CEF0C6 /* KeyboardKit */; };
 		28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */; };
@@ -380,6 +381,7 @@
 				285A81752A12E46A00ED7608 /* KeyboardView.swift in Sources */,
 				28EE554629EE361300CEF0C6 /* KeyboardLayoutProvider.swift in Sources */,
 				28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */,
+				28CF450E2A3A249600B8F52C /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
