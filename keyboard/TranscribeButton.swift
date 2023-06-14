@@ -21,7 +21,9 @@ struct TranscribeButton: View {
             let storedTranscription = try String(contentsOf: transcriptionURL!, encoding: .utf8)
             
             if !storedTranscription.isEmpty {
-                controller.textDocumentProxy.insertText(storedTranscription)
+//                controller.textDocumentProxy.insertText(storedTranscription)
+                let rangeToSelect = NSRange(location: 0, length: storedTranscription.count)
+                controller.textDocumentProxy.setMarkedText("\(storedTranscription)", selectedRange: rangeToSelect)
                 
                 // Send transcribed text to API only if storedTranscription is not empty
                 if !storedTranscription.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -31,7 +33,8 @@ struct TranscribeButton: View {
                             DispatchQueue.main.async {
                                 transformedText = transformed
                                 // Insert transformedText after receiving a response
-                                controller.textDocumentProxy.insertText("\n\n\(transformed)")
+                                let rangeToSelect = NSRange(location: 0, length: transformed.count)
+                                controller.textDocumentProxy.setMarkedText("\(transformed)", selectedRange: rangeToSelect)
                             }
                         case .failure(let error):
                             print("Error: \(error.localizedDescription)")
