@@ -13,7 +13,7 @@ struct TranscribeButton: View {
     let controller: KeyboardInputViewController
 
     var body: some View {
-        Button("Boop", action: {
+        Button("Talk", action: {
             if controller.hostBundleId != "ibbi.dyslexia" {
                 let urlHandler = URLHandler()
                 urlHandler.openURL("dyslexia://dictation")

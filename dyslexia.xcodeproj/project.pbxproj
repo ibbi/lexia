@@ -27,6 +27,7 @@
 		28CF45072A33D08B00B8F52C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF45062A33D08B00B8F52C /* API.swift */; };
 		28CF45092A38E5B800B8F52C /* DictationWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF45082A38E5B800B8F52C /* DictationWhisper.swift */; };
 		28CF450B2A38EA4800B8F52C /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF450A2A38EA4800B8F52C /* AudioRecorder.swift */; };
+		28CF450D2A3A1B9500B8F52C /* Paste.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF450C2A3A1B9500B8F52C /* Paste.swift */; };
 		28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553D29EE34B600CEF0C6 /* KeyboardKit */; };
 		28EE554029EE35BD00CEF0C6 /* KeyboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 28EE553F29EE35BD00CEF0C6 /* KeyboardKit */; };
 		28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */; };
@@ -110,6 +111,7 @@
 		28CF45062A33D08B00B8F52C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		28CF45082A38E5B800B8F52C /* DictationWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationWhisper.swift; sourceTree = "<group>"; };
 		28CF450A2A38EA4800B8F52C /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		28CF450C2A3A1B9500B8F52C /* Paste.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paste.swift; sourceTree = "<group>"; };
 		28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardActionHandler.swift; sourceTree = "<group>"; };
 		28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutProvider.swift; sourceTree = "<group>"; };
 		28F11CA029EE2E6700ED00D9 /* dyslexia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dyslexia.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +213,7 @@
 				28F11CBA29EE312600ED00D9 /* KeyboardViewController.swift */,
 				28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */,
 				285A817A2A12E93100ED7608 /* TranscribeButton.swift */,
+				28CF450C2A3A1B9500B8F52C /* Paste.swift */,
 				285A81742A12E46A00ED7608 /* KeyboardView.swift */,
 				28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */,
 				28F11CBC29EE312600ED00D9 /* Info.plist */,
@@ -375,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				285A817C2A12E93100ED7608 /* TranscribeButton.swift in Sources */,
+				28CF450D2A3A1B9500B8F52C /* Paste.swift in Sources */,
 				285A81792A12E77F00ED7608 /* Constants.swift in Sources */,
 				28F11CBB29EE312600ED00D9 /* KeyboardViewController.swift in Sources */,
 				285A81752A12E46A00ED7608 /* KeyboardView.swift in Sources */,

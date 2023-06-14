@@ -32,7 +32,18 @@ class KeyboardActionHandler: StandardKeyboardActionHandler {
             if let t = textDocumentProxy.selectedText {
                 textDocumentProxy.insertText("you highlighted " + t)
             }
-            textDocumentProxy.insertText("yo sup")
+            
+            let sharedContainerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")
+            let transcriptionURL = sharedContainerURL?.appendingPathComponent("transcription.txt")
+            
+            do {
+                let storedTranscription = try String(contentsOf: transcriptionURL!, encoding: .utf8)
+                textDocumentProxy.insertText(storedTranscription)
+            } catch {
+                print("Error: \(error)")
+                textDocumentProxy.insertText("yo sup")
+            }
+            
             return nil
         default:
             return nil

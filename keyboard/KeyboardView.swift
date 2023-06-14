@@ -17,7 +17,10 @@ struct KeyboardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TranscribeButton(controller: controller)
+            HStack {
+                TranscribeButton(controller: controller)
+                Paste(controller: controller)
+            }
 
             SystemKeyboard(
                 controller: controller,

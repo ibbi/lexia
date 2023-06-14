@@ -10,30 +10,34 @@ import AVFoundation
 
 struct DictationWhisper: View {
     @State private var transcription: String?
-    @State private var transformedText: String?
     
     @StateObject private var audioRecorder = AudioRecorder()
     
-    func transcribeAndRewriteAudio() {
+    func transcribeAudio() {
         audioRecorder.transcribeAudio { result in
             switch result {
             case .success(let json):
                 if let text = json["text"] as? String {
                     DispatchQueue.main.async {
                         transcription = text
-                    }
-                    API.sendTranscribedText(text) { result in
-                        switch result {
-                        case .success(let transformed):
-                            DispatchQueue.main.async {
-                                transformedText = transformed
-                            }
-                        case .failure(let error):
-                            print("Error: \(error.localizedDescription)")
-                        }
+                        storeTranscriptionAndJumpBack()
                     }
                 }
             case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    func storeTranscriptionAndJumpBack() {
+        if let transcription = transcription {
+            let sharedContainerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")
+            let transcriptionURL = sharedContainerURL?.appendingPathComponent("transcription.txt")
+            
+            do {
+                try transcription.write(to: transcriptionURL!, atomically: true, encoding: .utf8)
+                Helper.jumpBackToPreviousApp()
+            } catch {
                 print("Error: \(error)")
             }
         }
@@ -45,16 +49,12 @@ struct DictationWhisper: View {
                 if let transcription = transcription {
                     Text(transcription)
                 }
-                if let transformed = transformedText {
-                    Text(transformed)
-                        .foregroundColor(.blue)
-                }
             }
             .padding()
             
             Button(action: {
                 audioRecorder.stopRecording()
-                transcribeAndRewriteAudio()
+                transcribeAudio()
             }) {
                 Text("Stop Recording")
                     .font(.title2)
@@ -70,7 +70,6 @@ struct DictationWhisper: View {
         }
     }
 }
-
 struct DictationWhisper_Previews: PreviewProvider {
     static var previews: some View {
         DictationWhisper()
