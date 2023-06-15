@@ -17,7 +17,11 @@ struct KeyboardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            HStack {
                 TranscribeButton(controller: controller)
+                RewriteButton(controller: controller)
+                
+            }
             SystemKeyboard(
                 controller: controller,
                 autocompleteToolbar: .none

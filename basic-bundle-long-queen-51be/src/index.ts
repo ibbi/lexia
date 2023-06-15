@@ -26,10 +26,13 @@ async function handleRequest(request: Request): Promise<Response> {
     }
     return handleTransformerRequest(request);
   } else if (url.pathname === '/whisper') {
-    if (request.method !== 'POST') {
+    if (request.headers.get('Upgrade') === 'websocket') {
+      return handleWhisperWebSocket(request);
+    } else if (request.method === 'POST') {
+      return handleWhisperRequest(request);
+    } else {
       return new Response('Method not allowed', { status: 405 });
     }
-    return handleWhisperRequest(request);
   } else {
     return new Response('Not found', { status: 404 });
   }
@@ -62,10 +65,10 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
 
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: promptWrapped.replace(/^"(.*)"$/, '$1') }],
+      messages: [{ role: 'user', content: promptWrapped }],
     });
 
-    const assistantMessage = response.data.choices[0].message?.content;
+    const assistantMessage = response.data.choices[0].message?.content.replace(/^"(.*)"$/, '$1');
     return new Response(assistantMessage, {
       headers: { 'Content-Type': 'text/plain' },
     });
@@ -100,4 +103,40 @@ async function handleWhisperRequest(request: Request): Promise<Response> {
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
+}
+
+async function handleWhisperWebSocket(request: Request): Promise<Response> {
+  // @ts-ignore
+  const webSocketPair = new WebSocketPair();
+  const [client, server] = Object.values(webSocketPair);
+
+  // @ts-ignore
+  server.accept();
+
+  // @ts-ignore
+  server.addEventListener('message', async (event) => {
+    const audioBuffer = new Uint8Array(event.data);
+    const formData = new FormData();
+    formData.append('file', new Blob([audioBuffer], { type: 'audio/mpeg' }));
+    formData.append('model', 'whisper-1');
+
+    const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${OPENAI_KEY}`,
+      },
+    });
+
+    const data = await response.json();
+    const text = data['text'] || '';
+    // @ts-ignore
+    server.send(text);
+  });
+
+  return new Response(null, {
+    status: 101,
+    // @ts-ignore
+    webSocket: client,
+  });
 }
