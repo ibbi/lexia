@@ -12,10 +12,10 @@ struct DictationAssembly: View {
     @State private var isConnected = false
     @State private var transformedText: String?
     
-    @StateObject private var webSocket = WebSocketManager()
+    @StateObject private var webSocket = AssemblySocketManager()
     @StateObject private var audioRecorder: StreamingAudioRecorder
     init() {
-        let webSocket = WebSocketManager()
+        let webSocket = AssemblySocketManager()
         _webSocket = StateObject(wrappedValue: webSocket)
         _audioRecorder = StateObject(wrappedValue: StreamingAudioRecorder(webSocketManager: webSocket))
     }

@@ -13,7 +13,7 @@ struct AudioData: Codable {
 }
 
 
-class WebSocketManager: ObservableObject {
+class AssemblySocketManager: ObservableObject {
     private var webSocketTask: URLSessionWebSocketTask?
     @Published var latestMessage: String?
     @Published var latestTranscription: String?

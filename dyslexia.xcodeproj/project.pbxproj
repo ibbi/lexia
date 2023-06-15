@@ -16,7 +16,7 @@
 		2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023D2A0C3B5200045F40 /* InstallInstructions.swift */; };
 		288002402A0C3BB600045F40 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023F2A0C3BB600045F40 /* Playground.swift */; };
 		289584DA2A182FB7001425B8 /* DictationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289584D92A182FB7001425B8 /* DictationAssembly.swift */; };
-		2895851B2A23D88C001425B8 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895851A2A23D88C001425B8 /* Socket.swift */; };
+		2895851B2A23D88C001425B8 /* AssemblySocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895851A2A23D88C001425B8 /* AssemblySocket.swift */; };
 		289585212A273B6A001425B8 /* StreamingAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289585202A273B6A001425B8 /* StreamingAudioRecorder.swift */; };
 		28C14E792A0D7E7C00106EA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28C14E782A0D7E7C00106EA3 /* Settings.bundle */; };
 		28C14E7A2A0D7E7C00106EA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28C14E782A0D7E7C00106EA3 /* Settings.bundle */; };
@@ -93,7 +93,7 @@
 		289584DC2A1830A6001425B8 /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = keyboard.entitlements; sourceTree = "<group>"; };
 		289584DD2A1830B8001425B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2895850C2A22F847001425B8 /* URLProxy.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = URLProxy.xcodeproj; path = URLProxy/URLProxy.xcodeproj; sourceTree = SOURCE_ROOT; };
-		2895851A2A23D88C001425B8 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		2895851A2A23D88C001425B8 /* AssemblySocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySocket.swift; sourceTree = "<group>"; };
 		289585202A273B6A001425B8 /* StreamingAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingAudioRecorder.swift; sourceTree = "<group>"; };
 		28C14E782A0D7E7C00106EA3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		28CF45062A33D08B00B8F52C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 				2880023F2A0C3BB600045F40 /* Playground.swift */,
 				289584D92A182FB7001425B8 /* DictationAssembly.swift */,
 				28CF45082A38E5B800B8F52C /* DictationWhisper.swift */,
-				2895851A2A23D88C001425B8 /* Socket.swift */,
+				2895851A2A23D88C001425B8 /* AssemblySocket.swift */,
 				289585202A273B6A001425B8 /* StreamingAudioRecorder.swift */,
 				285A81772A12E77F00ED7608 /* Constants.swift */,
 				28CF450A2A38EA4800B8F52C /* AudioRecorder.swift */,
@@ -355,7 +355,7 @@
 				28741D6E2A06F5EC00D29899 /* Helper.swift in Sources */,
 				28F11CA429EE2E6700ED00D9 /* dyslexiaApp.swift in Sources */,
 				28CF45092A38E5B800B8F52C /* DictationWhisper.swift in Sources */,
-				2895851B2A23D88C001425B8 /* Socket.swift in Sources */,
+				2895851B2A23D88C001425B8 /* AssemblySocket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,10 +11,10 @@ class StreamingAudioRecorder: ObservableObject {
     private let audioEngine = AVAudioEngine()
     private var audioConverter: AVAudioConverter?
     private var recordingFormat: AVAudioFormat!
-    private let webSocketManager: WebSocketManager
+    private let webSocketManager: AssemblySocketManager
     private var chunkCounter = 0
 
-    init(webSocketManager: WebSocketManager) {
+    init(webSocketManager: AssemblySocketManager) {
         self.webSocketManager = webSocketManager
     }
 

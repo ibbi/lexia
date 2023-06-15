@@ -17,6 +17,7 @@ struct API {
     static let assemblyURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/assembly"
     static let transformerURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/transformer"
     static let whisperURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/whisper"
+    static let whisperWebSocketURL = "wss://basic-bundle-long-queen-51be.ibm456.workers.dev/whisper"
 
     
     static func getAssemblyToken(completion: @escaping (Result<String, BackendAPIError>) -> Void) {
@@ -109,5 +110,54 @@ struct API {
                 }
             }
         }.resume()
+    }
+    
+    class WebSocketManager: ObservableObject {
+        private var webSocketTask: URLSessionWebSocketTask?
+
+        func connect(completion: @escaping (Bool) -> Void) {
+            guard let url = URL(string: whisperWebSocketURL) else {
+                completion(false)
+                return
+            }
+            let urlSession = URLSession(configuration: .default)
+            webSocketTask = urlSession.webSocketTask(with: url)
+            webSocketTask?.resume()
+            receiveMessage()
+            completion(true)
+        }
+
+        func disconnect(completion: @escaping (Bool) -> Void = { _ in }) {
+            webSocketTask?.cancel(with: .normalClosure, reason: nil)
+            completion(true)
+        }
+
+        func sendAudioData(_ data: Data) {
+            webSocketTask?.send(.data(data)) { error in
+                if let error = error {
+                    print("WebSocket couldn’t send message because: \(error)")
+                }
+            }
+        }
+
+        private func receiveMessage() {
+            webSocketTask?.receive { [weak self] result in
+                switch result {
+                case .failure(let error):
+                    print("Error in receiving message: \(error)")
+                case .success(let message):
+                    switch message {
+                    case .string(let text):
+                        print("Received string: \(text)")
+                    case .data(let data):
+                        print("Received data: \(data)")
+                    @unknown default:
+                        print("Unknown data received.")
+                    }
+                }
+
+                self?.receiveMessage()
+            }
+        }
     }
 }
