@@ -132,13 +132,22 @@ struct API {
             completion(true)
         }
 
-        func sendAudioData(_ data: Data) {
+        func sendAudioData(_ audioData: Data) {
+            let boundary = UUID().uuidString
+            var data = Data()
+            data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+            data.append("Content-Disposition: form-data; name=\"file\"; filename=\"audio.m4a\"\r\n".data(using: .utf8)!)
+            data.append("Content-Type: audio/mp4\r\n\r\n".data(using: .utf8)!)
+            data.append(audioData)
+            data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+
             webSocketTask?.send(.data(data)) { error in
                 if let error = error {
                     print("WebSocket couldn’t send message because: \(error)")
                 }
             }
         }
+
 
         private func receiveMessage() {
             webSocketTask?.receive { [weak self] result in

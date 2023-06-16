@@ -130,6 +130,7 @@ async function handleWhisperWebSocket(request: Request): Promise<Response> {
 
     const data = await response.json();
     const text = data['text'] || '';
+    console.log(response, data, text);
     // @ts-ignore
     server.send(text);
   });
