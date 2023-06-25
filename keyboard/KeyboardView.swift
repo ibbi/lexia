@@ -20,7 +20,7 @@ struct KeyboardView: View {
             HStack {
                 TranscribeButton(controller: controller)
                 RewriteButton(controller: controller)
-                
+                TranscribeShared(controller: controller)
             }
             SystemKeyboard(
                 controller: controller,
