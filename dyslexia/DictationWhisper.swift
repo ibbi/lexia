@@ -12,7 +12,6 @@ struct DictationWhisper: View {
     @State private var transcription: String?
     
     @StateObject private var audioRecorder = AudioRecorder()
-    @StateObject private var webSocketManager = API.WebSocketManager()
     @Environment(\.scenePhase) private var scenePhase
 
     

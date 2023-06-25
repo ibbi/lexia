@@ -11,6 +11,7 @@ import KeyboardKit
 
 struct TranscribeButton: View {
     let controller: KeyboardInputViewController
+    
 
     func pasteTranscription() {
         let sharedContainerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")
