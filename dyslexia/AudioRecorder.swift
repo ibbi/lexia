@@ -35,6 +35,10 @@ class AudioRecorder: ObservableObject {
 
         try? audioRecorder = AVAudioRecorder(url: audioURL, settings: settings)
         audioRecorder.record()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.audioRecorder.stop()
+        }
     }
 
 

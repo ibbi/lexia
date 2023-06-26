@@ -74,6 +74,7 @@ struct DictationWhisper: View {
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
                 audioRecorder.startRecording()
+                Helper.jumpBackToPreviousApp()
             }
         }
     }
