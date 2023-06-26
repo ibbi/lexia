@@ -41,9 +41,10 @@ struct TranscribeShared: View {
     }
 
     var body: some View {
-        Button("Wrtie", action: {
+        Button("Write", action: {
+            let sharedDefaults = UserDefaults(suiteName: "group.lexia")
+            sharedDefaults?.set(false, forKey: "recording")
             tryTranscribe()
-            
         })
             .frame(maxWidth: .infinity)
             .padding()
