@@ -48,9 +48,11 @@ class AudioRecorder: ObservableObject {
         }
 
         recordingCheckTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            let isRecording = sharedDefaults?.bool(forKey: "recording") ?? false
-            if !isRecording {
+            let isStoppingRecording = sharedDefaults?.bool(forKey: "stopping_recording") ?? false
+            if isStoppingRecording {
                 self.audioRecorder.stop()
+                sharedDefaults?.set(false, forKey: "stopping_recording")
+                sharedDefaults?.set(false, forKey: "recording")
                 timer.invalidate()
                 UIApplication.shared.endBackgroundTask(self.backgroundTask)
                 self.backgroundTask = .invalid

@@ -18,7 +18,7 @@
 		289584DA2A182FB7001425B8 /* DictationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289584D92A182FB7001425B8 /* DictationAssembly.swift */; };
 		2895851B2A23D88C001425B8 /* AssemblySocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895851A2A23D88C001425B8 /* AssemblySocket.swift */; };
 		289585212A273B6A001425B8 /* StreamingAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289585202A273B6A001425B8 /* StreamingAudioRecorder.swift */; };
-		28B9A7E92A47CD0100109C6C /* TranscribeShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9A7E82A47CD0100109C6C /* TranscribeShared.swift */; };
+		28B9A7E92A47CD0100109C6C /* StopRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9A7E82A47CD0100109C6C /* StopRecording.swift */; };
 		28C14E792A0D7E7C00106EA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28C14E782A0D7E7C00106EA3 /* Settings.bundle */; };
 		28C14E7A2A0D7E7C00106EA3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28C14E782A0D7E7C00106EA3 /* Settings.bundle */; };
 		28CF45072A33D08B00B8F52C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28CF45062A33D08B00B8F52C /* API.swift */; };
@@ -96,7 +96,7 @@
 		2895850C2A22F847001425B8 /* URLProxy.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = URLProxy.xcodeproj; path = URLProxy/URLProxy.xcodeproj; sourceTree = SOURCE_ROOT; };
 		2895851A2A23D88C001425B8 /* AssemblySocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySocket.swift; sourceTree = "<group>"; };
 		289585202A273B6A001425B8 /* StreamingAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingAudioRecorder.swift; sourceTree = "<group>"; };
-		28B9A7E82A47CD0100109C6C /* TranscribeShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeShared.swift; sourceTree = "<group>"; };
+		28B9A7E82A47CD0100109C6C /* StopRecording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopRecording.swift; sourceTree = "<group>"; };
 		28C14E782A0D7E7C00106EA3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		28CF45062A33D08B00B8F52C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		28CF45082A38E5B800B8F52C /* DictationWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationWhisper.swift; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				28F11CBA29EE312600ED00D9 /* KeyboardViewController.swift */,
 				28EE554329EE360000CEF0C6 /* KeyboardActionHandler.swift */,
 				285A817A2A12E93100ED7608 /* TranscribeButton.swift */,
-				28B9A7E82A47CD0100109C6C /* TranscribeShared.swift */,
+				28B9A7E82A47CD0100109C6C /* StopRecording.swift */,
 				28CF45182A3A749900B8F52C /* RewriteButton.swift */,
 				285A81742A12E46A00ED7608 /* KeyboardView.swift */,
 				28EE554529EE361300CEF0C6 /* KeyboardLayoutProvider.swift */,
@@ -374,7 +374,7 @@
 				28EE554629EE361300CEF0C6 /* KeyboardLayoutProvider.swift in Sources */,
 				28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */,
 				28CF450E2A3A249600B8F52C /* API.swift in Sources */,
-				28B9A7E92A47CD0100109C6C /* TranscribeShared.swift in Sources */,
+				28B9A7E92A47CD0100109C6C /* StopRecording.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
