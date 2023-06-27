@@ -13,6 +13,8 @@ struct KeyboardView: View {
     @EnvironmentObject
     private var keyboardContext: KeyboardContext
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
+    @State private var recentTranscription: String = ""
+
 
     var body: some View {
         VStack(spacing: 0) {
@@ -20,8 +22,8 @@ struct KeyboardView: View {
                 StopRecording()
             } else {
                 HStack {
-                    TranscribeButton(controller: controller)
-                    RewriteButton(controller: controller)
+                    TranscribeButton(controller: controller, recentTranscription: $recentTranscription)
+                    RewriteButton(controller: controller, recentTranscription: $recentTranscription)
                 }
                 SystemKeyboard(
                     controller: controller,

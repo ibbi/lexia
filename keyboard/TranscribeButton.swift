@@ -11,6 +11,8 @@ import KeyboardKit
 
 struct TranscribeButton: View {
     let controller: KeyboardInputViewController
+    @Binding var recentTranscription: String
+
         
     func tryTranscribe() {
         func sharedDirectoryURL() -> URL {
@@ -37,6 +39,7 @@ struct TranscribeButton: View {
                 case .success(let json):
                     if let text = json["text"] as? String {
                         controller.textDocumentProxy.insertText(text)
+                        recentTranscription = text
                     }
                     do {
                         try fileManager.removeItem(at: audioURL)

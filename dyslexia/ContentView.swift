@@ -13,7 +13,6 @@ struct ContentView: View {
     @State private var deeplinkedURL: String?
     
     var body: some View {
-//        DictationWhisper()
         Group {
             if deeplinkedURL == "dictation" {
                 DictationWhisper()
