@@ -12,11 +12,8 @@ struct KeyboardView: View {
     unowned var controller: KeyboardInputViewController
     @EnvironmentObject
     private var keyboardContext: KeyboardContext
-    @State private var isRecording: Bool = false
-    private func updateRecordingFlag() {
-        let sharedDefaults = UserDefaults(suiteName: "group.lexia")
-        isRecording = sharedDefaults?.bool(forKey: "recording") ?? false
-    }
+    @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
+
     var body: some View {
         VStack(spacing: 0) {
             if isRecording {
@@ -33,15 +30,8 @@ struct KeyboardView: View {
                 .background(Color.pastelBlue)
             }
         }
-        .onAppear {
-            updateRecordingFlag()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)) { _ in
-            updateRecordingFlag()
-        }
     }
 }
-
 
 //struct KeyboardView_Previews: PreviewProvider {
 //    static var previews: some View {

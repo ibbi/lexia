@@ -11,7 +11,7 @@ import KeyboardKit
 
 struct TranscribeButton: View {
     let controller: KeyboardInputViewController
-    
+        
     func tryTranscribe() {
         func sharedDirectoryURL() -> URL {
             let fileManager = FileManager.default
@@ -60,12 +60,12 @@ struct TranscribeButton: View {
                 // TODO: Handle dictation on this page
             }
         })
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.pastelBlue)
-            .onAppear {
-                tryTranscribe()
-            }
+        .frame(maxWidth: .infinity)
+        .padding()
+        .background(Color.pastelBlue)
+        .onAppear {
+            tryTranscribe()
+        }
     }
 }
 
