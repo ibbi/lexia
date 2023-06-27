@@ -57,7 +57,7 @@ struct DictationWhisper: View {
                 }
             }
             .padding()
-//            
+//
 //            Button(action: {
 //                audioRecorder.stopRecording()
 //                transcribeAudio()
@@ -74,7 +74,7 @@ struct DictationWhisper: View {
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
                 audioRecorder.startRecording()
-                Helper.jumpBackToPreviousApp()
+//                Helper.jumpBackToPreviousApp()
             }
         }
     }

@@ -22,6 +22,12 @@ class AudioRecorder: ObservableObject {
     }
 
     func startRecording() {
+        
+        backgroundTask = UIApplication.shared.beginBackgroundTask {
+            UIApplication.shared.endBackgroundTask(self.backgroundTask)
+            self.backgroundTask = .invalid
+        }
+        Helper.jumpBackToPreviousApp()
         let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setCategory(.record, mode: .default)
         try? audioSession.setActive(true)
@@ -41,11 +47,7 @@ class AudioRecorder: ObservableObject {
         
         let sharedDefaults = UserDefaults(suiteName: "group.lexia")
         sharedDefaults?.set(true, forKey: "recording")
-        
-        backgroundTask = UIApplication.shared.beginBackgroundTask {
-            UIApplication.shared.endBackgroundTask(self.backgroundTask)
-            self.backgroundTask = .invalid
-        }
+
 
         recordingCheckTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             let isStoppingRecording = sharedDefaults?.bool(forKey: "stopping_recording") ?? false
