@@ -13,22 +13,25 @@ struct RewriteButton: View {
     let controller: KeyboardInputViewController
     @Binding var recentTranscription: String
     @State private var selectedText: String?
-    @State private var isButtonDisabled: Bool = true
+    @State private var isLoading: Bool = false
+
+
 
     func rewriteText(_ text: String, shouldDelete: Bool) {
+        isLoading = true
         API.sendTranscribedText(text) { result in
-            switch result {
-            case .success(let transformed):
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                isLoading = false
+                switch result {
+                case .success(let transformed):
                     transformedText = transformed
-                    // Replace recentTranscription with transformedText
                     if shouldDelete {
                         controller.textDocumentProxy.deleteBackward(times: text.count)
                     }
                     controller.textDocumentProxy.insertText(transformed)
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
                 }
-            case .failure(let error):
-                print("Error: \(error.localizedDescription)")
             }
         }
     }
@@ -46,20 +49,12 @@ struct RewriteButton: View {
         Button(action: {
             rewriteSelectedText()
         }) {
-            Text("Rewrite")
+            Text(isLoading ? "Loading..." : "Rewrite")
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(isButtonDisabled ? Color.pastelGray.opacity(0.5) : Color.pastelGray)
+                .background(Color.pastelGray)
         }
-        .disabled(isButtonDisabled)
-        .onChange(of: controller.keyboardTextContext.selectedText) { newValue in
-            controller.textDocumentProxy.insertText("transformed")
-            selectedText = newValue
-            isButtonDisabled = selectedText == nil && recentTranscription.isEmpty
-        }
-        .onChange(of: recentTranscription) { _ in
-            isButtonDisabled = selectedText == nil && recentTranscription.isEmpty
-        }
+        .disabled(isLoading)
     }
 }
 

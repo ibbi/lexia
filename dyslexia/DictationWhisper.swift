@@ -57,19 +57,19 @@ struct DictationWhisper: View {
                 }
             }
             .padding()
-            
-            Button(action: {
-                audioRecorder.stopRecording()
-                transcribeAudio()
-            }) {
-                Text("Stop Recording")
-                    .font(.title2)
-                    .padding()
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding()
+//            
+//            Button(action: {
+//                audioRecorder.stopRecording()
+//                transcribeAudio()
+//            }) {
+//                Text("Stop Recording")
+//                    .font(.title2)
+//                    .padding()
+//                    .background(Color.red)
+//                    .foregroundColor(.white)
+//                    .cornerRadius(10)
+//            }
+//            .padding()
         }
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
