@@ -17,10 +17,10 @@ struct KeyboardView: View {
 
 
     var body: some View {
-        VStack(spacing: 0) {
-            if isRecording {
-                StopRecording()
-            } else {
+        if isRecording {
+            StopRecording()
+        } else {
+            VStack(spacing: 0) {
                 HStack {
                     TranscribeButton(controller: controller, recentTranscription: $recentTranscription)
                     RewriteButton(controller: controller, recentTranscription: $recentTranscription)
@@ -29,7 +29,6 @@ struct KeyboardView: View {
                     controller: controller,
                     autocompleteToolbar: .none
                 )
-                .background(Color.pastelBlue)
             }
         }
     }

@@ -13,6 +13,10 @@ struct StopRecording: View {
         Button("Write", action: {
             let sharedDefaults = UserDefaults(suiteName: "group.lexia")
             sharedDefaults?.set(true, forKey: "stopping_recording")
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                sharedDefaults?.set(false, forKey: "recording")
+            }
         })
             .frame(maxWidth: .infinity)
             .padding()
