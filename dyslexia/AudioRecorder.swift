@@ -21,16 +21,13 @@ class AudioRecorder: ObservableObject {
         return fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")!
     }
 
-    func startRecording(fromPlayground: Bool) {
+    func startRecording() {
         
-        if (!fromPlayground){
-            backgroundTask = UIApplication.shared.beginBackgroundTask {
-                UIApplication.shared.endBackgroundTask(self.backgroundTask)
-                self.backgroundTask = .invalid
-            }
-            Helper.jumpBackToPreviousApp()
-            
+        backgroundTask = UIApplication.shared.beginBackgroundTask {
+            UIApplication.shared.endBackgroundTask(self.backgroundTask)
+            self.backgroundTask = .invalid
         }
+        Helper.jumpBackToPreviousApp()
         let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setCategory(.record, mode: .default)
         try? audioSession.setActive(true)
@@ -51,17 +48,16 @@ class AudioRecorder: ObservableObject {
         let sharedDefaults = UserDefaults(suiteName: "group.lexia")
         sharedDefaults?.set(true, forKey: "recording")
 
-        if (!fromPlayground) {
-            recordingCheckTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-                let isStoppingRecording = sharedDefaults?.bool(forKey: "stopping_recording") ?? false
-                if isStoppingRecording {
-                    self.audioRecorder.stop()
-                    sharedDefaults?.set(false, forKey: "stopping_recording")
-                    sharedDefaults?.set(false, forKey: "recording")
-                    timer.invalidate()
-                    UIApplication.shared.endBackgroundTask(self.backgroundTask)
-                    self.backgroundTask = .invalid
-                }
+
+        recordingCheckTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            let isStoppingRecording = sharedDefaults?.bool(forKey: "stopping_recording") ?? false
+            if isStoppingRecording {
+                self.audioRecorder.stop()
+                sharedDefaults?.set(false, forKey: "stopping_recording")
+                sharedDefaults?.set(false, forKey: "recording")
+                timer.invalidate()
+                UIApplication.shared.endBackgroundTask(self.backgroundTask)
+                self.backgroundTask = .invalid
             }
         }
     }
