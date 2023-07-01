@@ -13,6 +13,7 @@ struct Playground: View {
     
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
+    @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
     
     var body: some View {
         VStack {
@@ -31,8 +32,11 @@ struct Playground: View {
                 .padding()
                 .focused($isInputFocused)
                 .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        InAppTranscribeButton(inputText: $inputText)
+                    if !isRecording {
+                        
+                        ToolbarItemGroup(placement: .keyboard) {
+                            InAppTranscribeButton(inputText: $inputText)
+                        }
                     }
                 }
             

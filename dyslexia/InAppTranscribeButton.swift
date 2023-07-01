@@ -69,14 +69,13 @@ struct InAppTranscribeButton: View {
             }
             .padding(.horizontal)
             .onAppear {
-//                tryTranscribe()
+                tryTranscribe()
             }
             if isTranscribing {
                 Text("Transcribing...")
             }
         }
     }
-    
 }
 //struct TranscribeButton_Previews: PreviewProvider {
 //    static var previews: some View {

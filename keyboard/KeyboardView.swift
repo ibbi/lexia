@@ -20,14 +20,14 @@ struct KeyboardView: View {
         if isRecording {
             StopRecording()
         } else {
-            VStack(spacing: 4) {
+            VStack(spacing: 0) {
                 if controller.hostBundleId != "ibbi.dyslexia" {
                     HStack {
                         TranscribeButton(controller: controller, recentTranscription: $recentTranscription)
                         RewriteButton(controller: controller, recentTranscription: $recentTranscription)
                     }
-                    .padding(.bottom, 8)
-                    .background()
+                    .padding(.vertical)
+                    
                 }
                 SystemKeyboard(
                     controller: controller,
