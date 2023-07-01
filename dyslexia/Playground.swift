@@ -34,11 +34,12 @@ struct Playground: View {
                 .padding()
                 .focused($isInputFocused)
                 .toolbar {
-                    if !isRecording {
+                    if !isRecording && isKeyboardActive {
                         
                         ToolbarItemGroup(placement: .keyboard) {
                             HStack {
                                 InAppTranscribeButton(recentTranscription: $recentTranscription, inputText: $inputText)
+                                Spacer()
                                 InAppRewriteButton(recentTranscription: $recentTranscription, inputText: $inputText)
                             }
                             .padding(.vertical)
