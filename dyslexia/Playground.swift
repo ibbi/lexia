@@ -33,7 +33,7 @@ struct Playground: View {
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
                         Button("Click me!") {
-                            print("Clicked")
+                            inputText += "Clack"
                         }
                     }
                 }

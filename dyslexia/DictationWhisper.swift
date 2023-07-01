@@ -15,40 +15,6 @@ struct DictationWhisper: View {
     @Environment(\.scenePhase) private var scenePhase
 
     
-    func transcribeAudio() {
-        audioRecorder.transcribeAudio { result in
-            switch result {
-            case .success(let json):
-                if let text = json["text"] as? String {
-                    DispatchQueue.main.async {
-                        transcription = text
-                        storeTranscriptionAndJumpBack()
-                    }
-                }
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        }
-    }
-    
-    func storeTranscriptionAndJumpBack() {
-        if let transcription = transcription {
-            let sharedContainerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")
-            let transcriptionURL = sharedContainerURL?.appendingPathComponent("transcription.txt")
-            
-            do {
-                try transcription.write(to: transcriptionURL!, atomically: true, encoding: .utf8)
-                
-                // Clear the transcription state
-                self.transcription = nil
-                
-                Helper.jumpBackToPreviousApp()
-            } catch {
-                print("Error: \(error)")
-            }
-        }
-    }
-    
     var body: some View {
         VStack {
             VStack {
@@ -57,24 +23,10 @@ struct DictationWhisper: View {
                 }
             }
             .padding()
-//
-//            Button(action: {
-//                audioRecorder.stopRecording()
-//                transcribeAudio()
-//            }) {
-//                Text("Stop Recording")
-//                    .font(.title2)
-//                    .padding()
-//                    .background(Color.red)
-//                    .foregroundColor(.white)
-//                    .cornerRadius(10)
-//            }
-//            .padding()
         }
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
-                audioRecorder.startRecording()
-//                Helper.jumpBackToPreviousApp()
+                audioRecorder.startRecordingAndJumpBack()
             }
         }
     }
