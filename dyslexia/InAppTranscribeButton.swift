@@ -11,8 +11,10 @@ import KeyboardKit
 
 struct InAppTranscribeButton: View {
     @State var isTranscribing: Bool = false
+    @Binding var recentTranscription: String
     @Binding var inputText: String
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
+    
     
     @StateObject private var audioRecorder = AudioRecorder()
 
@@ -44,6 +46,7 @@ struct InAppTranscribeButton: View {
                 case .success(let json):
                     if let text = json["text"] as? String {
                         inputText += text
+                        recentTranscription = text
                     }
                     do {
                         try fileManager.removeItem(at: audioURL)
