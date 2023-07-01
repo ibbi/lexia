@@ -15,7 +15,7 @@ struct InstallInstructions: View {
     let installTodos: [(image: Image, text: String)] = [
         (Image("SettingsIcon"), "Open Settings"),
         (Image(systemName: "app.gift.fill"), "Lexia"),
-        (Image("KeyboardIcon"), "Keyboards"),
+        (Image("Micon"), "Keyboards"),
         (Image("ToggleIcon"), "Enable Lexia"),
         (Image("ToggleIcon"), "Allow Full Access"),
         (Image(systemName: "return"), "Come back here!")
