@@ -9,10 +9,11 @@ import SwiftUI
 import AVFoundation
 
 struct InstallInstructions: View {
-    let isOnlyMissingFullAccess: Bool
+    let isFullAccessEnabled: Bool
+    let isKeyboardEnabled: Bool
     
     let installTodos: [(image: Image, text: String)] = [
-        (Image("SettingsIcon"), "Go to settings"),
+        (Image("SettingsIcon"), "Open Settings"),
         (Image(systemName: "app.gift.fill"), "Lexia"),
         (Image("KeyboardIcon"), "Keyboards"),
         (Image("ToggleIcon"), "Enable Lexia"),
@@ -23,29 +24,18 @@ struct InstallInstructions: View {
     var body: some View {
         VStack {
             
-            Text(isOnlyMissingFullAccess ? "You're missing Full Access!" : "Enable Lexia")
+            Text("Enable Lexia")
                 .font(.largeTitle)
                 .padding()
             
             List {
                 ForEach(0..<installTodos.count, id: \.self) { index in
-                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text, isOnlyMissingFullAccess: isOnlyMissingFullAccess)
+                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text, isDone: (index < 4 && isKeyboardEnabled) || index == 4 && isFullAccessEnabled )
                         .frame(height: 60)
                         .padding(.horizontal)
                 }
             }
             .listStyle(PlainListStyle())
-            
-            //            Button("Take me to settings", action: {
-            //                Helper.openAppSettings()
-            //            })
-            //            .padding()
-            //            .background(Color.pastelBlue)
-            //            .foregroundColor(.white)
-            //            .cornerRadius(8)
-            //            .padding(.horizontal)
-            //            .shadow(color: .gray, radius: 5, x: 0, y: 2)
-            //        }
         }
         .onAppear(perform: requestMicPermissions)
     }
@@ -54,7 +44,7 @@ struct InstallInstructions: View {
         let index: Int
         let image: Image
         let text: String
-        let isOnlyMissingFullAccess: Bool
+        let isDone: Bool
         
         var body: some View {
             HStack {
@@ -67,10 +57,10 @@ struct InstallInstructions: View {
                     .foregroundColor(.pastelBlue)
                 Text(text)
                     .font(.body)
-                    .foregroundColor(isOnlyMissingFullAccess && text == "Allow Full Access" ? Color.red.opacity(0.8) : Color.primary)
+                    .strikethrough(isDone)
                 Spacer()
                 if text == "Lexia" {
-                    Button("Just take me there", action: {
+                    Button("Take me there", action: {
                         Helper.openAppSettings()
                     })
                     .padding(8)
@@ -78,8 +68,11 @@ struct InstallInstructions: View {
                     .foregroundColor(.white)
                     .cornerRadius(8)
                     .shadow(color: .gray, radius: 5, x: 0, y: 2)
+                    .disabled(isDone)
                 }
             }
+            .opacity(isDone ? 0.4 : 1)
+            .grayscale(isDone ? 1.0 : 0)
         }
     }
     
@@ -95,9 +88,9 @@ struct InstallInstructions: View {
         }
     }
     
-    struct InstallInstructions_Previews: PreviewProvider {
-        static var previews: some View {
-            InstallInstructions(isOnlyMissingFullAccess: false)
-        }
-    }
+//    struct InstallInstructions_Previews: PreviewProvider {
+//        static var previews: some View {
+//            InstallInstructions(isOnlyMissingFullAccess: false)
+//        }
+//    }
 }

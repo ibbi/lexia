@@ -18,7 +18,7 @@ struct ContentView: View {
                 DictationWhisper()
             }
             else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
-                InstallInstructions(isOnlyMissingFullAccess: !keyboardState.isFullAccessEnabled && keyboardState.isKeyboardEnabled)
+                InstallInstructions(isFullAccessEnabled: keyboardState.isFullAccessEnabled, isKeyboardEnabled: keyboardState.isKeyboardEnabled)
             }
             else {
                 Playground(isKeyboardActive: keyboardState.isKeyboardActive)
