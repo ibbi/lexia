@@ -32,9 +32,7 @@ struct Playground: View {
                 .focused($isInputFocused)
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
-                        Button("Click me!") {
-                            inputText += "Clack"
-                        }
+                        InAppTranscribeButton(inputText: $inputText)
                     }
                 }
             

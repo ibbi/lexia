@@ -13,24 +13,9 @@ struct InAppTranscribeButton: View {
     @State var isTranscribing: Bool = false
     @Binding var inputText: String
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
+    
     @StateObject private var audioRecorder = AudioRecorder()
 
-
-    func transcribeAudio() {
-        audioRecorder.transcribeAudio { result in
-            switch result {
-            case .success(let json):
-                if let text = json["text"] as? String {
-                    DispatchQueue.main.async {
-//                        transcription = text
-//                        storeTranscriptionAndJumpBack()
-                    }
-                }
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        }
-    }
     
     func tryTranscribe() {
         func sharedDirectoryURL() -> URL {
@@ -75,7 +60,7 @@ struct InAppTranscribeButton: View {
     var body: some View {
         HStack {
             Button(action: {
-                audioRecorder.startRecording()
+                audioRecorder.startRecording(shouldJumpBack: false)
             }) {
                 Image("Micon")
                     .resizable()
@@ -84,7 +69,7 @@ struct InAppTranscribeButton: View {
             }
             .padding(.horizontal)
             .onAppear {
-                tryTranscribe()
+//                tryTranscribe()
             }
             if isTranscribing {
                 Text("Transcribing...")
