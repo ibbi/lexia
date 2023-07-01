@@ -12,7 +12,9 @@ import KeyboardKit
 struct TranscribeButton: View {
     let controller: KeyboardInputViewController
     @Binding var recentTranscription: String
-    
+    @State var isTranscribing: Bool = false
+    let sharedDefaults = UserDefaults(suiteName: "group.lexia")
+
     
     func tryTranscribe() {
         func sharedDirectoryURL() -> URL {
@@ -34,7 +36,9 @@ struct TranscribeButton: View {
         let fileManager = FileManager.default
         
         if fileManager.fileExists(atPath: audioURL.path) {
+            isTranscribing = true
             transcribeAudio { result in
+                isTranscribing = false
                 switch result {
                 case .success(let json):
                     if let text = json["text"] as? String {
@@ -54,23 +58,23 @@ struct TranscribeButton: View {
     }
     
     var body: some View {
-        Button(action: {
-            if controller.hostBundleId != "ibbi.dyslexia" {
+        HStack {
+            Button(action: {
                 let urlHandler = URLHandler()
                 urlHandler.openURL("dyslexia://dictation")
+            }) {
+                Image("Micon")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
             }
-            else {
-                // TODO: Handle dictation on this page
+            .padding(.horizontal)
+            .onAppear {
+                tryTranscribe()
             }
-        }) {
-            Image("Micon")
-                .resizable()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
-        }
-        .padding(.horizontal)
-        .onAppear {
-            tryTranscribe()
+            if isTranscribing {
+                Text("Transcribing...")
+            }
         }
     }
     

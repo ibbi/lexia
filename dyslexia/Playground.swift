@@ -30,6 +30,13 @@ struct Playground: View {
             TextEditor( text: $inputText)
                 .padding()
                 .focused($isInputFocused)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Button("Click me!") {
+                            print("Clicked")
+                        }
+                    }
+                }
             
             Spacer()
         }
