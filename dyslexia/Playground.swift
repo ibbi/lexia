@@ -20,15 +20,14 @@ struct Playground: View {
     var body: some View {
         VStack {
             if !isKeyboardActive {
-                HStack {
-                    Text("Tap and hold the ")
-                    Image(systemName: "globe")
-                    Text(" below and select Lexia")
-                }
-                Spacer()                
+                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexboard")
+                    .font(.title)
+                    .foregroundColor(Color.pastelBlue)
+                    .multilineTextAlignment(.center)
+                    .padding()
+            } else {
+                Text("Try yelling")
             }
-            Text("Try yelling")
-            Text("Now try whisper")
             
             TextEditor( text: $inputText)
                 .padding()
