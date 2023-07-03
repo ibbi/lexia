@@ -11,7 +11,6 @@ import KeyboardKit
 
 struct TranscribeButton: View {
     let controller: KeyboardInputViewController
-    @Binding var recentTranscription: String
     @State var isTranscribing: Bool = false
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
 
@@ -43,7 +42,6 @@ struct TranscribeButton: View {
                 case .success(let json):
                     if let text = json["text"] as? String {
                         controller.textDocumentProxy.insertText(text)
-                        recentTranscription = text
                     }
                     do {
                         try fileManager.removeItem(at: audioURL)

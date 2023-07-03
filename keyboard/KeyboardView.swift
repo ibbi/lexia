@@ -13,7 +13,6 @@ struct KeyboardView: View {
     @EnvironmentObject
     private var keyboardContext: KeyboardContext
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
-    @State private var recentTranscription: String = ""
 
 
     var body: some View {
@@ -23,8 +22,8 @@ struct KeyboardView: View {
             VStack(spacing: 0) {
                 if controller.hostBundleId != "ibbi.dyslexia" {
                     HStack {
-                        TranscribeButton(controller: controller, recentTranscription: $recentTranscription)
-                        RewriteButton(controller: controller, recentTranscription: $recentTranscription)
+                        TranscribeButton(controller: controller)
+                        RewriteButton(controller: controller)
                     }
                     .padding(.vertical)
                     

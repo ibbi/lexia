@@ -12,7 +12,6 @@ import Combine
 struct RewriteButton: View {
     @State private var transformedText: String?
     let controller: KeyboardInputViewController
-    @Binding var recentTranscription: String
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @State private var prevText = ""
@@ -52,6 +51,7 @@ struct RewriteButton: View {
             // silly hack because sometimes newlines break this jank thing i wrote lel. It breaks if there are more than 10 unexpected newlines
             if (afterTries < 10) {
                 controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+                afterText += "\n"
                 afterTries += 1
             } else {
                 afterTries = 0
@@ -91,20 +91,20 @@ struct RewriteButton: View {
         isLoading = true
         if let selectedText = controller.keyboardTextContext.selectedText {
             rewriteText(selectedText, shouldDelete: false)
-        } else if controller.textDocumentProxy.documentContextAfterInput != nil || controller.textDocumentProxy.documentContextBeforeInput != nil {
+            controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
+            controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
+        } else if controller.textDocumentProxy.documentContext != nil {
             self.beforeCancellable = self.beforeTimer.sink { _ in
                 DispatchQueue.main.async {
                     self.getTextContextBefore()
                 }
             }
-//            recentTranscription = ""
         }
     }
 
     var body: some View {
         Button(action: {
             decideSelectionOrEntire()
-  
         }) {
             Text(isLoading ? "Loading..." : "Rewrite")
                 .frame(maxWidth: .infinity)
