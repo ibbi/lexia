@@ -59,6 +59,9 @@ struct RewriteButton: View {
             } else {
                 afterTries = 0
                 afterCancellable?.cancel()
+                while afterText.hasSuffix("\n") {
+                    afterText = String(afterText.dropLast())
+                }
                 fullText = prevText + afterText
                 afterText = ""
                 prevText = ""
