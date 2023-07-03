@@ -27,10 +27,11 @@ struct KeyboardView: View {
                 if controller.hostBundleId != "ibbi.dyslexia" {
                     HStack {
                         TranscribeButton(controller: controller)
+                        Spacer()
                         RewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
                         UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
                     }
-                    .padding(.vertical)
+                    .padding(.vertical, 6)
                     
                 }
                 SystemKeyboard(

@@ -114,9 +114,6 @@ struct RewriteButton: View {
             decideSelectionOrEntire()
         }) {
             Text(isLoading ? "Loading..." : "Rewrite")
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.pastelGray)
         }
         .disabled(isLoading)
         .onChange(of: fullText) { newValue in
@@ -125,6 +122,7 @@ struct RewriteButton: View {
                 fullText = ""
             }
         }
+        .buttonStyle(.bordered)
     }
 }
 

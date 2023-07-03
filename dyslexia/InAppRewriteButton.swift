@@ -53,11 +53,9 @@ struct InAppRewriteButton: View {
             rewriteSelectedText()
         }) {
             Text(isLoading ? "Loading..." : "Rewrite")
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.pastelGray)
         }
         .disabled(isLoading)
+        .buttonStyle(.bordered)
     }
 }
 

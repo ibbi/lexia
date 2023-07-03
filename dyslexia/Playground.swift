@@ -107,20 +107,19 @@ struct Playground: View {
             }
             VStack {
                 TextViewWrapper(text: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange, isFocused: $isFocused)
-                    .padding()
                     .onAppear { // Focus the TextViewWrapper when it appears
                         self.isFocused = true
                     }
                 if !isRecording && isKeyboardActive {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
+                        Spacer()
                         InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }
-                    .padding(.vertical)
+                    .padding(.bottom, 10)
                 }
             }
-            Spacer()
         }
     }
 }
