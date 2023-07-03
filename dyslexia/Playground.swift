@@ -13,6 +13,7 @@ struct TextViewWrapper: UIViewRepresentable {
     @Binding var text: String
     @Binding var selectedText: String
     @Binding var selectedTextRange: NSRange
+    @Binding var isFocused: Bool // New binding variable for focus status
     var isEditable: Bool = true
 
     func makeCoordinator() -> Coordinator {
@@ -31,10 +32,15 @@ struct TextViewWrapper: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = self.text
-        // Make sure selected range is within text bounds
         let start = uiView.position(from: uiView.beginningOfDocument, offset: selectedTextRange.location) ?? uiView.beginningOfDocument
         let end = uiView.position(from: start, offset: selectedTextRange.length) ?? start
         uiView.selectedTextRange = uiView.textRange(from: start, to: end)
+
+        if self.isFocused {
+            uiView.becomeFirstResponder() // Focus the TextView when isFocused is true
+        } else {
+            uiView.resignFirstResponder() // Remove the focus when isFocused is false
+        }
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
@@ -47,7 +53,7 @@ struct TextViewWrapper: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             self.parent.text = textView.text
         }
-        
+
         func textViewDidChangeSelection(_ textView: UITextView) {
             if let range = textView.selectedTextRange {
                 let start = textView.offset(from: textView.beginningOfDocument, to: range.start)
@@ -63,10 +69,10 @@ struct TextViewWrapper: UIViewRepresentable {
 
 
 
+
 struct Playground: View {
     let isKeyboardActive: Bool
-    
-    @FocusState private var isInputFocused: Bool
+    @State private var isFocused: Bool = false // New state variable for focus status
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
     @State private var prevCursorPosition: Int?
     @State private var prevInputText = ""
@@ -85,13 +91,14 @@ struct Playground: View {
                     .multilineTextAlignment(.center)
                     .padding()
             } else {
-                Text("Try yelling")
+                Text("Try rewriting the text, or selecting a portion and only rewriting that!")
+                Text("You can also use the \(Image("Micon")) to get high quality dictation.")
             }
             VStack {
-                TextViewWrapper(text: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
+                TextViewWrapper(text: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange, isFocused: $isFocused)
                     .padding()
-                    .onAppear {
-                        isInputFocused = true
+                    .onAppear { // Focus the TextViewWrapper when it appears
+                        self.isFocused = true
                     }
                 if !isRecording && isKeyboardActive {
                     HStack {
@@ -102,31 +109,12 @@ struct Playground: View {
                     .padding(.vertical)
                 }
             }
-            
-//            TextEditor( text: $inputText)
-//                .padding()
-//                .focused($isInputFocused)
-//                .toolbar {
-//                    if !isRecording && isKeyboardActive {
-//
-//                        ToolbarItemGroup(placement: .keyboard) {
-//                            HStack {
-//                                InAppTranscribeButton(inputText: $inputText)
-//                                Spacer()
-//                                InAppRewriteButton(inputText: $inputText)
-//                            }
-//                            .padding(.vertical)
-//                        }
-//                    }
-//                }
-            
             Spacer()
         }
-//        .onAppear {
-//            isInputFocused = true
-//        }
     }
 }
+
+
 struct Playground_Previews: PreviewProvider {
     static var previews: some View {
         Playground(isKeyboardActive: true)
