@@ -78,10 +78,10 @@ struct Playground: View {
     @State private var prevInputText = ""
     @State private var inputText: String = "Once a silent keyboard in a tech shop, Lexboard found its voice when a lightning bolt zapped it into the cyberworld. From observer to participant, it evolved, learning to reach billions of iPhone users. It offered innovative suggestions, simplified tasks, and sparked creativity, turning its dormant ideas into dynamic user experiences. \n\nFrom a mere keyboard to a global influencer, Lexboard transformed into an unsung pocket hero."
     @State private var selectedText: String = ""
-    @State private var selectedTextRange: NSRange = NSRange(location: 0, length: 0)
+    // Hardcoded length of inputText
+    @State private var selectedTextRange: NSRange = NSRange(location: 432, length: 0)
 
 
-    
     var body: some View {
         VStack {
             if !isKeyboardActive {
@@ -110,6 +110,7 @@ struct Playground: View {
                     .onAppear { // Focus the TextViewWrapper when it appears
                         self.isFocused = true
                     }
+                    .padding(.horizontal)
                 if !isRecording && isKeyboardActive {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)

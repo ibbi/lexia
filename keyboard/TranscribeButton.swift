@@ -56,7 +56,6 @@ struct TranscribeButton: View {
     }
     
     var body: some View {
-        HStack {
             Button(action: {
                 let urlHandler = URLHandler()
                 urlHandler.openURL("dyslexia://dictation")
@@ -72,7 +71,6 @@ struct TranscribeButton: View {
             }
             if isTranscribing {
                 Text("Transcribing...")
-            }
         }
     }
     
