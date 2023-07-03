@@ -10,7 +10,6 @@ import KeyboardKit
 
 struct InAppRewriteButton: View {
     @State private var transformedText: String?
-    @Binding var recentTranscription: String
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @Binding var inputText: String
@@ -24,10 +23,6 @@ struct InAppRewriteButton: View {
                 switch result {
                 case .success(let transformed):
                     transformedText = transformed
-//                    if shouldDelete {
-//                        controller.textDocumentProxy.deleteBackward(times: text.count)
-//                    }
-//                    controller.textDocumentProxy.insertText(transformed)
                     inputText = transformed
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
@@ -39,9 +34,8 @@ struct InAppRewriteButton: View {
     func rewriteSelectedText() {
         if false {
             rewriteText("selectedText", shouldDelete: false)
-        } else if !recentTranscription.isEmpty {
-            rewriteText(recentTranscription, shouldDelete: true)
-            recentTranscription = ""
+        } else if !inputText.isEmpty {
+            rewriteText(inputText, shouldDelete: true)
         }
     }
 
