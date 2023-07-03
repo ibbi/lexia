@@ -26,6 +26,7 @@ struct RewriteButton: View {
     @State private var beforeCancellable: AnyCancellable?
     @State private var afterCancellable: AnyCancellable?
     
+    
 
     
     func getTextContextBefore() -> Bool {
@@ -87,7 +88,7 @@ struct RewriteButton: View {
                     }
                     controller.textDocumentProxy.insertText(transformed)
                     rewrittenText = transformed
-                    prevContext = controller.textDocumentProxy.documentContext
+                    prevContext = KeyHelper.getFiveSurroundingChars(controller: controller)
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }

@@ -18,7 +18,7 @@ struct UndoButton: View {
         if rewrittenText.isEmpty || prewrittenText.isEmpty {
             return false
         }
-        if (controller.textDocumentProxy.documentContext != prevContext) {
+        if (KeyHelper.getFiveSurroundingChars(controller: controller) != prevContext) {
             return false
         }
         return true
