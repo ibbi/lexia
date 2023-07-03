@@ -94,7 +94,7 @@ struct Playground: View {
                     Image("Micon")
                         .resizable()
                         .frame(width: 30,height: 30)
-                    Text("enables you to whisper!")
+                    Text("enables you to dictate, in any language!")
                         .font(.title)
                         .foregroundColor(Color.pastelBlue)
                         .padding()

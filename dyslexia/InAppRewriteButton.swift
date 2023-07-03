@@ -32,6 +32,8 @@ struct InAppRewriteButton: View {
                     } else {
                         prevInputText = inputText
                         inputText = transformed
+                        selectedText = ""
+                        selectedTextRange = NSRange(location: inputText.count, length: 0)
                     }
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")

@@ -77,6 +77,7 @@ struct RewriteButton: View {
 
 
     func rewriteText(_ text: String, shouldDelete: Bool) {
+        isLoading = true
         prewrittenText = text
         API.sendTranscribedText(text) { result in
             DispatchQueue.main.async {
@@ -97,7 +98,6 @@ struct RewriteButton: View {
     }
 
     func decideSelectionOrEntire() {
-        isLoading = true
         if let selectedText = controller.keyboardTextContext.selectedText {
             rewriteText(selectedText, shouldDelete: false)
         } else if controller.textDocumentProxy.documentContext != nil {
