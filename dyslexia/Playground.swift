@@ -88,11 +88,22 @@ struct Playground: View {
                 Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexboard")
                     .font(.title)
                     .foregroundColor(Color.pastelBlue)
-                    .multilineTextAlignment(.center)
                     .padding()
+            } else if !prevInputText.isEmpty {
+                HStack {
+                    Image("Micon")
+                        .resizable()
+                        .frame(width: 30,height: 30)
+                    Text("enables you to whisper!")
+                        .font(.title)
+                        .foregroundColor(Color.pastelBlue)
+                        .padding()
+                }
             } else {
                 Text("Try rewriting the text, or selecting a portion and only rewriting that!")
-                Text("You can also use the \(Image("Micon")) to get high quality dictation.")
+                    .font(.title)
+                    .foregroundColor(Color.pastelBlue)
+                    .padding()
             }
             VStack {
                 TextViewWrapper(text: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange, isFocused: $isFocused)
@@ -102,7 +113,7 @@ struct Playground: View {
                     }
                 if !isRecording && isKeyboardActive {
                     HStack {
-                        InAppTranscribeButton(inputText: $inputText)
+                        InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }

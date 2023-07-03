@@ -12,6 +12,8 @@ import KeyboardKit
 struct InAppTranscribeButton: View {
     @State var isTranscribing: Bool = false
     @Binding var inputText: String
+    @Binding var selectedText: String
+    @Binding var selectedTextRange: NSRange
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
     
     
@@ -44,7 +46,13 @@ struct InAppTranscribeButton: View {
                 switch result {
                 case .success(let json):
                     if let text = json["text"] as? String {
-                        inputText += text
+                        let startIndex = inputText.index(inputText.startIndex, offsetBy: selectedTextRange.location)
+                        let endIndex = inputText.index(startIndex, offsetBy: selectedTextRange.length)
+                        
+                        inputText.removeSubrange(startIndex..<endIndex)
+                        inputText.insert(contentsOf: text, at: startIndex)
+                        selectedText = ""
+                        selectedTextRange = NSRange(location: selectedTextRange.location + text.count, length: 0)
                     }
                     do {
                         try fileManager.removeItem(at: audioURL)
