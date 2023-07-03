@@ -32,8 +32,6 @@ struct RewriteButton: View {
         if ((before == nil) || (before!.isEmpty)){
             controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
             beforeCancellable?.cancel()
-            fullText = prevText
-            prevText = ""
             self.afterCancellable = self.afterTimer.sink { _ in
                 DispatchQueue.main.async {
                     self.getTextContextAfter()
@@ -56,11 +54,11 @@ struct RewriteButton: View {
                 controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
                 afterTries += 1
             } else {
-                print("finito")
                 afterTries = 0
                 afterCancellable?.cancel()
-                fullText += afterText
+                fullText = prevText + afterText
                 afterText = ""
+                prevText = ""
                 return true
             }
         }
@@ -72,7 +70,6 @@ struct RewriteButton: View {
 
 
     func rewriteText(_ text: String, shouldDelete: Bool) {
-        isLoading = true
         API.sendTranscribedText(text) { result in
             DispatchQueue.main.async {
                 isLoading = false
@@ -90,22 +87,24 @@ struct RewriteButton: View {
         }
     }
 
-    func rewriteSelectedText() {
+    func decideSelectionOrEntire() {
+        isLoading = true
         if let selectedText = controller.keyboardTextContext.selectedText {
             rewriteText(selectedText, shouldDelete: false)
-        } else if !recentTranscription.isEmpty {
-            rewriteText(recentTranscription, shouldDelete: true)
-            recentTranscription = ""
-        }
-    }
-
-    var body: some View {
-        Button(action: {
+        } else if controller.textDocumentProxy.documentContextAfterInput != nil || controller.textDocumentProxy.documentContextBeforeInput != nil {
             self.beforeCancellable = self.beforeTimer.sink { _ in
                 DispatchQueue.main.async {
                     self.getTextContextBefore()
                 }
             }
+//            recentTranscription = ""
+        }
+    }
+
+    var body: some View {
+        Button(action: {
+            decideSelectionOrEntire()
+  
         }) {
             Text(isLoading ? "Loading..." : "Rewrite")
                 .frame(maxWidth: .infinity)
@@ -114,7 +113,10 @@ struct RewriteButton: View {
         }
         .disabled(isLoading)
         .onChange(of: fullText) { newValue in
-            print(newValue)
+            if (!newValue.isEmpty) {
+                rewriteText(fullText, shouldDelete: true)
+                fullText = ""
+            }
         }
     }
 }
