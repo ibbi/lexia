@@ -10,8 +10,10 @@ import KeyboardKit
 import Combine
 
 struct RewriteButton: View {
-    @State private var transformedText: String?
     let controller: KeyboardInputViewController
+    @Binding var rewrittenText: String
+    @Binding var prewrittenText: String
+    @Binding var prevContext: String?
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @State private var prevText = ""
@@ -23,6 +25,7 @@ struct RewriteButton: View {
     let afterTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     @State private var beforeCancellable: AnyCancellable?
     @State private var afterCancellable: AnyCancellable?
+    
 
     
     func getTextContextBefore() -> Bool {
@@ -70,16 +73,18 @@ struct RewriteButton: View {
 
 
     func rewriteText(_ text: String, shouldDelete: Bool) {
+        prewrittenText = text
         API.sendTranscribedText(text) { result in
             DispatchQueue.main.async {
                 isLoading = false
                 switch result {
                 case .success(let transformed):
-                    transformedText = transformed
                     if shouldDelete {
                         controller.textDocumentProxy.deleteBackward(times: text.count)
                     }
                     controller.textDocumentProxy.insertText(transformed)
+                    rewrittenText = transformed
+                    prevContext = controller.textDocumentProxy.documentContext
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }
@@ -91,8 +96,6 @@ struct RewriteButton: View {
         isLoading = true
         if let selectedText = controller.keyboardTextContext.selectedText {
             rewriteText(selectedText, shouldDelete: false)
-            controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
-            controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
         } else if controller.textDocumentProxy.documentContext != nil {
             self.beforeCancellable = self.beforeTimer.sink { _ in
                 DispatchQueue.main.async {

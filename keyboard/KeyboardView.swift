@@ -13,6 +13,10 @@ struct KeyboardView: View {
     @EnvironmentObject
     private var keyboardContext: KeyboardContext
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
+    @State private var rewrittenText: String = ""
+    @State private var prewrittenText: String = ""
+    @State private var prevContext: String? = ""
+    
 
 
     var body: some View {
@@ -23,7 +27,8 @@ struct KeyboardView: View {
                 if controller.hostBundleId != "ibbi.dyslexia" {
                     HStack {
                         TranscribeButton(controller: controller)
-                        RewriteButton(controller: controller)
+                        RewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
+                        UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
                     }
                     .padding(.vertical)
                     
