@@ -11,6 +11,8 @@ import KeyboardKit
 
 struct TextViewWrapper: UIViewRepresentable {
     @Binding var text: String
+    @Binding var selectedText: String
+    @Binding var selectedTextRange: NSRange
     var isEditable: Bool = true
 
     func makeCoordinator() -> Coordinator {
@@ -23,11 +25,16 @@ struct TextViewWrapper: UIViewRepresentable {
         textView.isEditable = self.isEditable
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
         return textView
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = self.text
+        // Make sure selected range is within text bounds
+        let start = uiView.position(from: uiView.beginningOfDocument, offset: selectedTextRange.location) ?? uiView.beginningOfDocument
+        let end = uiView.position(from: start, offset: selectedTextRange.length) ?? start
+        uiView.selectedTextRange = uiView.textRange(from: start, to: end)
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
@@ -40,19 +47,33 @@ struct TextViewWrapper: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             self.parent.text = textView.text
         }
-
-        func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-            return true
+        
+        func textViewDidChangeSelection(_ textView: UITextView) {
+            if let range = textView.selectedTextRange {
+                let start = textView.offset(from: textView.beginningOfDocument, to: range.start)
+                let end = textView.offset(from: textView.beginningOfDocument, to: range.end)
+                DispatchQueue.main.async {
+                    self.parent.selectedTextRange = NSRange(location: start, length: end - start)
+                    self.parent.selectedText = textView.text(in: range) ?? ""
+                }
+            }
         }
     }
 }
+
+
 
 struct Playground: View {
     let isKeyboardActive: Bool
     
     @FocusState private var isInputFocused: Bool
-    @State private var inputText: String = "Once a silent keyboard in a tech shop, Lexboard found its voice when a lightning bolt zapped it into the cyberworld. From observer to participant, it evolved, learning to reach billions of iPhone users. It offered innovative suggestions, simplified tasks, and sparked creativity, turning its dormant ideas into dynamic user experiences. \n\nFrom a mere keyboard to a global influencer, Lexboard transformed into an unsung pocket hero."
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
+    @State private var prevCursorPosition: Int?
+    @State private var prevInputText = ""
+    @State private var inputText: String = "Once a silent keyboard in a tech shop, Lexboard found its voice when a lightning bolt zapped it into the cyberworld. From observer to participant, it evolved, learning to reach billions of iPhone users. It offered innovative suggestions, simplified tasks, and sparked creativity, turning its dormant ideas into dynamic user experiences. \n\nFrom a mere keyboard to a global influencer, Lexboard transformed into an unsung pocket hero."
+    @State private var selectedText: String = ""
+    @State private var selectedTextRange: NSRange = NSRange(location: 0, length: 0)
+
 
     
     var body: some View {
@@ -67,7 +88,7 @@ struct Playground: View {
                 Text("Try yelling")
             }
             VStack {
-                TextViewWrapper(text: $inputText)
+                TextViewWrapper(text: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                     .padding()
                     .onAppear {
                         isInputFocused = true
@@ -75,8 +96,8 @@ struct Playground: View {
                 if !isRecording && isKeyboardActive {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText)
-                        Spacer()
-                        InAppRewriteButton(inputText: $inputText)
+                        InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
+                        InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }
                     .padding(.vertical)
                 }

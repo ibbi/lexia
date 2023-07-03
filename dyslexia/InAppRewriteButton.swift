@@ -10,20 +10,29 @@ import KeyboardKit
 
 struct InAppRewriteButton: View {
     @State private var transformedText: String?
-    @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @Binding var inputText: String
+    @Binding var prevInputText: String
+    @Binding var selectedText: String
+    @Binding var selectedTextRange: NSRange
 
-
-    func rewriteText(_ text: String, shouldDelete: Bool) {
+    func rewriteText(_ text: String) {
         isLoading = true
         API.sendTranscribedText(text) { result in
             DispatchQueue.main.async {
                 isLoading = false
                 switch result {
                 case .success(let transformed):
-                    transformedText = transformed
-                    inputText = transformed
+                    if !selectedText.isEmpty {
+                        prevInputText = inputText
+                        let nsString = inputText as NSString
+                        inputText = nsString.replacingCharacters(in: selectedTextRange, with: transformed)
+                        selectedText = ""
+                        selectedTextRange = NSRange(location: selectedTextRange.location + transformed.count, length: 0)
+                    } else {
+                        prevInputText = inputText
+                        inputText = transformed
+                    }
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }
@@ -32,10 +41,10 @@ struct InAppRewriteButton: View {
     }
 
     func rewriteSelectedText() {
-        if false {
-            rewriteText("selectedText", shouldDelete: false)
+        if !selectedText.isEmpty {
+            rewriteText(selectedText)
         } else if !inputText.isEmpty {
-            rewriteText(inputText, shouldDelete: true)
+            rewriteText(inputText)
         }
     }
 
