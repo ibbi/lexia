@@ -42,7 +42,7 @@ struct InAppRewriteButton: View {
         }
     }
 
-    func rewriteSelectedText() {
+    func tryRewriteText() {
         if !selectedText.isEmpty {
             rewriteText(selectedText)
         } else if !inputText.isEmpty {
@@ -52,7 +52,7 @@ struct InAppRewriteButton: View {
 
     var body: some View {
         Button(action: {
-            rewriteSelectedText()
+            tryRewriteText()
         }) {
             Text(isLoading ? "Loading..." : "Rewrite")
         }

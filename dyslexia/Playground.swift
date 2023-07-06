@@ -115,6 +115,7 @@ struct Playground: View {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         Spacer()
+                        InAppVoiceRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }

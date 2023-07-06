@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		28432C942A5637B9001D1AC1 /* VoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */; };
+		28432C962A565089001D1AC1 /* InAppVoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */; };
 		285943292A5013CE003038F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F11CA729EE2E6900ED00D9 /* Assets.xcassets */; };
 		2859432B2A502067003038F2 /* InAppTranscribeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2859432A2A502067003038F2 /* InAppTranscribeButton.swift */; };
 		2859432D2A50D15D003038F2 /* InAppRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2859432C2A50D15D003038F2 /* InAppRewriteButton.swift */; };
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRewriteButton.swift; sourceTree = "<group>"; };
+		28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppVoiceRewriteButton.swift; sourceTree = "<group>"; };
 		2859432A2A502067003038F2 /* InAppTranscribeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTranscribeButton.swift; sourceTree = "<group>"; };
 		2859432C2A50D15D003038F2 /* InAppRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppRewriteButton.swift; sourceTree = "<group>"; };
 		2859432E2A528DA9003038F2 /* UndoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoButton.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				2859432C2A50D15D003038F2 /* InAppRewriteButton.swift */,
 				289584D92A182FB7001425B8 /* DictationAssembly.swift */,
 				285943322A532D41003038F2 /* InAppUndoButton.swift */,
+				28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */,
 				28CF45082A38E5B800B8F52C /* DictationWhisper.swift */,
 				2859432A2A502067003038F2 /* InAppTranscribeButton.swift */,
 				2895851A2A23D88C001425B8 /* AssemblySocket.swift */,
@@ -378,6 +381,7 @@
 				28F11CA629EE2E6700ED00D9 /* ContentView.swift in Sources */,
 				285943332A532D41003038F2 /* InAppUndoButton.swift in Sources */,
 				28CF450B2A38EA4800B8F52C /* AudioRecorder.swift in Sources */,
+				28432C962A565089001D1AC1 /* InAppVoiceRewriteButton.swift in Sources */,
 				28741D6E2A06F5EC00D29899 /* Helper.swift in Sources */,
 				28F11CA429EE2E6700ED00D9 /* dyslexiaApp.swift in Sources */,
 				28CF45092A38E5B800B8F52C /* DictationWhisper.swift in Sources */,
