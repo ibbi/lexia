@@ -14,8 +14,8 @@ struct InstallInstructions: View {
     
     let installTodos: [(image: Image, text: String)] = [
         (Image("SettingsIcon"), "Open Settings"),
-        (Image(systemName: "app.gift.fill"), "Lexia"),
-        (Image("Micon"), "Keyboards"),
+        (Image("Democon"), "Lexia"),
+        (Image("KeyboardIcon"), "Keyboards"),
         (Image("ToggleIcon"), "Enable Lexia"),
         (Image("ToggleIcon"), "Allow Full Access"),
         (Image(systemName: "return"), "Come back here!")
@@ -53,8 +53,9 @@ struct InstallInstructions: View {
                     .padding(.trailing)
                 image
                     .resizable()
-                    .frame(width: 24, height: 24)
+                    .frame(width: 40, height: 40)
                     .foregroundColor(.pastelBlue)
+                    .padding(.trailing)
                 Text(text)
                     .font(.body)
                     .strikethrough(isDone)
@@ -63,12 +64,9 @@ struct InstallInstructions: View {
                     Button("Take me there", action: {
                         Helper.openAppSettings()
                     })
-                    .padding(8)
-                    .background(Color.pastelBlue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-                    .shadow(color: .gray, radius: 5, x: 0, y: 2)
-                    .disabled(isDone)
+                    .buttonStyle(.borderedProminent)
+                    .shadow(color: .gray, radius: 3, x: 0, y: 1)
+
                 }
             }
             .opacity(isDone ? 0.4 : 1)
@@ -88,9 +86,9 @@ struct InstallInstructions: View {
         }
     }
     
-//    struct InstallInstructions_Previews: PreviewProvider {
-//        static var previews: some View {
-//            InstallInstructions(isOnlyMissingFullAccess: false)
-//        }
-//    }
+    struct InstallInstructions_Previews: PreviewProvider {
+        static var previews: some View {
+            InstallInstructions(isFullAccessEnabled: false, isKeyboardEnabled: false)
+        }
+    }
 }

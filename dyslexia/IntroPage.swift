@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IntroPage: View {
-    let playgrounds = ["whisper", "speak_edit", "quick_edit"]
+    let playgrounds = ["whisper", "speak_edit", "quick_edit", "undo"]
 
     var body: some View {
         NavigationView {
@@ -19,30 +19,52 @@ struct IntroPage: View {
                     HStack {
                         switch playground{
                         case "whisper":
-                            Image("Micon")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                            Text("Write by speaking in any language")
+                            VStack(alignment: .leading) {
+                                Button(action: {
+                                }) {
+                                    Text("Speak")
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(Color.pastelBlue)
+                                Text("Speech to text in any language")
+                            }
                         case "speak_edit":
-                            Button(action: {
-                            }) {
-                                Text("Edit")
+                            VStack(alignment: .leading) {
+                                Button(action: {
+                                }) {
+                                    Text("Edit")
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(Color.pastelGreen)
+                                Text("Text edits using voice commands")
                             }
-                            .buttonStyle(.bordered)
-                            Text("Tell Lexboard how you want text to change")
+                        case "quick_edit":
+                            VStack(alignment: .leading) {
+                                Button(action: {
+                                }) {
+                                    Text("Enhance")
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(Color.pastelYellow)
+                                Text("One tap edits, with saved presets")
+                            }
                         default:
-                            Button(action: {
-                            }) {
-                                Text("Enhance")
+                            VStack(alignment: .leading) {
+                                Button(action: {
+                                }) {
+                                    Text("Undo")
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(Color.pastelRed)
+                                Text("Undo the last change")
                             }
-                            .buttonStyle(.bordered)
-                            Text("Quickly improve your text with one tap")
                         }
                         Spacer()
                     }
                 }
             }
-            .navigationTitle("Learn how to use Lexboard")
+            .padding(.vertical)
+            .navigationTitle("Learn Lexboard")
         }
     }
 }

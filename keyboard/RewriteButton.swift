@@ -123,6 +123,7 @@ struct RewriteButton: View {
             }
         }
         .buttonStyle(.bordered)
+        .tint(Color.pastelYellow)
     }
 }
 

@@ -82,6 +82,7 @@ struct InAppVoiceRewriteButton: View {
         }
         .disabled(isLoading)
         .buttonStyle(.bordered)
+        .tint(Color.pastelGreen)
         .onAppear{
             tryGetContext()
         }

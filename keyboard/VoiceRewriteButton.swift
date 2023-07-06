@@ -153,6 +153,7 @@ struct VoiceRewriteButton: View {
             Text(isLoading ? "Loading..." : "Edit")
         }
         .disabled(isLoading)
+        .tint(Color.pastelGreen)
         .onChange(of: fullText) { newValue in
             if (!newValue.isEmpty && hasTextToRewrite()) {
                 rewriteTextWithAudioInstructions(fullText, shouldDelete: true)

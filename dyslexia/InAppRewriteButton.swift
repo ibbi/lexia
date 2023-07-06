@@ -58,6 +58,7 @@ struct InAppRewriteButton: View {
         }
         .disabled(isLoading)
         .buttonStyle(.bordered)
+        .tint(Color.pastelYellow)
     }
 }
 

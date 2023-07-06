@@ -71,17 +71,14 @@ struct InAppTranscribeButton: View {
             Button(action: {
                 audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)
             }) {
-                Image("Micon")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .clipShape(Circle())
+                Text(isTranscribing ? "Loading..." : "Speak")
             }
+            .buttonStyle(.bordered)
+            .tint(Color.pastelBlue)
+            .disabled(isTranscribing)
             .padding(.horizontal)
             .onAppear {
                 tryTranscribe()
-            }
-            if isTranscribing {
-                Text("Transcribing...")
             }
         }
     }

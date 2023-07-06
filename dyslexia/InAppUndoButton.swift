@@ -32,11 +32,10 @@ struct InAppUndoButton: View {
             Button(action: {
                 tryUndo()
             }) {
-                Image("Undo")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .clipShape(Circle())
+                Text("Undo")
             }
+            .buttonStyle(.bordered)
+            .tint(Color.pastelRed)
             .padding(.horizontal)
         }
     }

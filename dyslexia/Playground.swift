@@ -71,7 +71,7 @@ struct TextViewWrapper: UIViewRepresentable {
 
 
 struct Playground: View {
-    @State private var isKeyboardActive = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardActive
+    @StateObject private var keyboardState = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*")
     @State private var isFocused: Bool = false // New state variable for focus status
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
     @State private var prevCursorPosition: Int?
@@ -84,7 +84,7 @@ struct Playground: View {
 
     var body: some View {
         VStack {
-            if !isKeyboardActive {
+            if !keyboardState.isKeyboardActive {
                 Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexboard")
                     .font(.title)
                     .foregroundColor(Color.pastelBlue)
@@ -111,7 +111,7 @@ struct Playground: View {
                         self.isFocused = true
                     }
                     .padding(.horizontal)
-                if !isRecording && isKeyboardActive {
+                if !isRecording && keyboardState.isKeyboardActive {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         Spacer()
