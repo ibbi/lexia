@@ -26,7 +26,7 @@ struct TranscribeButton: View {
             return sharedDataPath.appendingPathComponent("recording.m4a")
         }
         
-        func transcribeAudio(completion: @escaping (Result<[String: Any], BackendAPIError>) -> Void) {
+        func transcribeAudio(completion: @escaping (Result<String, BackendAPIError>) -> Void) {
             let audioURL = getAudioURL()
             API.sendAudioForTranscription(audioURL: audioURL, completion: completion)
         }
@@ -39,8 +39,8 @@ struct TranscribeButton: View {
             transcribeAudio { result in
                 isTranscribing = false
                 switch result {
-                case .success(let json):
-                    if let text = json["text"] as? String {
+                case .success(let text):
+                    if !text.isEmpty {
                         controller.textDocumentProxy.insertText(text)
                     }
                     do {

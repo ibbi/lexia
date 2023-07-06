@@ -1,15 +1,16 @@
 //
-//  RewriteButton.swift
+//  VoiceRewriteButton.swift
 //  keyboard
 //
-//  Created by ibbi on 6/14/23.
+//  Created by ibbi on 7/5/23.
 //
 
 import SwiftUI
 import KeyboardKit
 import Combine
+import URLProxy
 
-struct RewriteButton: View {
+struct VoiceRewriteButton: View {
     let controller: KeyboardInputViewController
     @Binding var rewrittenText: String
     @Binding var prewrittenText: String
@@ -20,18 +21,35 @@ struct RewriteButton: View {
     @State private var afterText = ""
     @State private var fullText = ""
     @State private var afterTries = 0
+    @State var isTranscribing: Bool = false
 
     let beforeTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     let afterTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
+    let sharedDefaults = UserDefaults(suiteName: "group.lexia")
     @State private var beforeCancellable: AnyCancellable?
     @State private var afterCancellable: AnyCancellable?
     
-    
+    func getAudioURL() -> URL {
+        let fileManager = FileManager.default
+        let sharedDataPath = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")!
+        return sharedDataPath.appendingPathComponent("edit_recording.m4a")
+    }
 
+    
+    func tryGetContext() {
+        let audioURL = getAudioURL()
+        let fileManager = FileManager.default
+        
+        if fileManager.fileExists(atPath: audioURL.path) {
+            print("file exists")
+            isLoading = true
+            decideSelectionOrEntire()
+        }
+    }
     
     func getTextContextBefore() -> Bool {
 
-        let before = controller.textDocumentProxy.documentContextBeforeInput
+        var before = controller.textDocumentProxy.documentContextBeforeInput
         if ((before == nil) || (before!.isEmpty)){
             controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
             beforeCancellable?.cancel()
@@ -43,14 +61,14 @@ struct RewriteButton: View {
             return true
         }
         prevText = (before ?? "") + prevText
-        let len = (before?.count ?? 0) * -1
+        var len = (before?.count ?? 0) * -1
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
         return false
     }
     
     func getTextContextAfter() -> Bool {
  
-        let after = controller.textDocumentProxy.documentContextAfterInput
+        var after = controller.textDocumentProxy.documentContextAfterInput
         if ((after == nil) || (after!.isEmpty)){
             // silly hack because sometimes newlines break this jank thing i wrote lel. It breaks if there are more than 10 unexpected newlines
             if (afterTries < 10) {
@@ -70,16 +88,17 @@ struct RewriteButton: View {
             }
         }
         afterText = afterText + (after ?? "")
-        let len = (after?.count ?? 0)
+        var len = (after?.count ?? 0)
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
         return false
     }
 
 
-    func rewriteText(_ text: String, shouldDelete: Bool) {
-        isLoading = true
+    func rewriteTextWithAudioInstructions(_ text: String, shouldDelete: Bool) {
+        let audioURL = getAudioURL()
         prewrittenText = text
-        API.sendTranscribedText(text) { result in
+        
+        API.sendAudioAndText(audioURL: audioURL, contextText: text) { result in
             DispatchQueue.main.async {
                 isLoading = false
                 switch result {
@@ -93,13 +112,19 @@ struct RewriteButton: View {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }
+                do {
+                    let fileManager = FileManager.default
+                    try fileManager.removeItem(at: audioURL)
+                } catch {
+                    print("Error deleting file: \(error)")
+                }
             }
         }
     }
 
     func decideSelectionOrEntire() {
         if let selectedText = controller.keyboardTextContext.selectedText {
-            rewriteText(selectedText, shouldDelete: false)
+            rewriteTextWithAudioInstructions(selectedText, shouldDelete: false)
         } else if controller.textDocumentProxy.documentContext != nil {
             self.beforeCancellable = self.beforeTimer.sink { _ in
                 DispatchQueue.main.async {
@@ -108,26 +133,41 @@ struct RewriteButton: View {
             }
         }
     }
+    
+    func hasTextToRewrite() -> Bool {
+        if let selectedText = controller.keyboardTextContext.selectedText {
+            return true
+        } else if controller.textDocumentProxy.documentContext != nil {
+            return true
+        }
+        return false
+    }
 
     var body: some View {
         Button(action: {
-            decideSelectionOrEntire()
+            if hasTextToRewrite() {
+                let urlHandler = URLHandler()
+                urlHandler.openURL("dyslexia://edit_dictation")
+            }
         }) {
-            Text(isLoading ? "Loading..." : "Enhance")
+            Text(isLoading ? "Loading..." : "Edit")
         }
         .disabled(isLoading)
         .onChange(of: fullText) { newValue in
-            if (!newValue.isEmpty) {
-                rewriteText(fullText, shouldDelete: true)
+            if (!newValue.isEmpty && hasTextToRewrite()) {
+                rewriteTextWithAudioInstructions(fullText, shouldDelete: true)
                 fullText = ""
             }
         }
         .buttonStyle(.bordered)
+        .onAppear{
+            tryGetContext()
+        }
     }
 }
 
-//struct RewriteButton_Previews: PreviewProvider {
+//struct VoiceRewriteButton_Previews: PreviewProvider {
 //    static var previews: some View {
-//        RewriteButton()
+//        VoiceRewriteButton()
 //    }
 //}

@@ -22,7 +22,7 @@ class AudioRecorder: ObservableObject {
         return fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")!
     }
 
-    func startRecording(shouldJumpBack: Bool) {
+    func startRecording(shouldJumpBack: Bool, isEdit: Bool) {
         if (shouldJumpBack) {
             backgroundTask = UIApplication.shared.beginBackgroundTask {
                 UIApplication.shared.endBackgroundTask(self.backgroundTask)
@@ -37,7 +37,7 @@ class AudioRecorder: ObservableObject {
             try audioSession.setActive(true)
 
             let sharedDataPath = sharedDirectoryURL()
-            let audioURL = sharedDataPath.appendingPathComponent("recording.m4a")
+            let audioURL = sharedDataPath.appendingPathComponent(isEdit ? "edit_recording.m4a" :"recording.m4a")
 
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -69,15 +69,5 @@ class AudioRecorder: ObservableObject {
 
     func stopRecording() {
         audioRecorder.stop()
-    }
-
-    func getAudioURL() -> URL {
-        let sharedDataPath = sharedDirectoryURL()
-        return sharedDataPath.appendingPathComponent("recording.m4a")
-    }
-
-    func transcribeAudio(completion: @escaping (Result<[String: Any], BackendAPIError>) -> Void) {
-        let audioURL = getAudioURL()
-        API.sendAudioForTranscription(audioURL: audioURL, completion: completion)
     }
 }

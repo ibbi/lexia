@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28432C942A5637B9001D1AC1 /* VoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */; };
 		285943292A5013CE003038F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F11CA729EE2E6900ED00D9 /* Assets.xcassets */; };
 		2859432B2A502067003038F2 /* InAppTranscribeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2859432A2A502067003038F2 /* InAppTranscribeButton.swift */; };
 		2859432D2A50D15D003038F2 /* InAppRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2859432C2A50D15D003038F2 /* InAppRewriteButton.swift */; };
@@ -89,6 +90,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRewriteButton.swift; sourceTree = "<group>"; };
 		2859432A2A502067003038F2 /* InAppTranscribeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTranscribeButton.swift; sourceTree = "<group>"; };
 		2859432C2A50D15D003038F2 /* InAppRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppRewriteButton.swift; sourceTree = "<group>"; };
 		2859432E2A528DA9003038F2 /* UndoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoButton.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				285A817A2A12E93100ED7608 /* TranscribeButton.swift */,
 				28B9A7E82A47CD0100109C6C /* StopRecording.swift */,
 				28CF45182A3A749900B8F52C /* RewriteButton.swift */,
+				28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */,
 				285A81742A12E46A00ED7608 /* KeyboardView.swift */,
 				2859432E2A528DA9003038F2 /* UndoButton.swift */,
 				285943302A532633003038F2 /* KeyHelper.swift */,
@@ -393,6 +396,7 @@
 				285A81752A12E46A00ED7608 /* KeyboardView.swift in Sources */,
 				28CF45192A3A749900B8F52C /* RewriteButton.swift in Sources */,
 				28EE554629EE361300CEF0C6 /* KeyboardLayoutProvider.swift in Sources */,
+				28432C942A5637B9001D1AC1 /* VoiceRewriteButton.swift in Sources */,
 				28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */,
 				28CF450E2A3A249600B8F52C /* API.swift in Sources */,
 				28B9A7E92A47CD0100109C6C /* StopRecording.swift in Sources */,

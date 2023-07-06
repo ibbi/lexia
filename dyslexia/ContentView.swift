@@ -15,7 +15,10 @@ struct ContentView: View {
     var body: some View {
         Group {
             if deeplinkedURL == "dictation" {
-                DictationWhisper()
+                DictationWhisper(isEdit: false)
+            }
+            else if deeplinkedURL == "edit_dictation" {
+                DictationWhisper(isEdit: true)
             }
             else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
                 InstallInstructions(isFullAccessEnabled: keyboardState.isFullAccessEnabled, isKeyboardEnabled: keyboardState.isKeyboardEnabled)

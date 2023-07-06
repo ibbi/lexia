@@ -31,7 +31,7 @@ struct InAppTranscribeButton: View {
             return sharedDataPath.appendingPathComponent("recording.m4a")
         }
         
-        func transcribeAudio(completion: @escaping (Result<[String: Any], BackendAPIError>) -> Void) {
+        func transcribeAudio(completion: @escaping (Result<String, BackendAPIError>) -> Void) {
             let audioURL = getAudioURL()
             API.sendAudioForTranscription(audioURL: audioURL, completion: completion)
         }
@@ -44,8 +44,8 @@ struct InAppTranscribeButton: View {
             transcribeAudio { result in
                 isTranscribing = false
                 switch result {
-                case .success(let json):
-                    if let text = json["text"] as? String {
+                case .success(let text):
+                    if !text.isEmpty {
                         let startIndex = inputText.index(inputText.startIndex, offsetBy: selectedTextRange.location)
                         let endIndex = inputText.index(startIndex, offsetBy: selectedTextRange.length)
                         
@@ -54,13 +54,13 @@ struct InAppTranscribeButton: View {
                         selectedText = ""
                         selectedTextRange = NSRange(location: selectedTextRange.location + text.count, length: 0)
                     }
-                    do {
-                        try fileManager.removeItem(at: audioURL)
-                    } catch {
-                        print("Error deleting file: \(error)")
-                    }
                 case .failure(let error):
                     print("Error: \(error)")
+                }
+                do {
+                    try fileManager.removeItem(at: audioURL)
+                } catch {
+                    print("Error deleting file: \(error)")
                 }
             }
         }
@@ -69,7 +69,7 @@ struct InAppTranscribeButton: View {
     var body: some View {
         HStack {
             Button(action: {
-                audioRecorder.startRecording(shouldJumpBack: false)
+                audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)
             }) {
                 Image("Micon")
                     .resizable()

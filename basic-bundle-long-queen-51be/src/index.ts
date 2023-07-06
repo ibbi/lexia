@@ -25,6 +25,11 @@ async function handleRequest(request: Request): Promise<Response> {
       return new Response('Method not allowed', { status: 405 });
     }
     return handleTransformerRequest(request);
+  } else if (url.pathname === '/voice_edit') {
+    if (request.method !== 'POST') {
+      return new Response('Method not allowed', { status: 405 });
+    }
+    return handleVoiceEdit(request);
   } else if (url.pathname === '/whisper') {
     if (request.headers.get('Upgrade') === 'websocket') {
       return handleWhisperWebSocket(request);
@@ -99,6 +104,45 @@ async function handleWhisperRequest(request: Request): Promise<Response> {
     const data = await response.json();
     return new Response(JSON.stringify(data), {
       headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+}
+
+async function handleVoiceEdit(request: Request): Promise<Response> {
+  try {
+    const formData = await request.formData();
+    const contextText = formData.get('context');
+    const audioFile = formData.get('file');
+
+    if (!(audioFile instanceof File)) {
+      return new Response('Invalid file', { status: 400 });
+    }
+
+    formData.append('model', 'whisper-1');
+
+    const whisperResponse = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${OPENAI_KEY}`,
+      },
+    });
+    const { text } = await whisperResponse.json();
+
+    const promptWrapped = `Apply the following instructions:\n---\n${text}\n---\n\nto the following text:\n---\n${contextText}\n---\n`;
+    console.log(promptWrapped);
+    const gptResponse = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: promptWrapped }],
+    });
+
+    const assistantMessage = gptResponse.data.choices[0].message?.content.replace(/^"(.*)"$/, '$1');
+    console.log(assistantMessage);
+
+    return new Response(assistantMessage, {
+      headers: { 'Content-Type': 'text/plain' },
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });

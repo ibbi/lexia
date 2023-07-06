@@ -10,6 +10,7 @@ import AVFoundation
 
 struct DictationWhisper: View {
     @State private var transcription: String?
+    let isEdit: Bool
     
     @StateObject private var audioRecorder = AudioRecorder()
     @Environment(\.scenePhase) private var scenePhase
@@ -26,7 +27,7 @@ struct DictationWhisper: View {
         }
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
-                audioRecorder.startRecording(shouldJumpBack: true)
+                audioRecorder.startRecording(shouldJumpBack: true, isEdit: isEdit)
             }
         }
     }
@@ -34,6 +35,6 @@ struct DictationWhisper: View {
 
 struct DictationWhisper_Previews: PreviewProvider {
     static var previews: some View {
-        DictationWhisper()
+        DictationWhisper(isEdit: false)
     }
 }
