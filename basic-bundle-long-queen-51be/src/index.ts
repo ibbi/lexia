@@ -66,8 +66,10 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
   try {
     const requestBody = await request.json();
     const userMessage = requestBody.message;
-    const userPrompt = requestBody.prompt || 'Please rewrite this: ';
-    const promptWrapped = `${userPrompt}\n"${userMessage}"\n:`;
+    const userPrompt = requestBody.prompt || 'Please rewrite this:';
+    const promptWrapped = `${userPrompt} \n"${userMessage}"\n:`;
+
+    console.log(promptWrapped);
 
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',

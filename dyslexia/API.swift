@@ -49,11 +49,16 @@ struct API {
             completion(.failure(.urlError))
             return
         }
+        print("thistext", text)
+        let sharedDefaults = UserDefaults(suiteName: "group.lexia")
         
+        sharedDefaults?.set("Please rewrite this:", forKey: "quick_prompt")
+        
+        let prompt = sharedDefaults?.string(forKey: "quick_prompt") ?? "Please rewrite this:"
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(["message": text])
+        request.httpBody = try? JSONEncoder().encode(["prompt": prompt, "message": text])
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let _ = error {
