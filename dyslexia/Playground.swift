@@ -71,7 +71,7 @@ struct TextViewWrapper: UIViewRepresentable {
 
 
 struct Playground: View {
-    let isKeyboardActive: Bool
+    @State private var isKeyboardActive = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*").isKeyboardActive
     @State private var isFocused: Bool = false // New state variable for focus status
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
     @State private var prevCursorPosition: Int?
@@ -129,6 +129,6 @@ struct Playground: View {
 
 struct Playground_Previews: PreviewProvider {
     static var previews: some View {
-        Playground(isKeyboardActive: true)
+        Playground()
     }
 }
