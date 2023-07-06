@@ -80,7 +80,7 @@ struct Playground: View {
     @State private var selectedText: String = ""
     // Hardcoded length of inputText
     @State private var selectedTextRange: NSRange = NSRange(location: 432, length: 0)
-
+    
 
     var body: some View {
         VStack {

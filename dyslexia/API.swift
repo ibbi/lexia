@@ -49,7 +49,6 @@ struct API {
             completion(.failure(.urlError))
             return
         }
-        print("thistext", text)
         let sharedDefaults = UserDefaults(suiteName: "group.lexia")
         
         sharedDefaults?.set("Please rewrite this:", forKey: "quick_prompt")
