@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283E222C2A57518C0023BA3A /* IntroPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E222B2A57518C0023BA3A /* IntroPage.swift */; };
 		28432C942A5637B9001D1AC1 /* VoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */; };
 		28432C962A565089001D1AC1 /* InAppVoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */; };
 		285943292A5013CE003038F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F11CA729EE2E6900ED00D9 /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		283E222B2A57518C0023BA3A /* IntroPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPage.swift; sourceTree = "<group>"; };
 		28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRewriteButton.swift; sourceTree = "<group>"; };
 		28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppVoiceRewriteButton.swift; sourceTree = "<group>"; };
 		2859432A2A502067003038F2 /* InAppTranscribeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTranscribeButton.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				28CF45062A33D08B00B8F52C /* API.swift */,
 				2880023D2A0C3B5200045F40 /* InstallInstructions.swift */,
 				2880023F2A0C3BB600045F40 /* Playground.swift */,
+				283E222B2A57518C0023BA3A /* IntroPage.swift */,
 				2859432C2A50D15D003038F2 /* InAppRewriteButton.swift */,
 				289584D92A182FB7001425B8 /* DictationAssembly.swift */,
 				285943322A532D41003038F2 /* InAppUndoButton.swift */,
@@ -372,6 +375,7 @@
 				28CF45072A33D08B00B8F52C /* API.swift in Sources */,
 				2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */,
 				289584DA2A182FB7001425B8 /* DictationAssembly.swift in Sources */,
+				283E222C2A57518C0023BA3A /* IntroPage.swift in Sources */,
 				289585212A273B6A001425B8 /* StreamingAudioRecorder.swift in Sources */,
 				285A81782A12E77F00ED7608 /* Constants.swift in Sources */,
 				288002402A0C3BB600045F40 /* Playground.swift in Sources */,
