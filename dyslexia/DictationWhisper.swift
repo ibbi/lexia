@@ -10,6 +10,7 @@ import AVFoundation
 
 struct DictationWhisper: View {
     let isEdit: Bool
+    @Binding var deeplinkedURL: String?
     
     @StateObject private var audioRecorder = AudioRecorder()
     @Environment(\.scenePhase) private var scenePhase
@@ -20,6 +21,7 @@ struct DictationWhisper: View {
         }
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
+                deeplinkedURL = ""
                 audioRecorder.startRecording(shouldJumpBack: true, isEdit: isEdit)
             }
         }
