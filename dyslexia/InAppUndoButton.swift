@@ -36,7 +36,6 @@ struct InAppUndoButton: View {
             }
             .buttonStyle(.bordered)
             .tint(Color.pastelRed)
-            .padding(.horizontal)
         }
     }
     

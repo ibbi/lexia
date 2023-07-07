@@ -1,14 +1,14 @@
 //
-//  Playground.swift
+//  SpeakPlayground.swift
 //  dyslexia
 //
-//  Created by ibbi on 5/10/23.
+//  Created by ibbi on 7/7/23.
 //
 
 import KeyboardKit
 import SwiftUI
 
-struct Playground: View {
+struct SpeakPlayground: View {
     @StateObject private var keyboardState = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*")
     @State private var isFocused: Bool = false
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
@@ -27,18 +27,18 @@ struct Playground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Here are some extra tips")
+                    Text("Use \(Image(systemName: "globe")) to dictate, in any language")
                         .font(.title)
                         .padding(.bottom)
-                    Text("You can apply your changes to only a portion of selected text")
-                    Text("The undo button only remembers the most recent edit")
-                    Text("You can use the edit commands to translate your text to another language!")
+                    Text("When was the last time you saw a cow?")
+                    Text("How big was it?")
                 }
             }
             Divider()
             VStack {
+                Spacer()
                 TextViewWrapper(text: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange, isFocused: $isFocused)
-                    .onAppear { // Focus the TextViewWrapper when it appears
+                    .onAppear {
                         self.isFocused = true
                     }
                     .padding(.horizontal)
@@ -46,10 +46,8 @@ struct Playground: View {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         Spacer()
-                        InAppVoiceRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
-                        InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
-                        InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }
+                    .padding(.horizontal)
                     .padding(.bottom, 10)
                 }
             }
@@ -58,8 +56,8 @@ struct Playground: View {
 }
 
 
-struct Playground_Previews: PreviewProvider {
+struct SpeakPlayground_Previews: PreviewProvider {
     static var previews: some View {
-        Playground()
+        SpeakPlayground()
     }
 }

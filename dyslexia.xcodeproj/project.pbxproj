@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		283E222C2A57518C0023BA3A /* IntroPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E222B2A57518C0023BA3A /* IntroPage.swift */; };
+		283E222E2A57C5DD0023BA3A /* SpeakPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E222D2A57C5DD0023BA3A /* SpeakPlayground.swift */; };
+		283E22302A57C6130023BA3A /* EditPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E222F2A57C6130023BA3A /* EditPlayground.swift */; };
+		283E22322A57C6200023BA3A /* EnhancePlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E22312A57C6200023BA3A /* EnhancePlayground.swift */; };
+		283E22342A57C6630023BA3A /* TextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E22332A57C6630023BA3A /* TextViewWrapper.swift */; };
 		28432C942A5637B9001D1AC1 /* VoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */; };
 		28432C962A565089001D1AC1 /* InAppVoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */; };
 		285943292A5013CE003038F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F11CA729EE2E6900ED00D9 /* Assets.xcassets */; };
@@ -93,6 +97,10 @@
 
 /* Begin PBXFileReference section */
 		283E222B2A57518C0023BA3A /* IntroPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPage.swift; sourceTree = "<group>"; };
+		283E222D2A57C5DD0023BA3A /* SpeakPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakPlayground.swift; sourceTree = "<group>"; };
+		283E222F2A57C6130023BA3A /* EditPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayground.swift; sourceTree = "<group>"; };
+		283E22312A57C6200023BA3A /* EnhancePlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancePlayground.swift; sourceTree = "<group>"; };
+		283E22332A57C6630023BA3A /* TextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWrapper.swift; sourceTree = "<group>"; };
 		28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRewriteButton.swift; sourceTree = "<group>"; };
 		28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppVoiceRewriteButton.swift; sourceTree = "<group>"; };
 		2859432A2A502067003038F2 /* InAppTranscribeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTranscribeButton.swift; sourceTree = "<group>"; };
@@ -191,6 +199,10 @@
 				28CF45062A33D08B00B8F52C /* API.swift */,
 				2880023D2A0C3B5200045F40 /* InstallInstructions.swift */,
 				2880023F2A0C3BB600045F40 /* Playground.swift */,
+				283E22332A57C6630023BA3A /* TextViewWrapper.swift */,
+				283E222D2A57C5DD0023BA3A /* SpeakPlayground.swift */,
+				283E222F2A57C6130023BA3A /* EditPlayground.swift */,
+				283E22312A57C6200023BA3A /* EnhancePlayground.swift */,
 				283E222B2A57518C0023BA3A /* IntroPage.swift */,
 				2859432C2A50D15D003038F2 /* InAppRewriteButton.swift */,
 				289584D92A182FB7001425B8 /* DictationAssembly.swift */,
@@ -385,10 +397,14 @@
 				28F11CA629EE2E6700ED00D9 /* ContentView.swift in Sources */,
 				285943332A532D41003038F2 /* InAppUndoButton.swift in Sources */,
 				28CF450B2A38EA4800B8F52C /* AudioRecorder.swift in Sources */,
+				283E22342A57C6630023BA3A /* TextViewWrapper.swift in Sources */,
 				28432C962A565089001D1AC1 /* InAppVoiceRewriteButton.swift in Sources */,
 				28741D6E2A06F5EC00D29899 /* Helper.swift in Sources */,
+				283E222E2A57C5DD0023BA3A /* SpeakPlayground.swift in Sources */,
 				28F11CA429EE2E6700ED00D9 /* dyslexiaApp.swift in Sources */,
 				28CF45092A38E5B800B8F52C /* DictationWhisper.swift in Sources */,
+				283E22302A57C6130023BA3A /* EditPlayground.swift in Sources */,
+				283E22322A57C6200023BA3A /* EnhancePlayground.swift in Sources */,
 				2895851B2A23D88C001425B8 /* AssemblySocket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

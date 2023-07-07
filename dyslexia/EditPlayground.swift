@@ -1,23 +1,23 @@
 //
-//  Playground.swift
+//  EditPlayground.swift
 //  dyslexia
 //
-//  Created by ibbi on 5/10/23.
+//  Created by ibbi on 7/7/23.
 //
 
-import KeyboardKit
 import SwiftUI
+import KeyboardKit
 
-struct Playground: View {
+struct EditPlayground: View {
     @StateObject private var keyboardState = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*")
     @State private var isFocused: Bool = false
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
     @State private var prevCursorPosition: Int?
     @State private var prevInputText = ""
-    @State private var inputText: String = ""
+    @State private var inputText: String = "Once a silent keyboard in a tech shop, Lexboard found its voice when a lightning bolt zapped it into the cyberworld. From observer to participant, it evolved, learning to reach billions of iPhone users. It offered innovative suggestions, simplified tasks, and sparked creativity, turning its dormant ideas into dynamic user experiences. \n\nFrom a mere keyboard to a global influencer, Lexboard transformed into an unsung pocket hero."
     @State private var selectedText: String = ""
     // Hardcoded length of inputText
-    @State private var selectedTextRange: NSRange = NSRange(location: 0, length: 0)
+    @State private var selectedTextRange: NSRange = NSRange(location: 432, length: 0)
     
 
     var body: some View {
@@ -27,12 +27,14 @@ struct Playground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Here are some extra tips")
+                    Text("Use \(Image(systemName: "globe")) to tell me how to change the text (or just a slected portion)")
                         .font(.title)
                         .padding(.bottom)
-                    Text("You can apply your changes to only a portion of selected text")
-                    Text("The undo button only remembers the most recent edit")
-                    Text("You can use the edit commands to translate your text to another language!")
+                    
+                    Text("Here are some ideas:")
+                    Text("- \"make this story shorter\"")
+                    Text("- \"turn this into a poem\"")
+                    Text("- \"replace all instances of Lexboard with Jeremy\"")
                 }
             }
             Divider()
@@ -44,12 +46,11 @@ struct Playground: View {
                     .padding(.horizontal)
                 if !isRecording && keyboardState.isKeyboardActive {
                     HStack {
-                        InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
-                        Spacer()
                         InAppVoiceRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
-                        InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
+                        Spacer()
                         InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }
+                    .padding(.horizontal)
                     .padding(.bottom, 10)
                 }
             }
@@ -57,9 +58,8 @@ struct Playground: View {
     }
 }
 
-
-struct Playground_Previews: PreviewProvider {
+struct EditPlayground_Previews: PreviewProvider {
     static var previews: some View {
-        Playground()
+        EditPlayground()
     }
 }

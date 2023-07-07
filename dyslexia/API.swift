@@ -49,11 +49,8 @@ struct API {
             completion(.failure(.urlError))
             return
         }
-        let sharedDefaults = UserDefaults(suiteName: "group.lexia")
         
-        sharedDefaults?.set("Please rewrite this:", forKey: "quick_prompt")
-        
-        let prompt = sharedDefaults?.string(forKey: "quick_prompt") ?? "Please rewrite this:"
+        let prompt = UserDefaults(suiteName: "group.lexia")?.string(forKey: "quick_prompt") ?? "Please rewrite this:"
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

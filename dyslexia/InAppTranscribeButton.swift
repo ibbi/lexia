@@ -76,7 +76,6 @@ struct InAppTranscribeButton: View {
             .buttonStyle(.bordered)
             .tint(Color.pastelBlue)
             .disabled(isTranscribing)
-            .padding(.horizontal)
             .onAppear {
                 tryTranscribe()
             }
