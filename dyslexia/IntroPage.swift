@@ -31,52 +31,21 @@ struct IntroPage: View {
                         VStack(alignment: .leading) {
                             switch playground {
                             case "speak":
-                                    Image(systemName: "mic.fill")
-                                    Text("Speech to text in any language")
+                                TopBarButton(buttonType: .speak, action: {}, isLoading: .constant(false), onlyVisual: true)
+                                Text("Speech to text in any language")
                             case "edit":
-                                    Button(action: {
-                                    }) {
-                                        Text("Edit")
-                                    }
-                                    .buttonStyle(.bordered)
-                                    .tint(Color.pastelGreen)
+                                TopBarButton(buttonType: .edit, action: {}, isLoading: .constant(false), onlyVisual: true)
                                     Text("Text edits using voice commands")
                             case "enhance":
-                                    Button(action: {
-                                    }) {
-                                        Text("Enhance")
-                                    }
-                                    .buttonStyle(.bordered)
-                                    .tint(Color.pastelYellow)
+                                TopBarButton(buttonType: .enhance, action: {}, isLoading: .constant(false), onlyVisual: true)
                                     Text("One tap edits, with saved presets")
                             default:
                                     HStack {
-                                        Button(action: {
-                                        }) {
-                                            Text("Speak")
-                                        }
-                                        .buttonStyle(.bordered)
-                                        .tint(Color.pastelBlue)
-                                        Button(action: {
-                                        }) {
-                                            Text("Edit")
-                                        }
-                                        .buttonStyle(.bordered)
-                                        .tint(Color.pastelGreen)
-                                        Button(action: {
-                                        }) {
-                                            Text("Enhance")
-                                                .lineLimit(1)
-                                        }
-                                        .buttonStyle(.bordered)
-                                        .tint(Color.pastelYellow)
-                                        Button(action: {
-                                        }) {
-                                            Text("Undo")
-                                        }
+                                        TopBarButton(buttonType: .speak, action: nil, isLoading: .constant(false), onlyVisual: true)
+                                        TopBarButton(buttonType: .edit, action: nil, isLoading: .constant(false), onlyVisual: true)
+                                        TopBarButton(buttonType: .enhance, action: nil, isLoading: .constant(false), onlyVisual: true)
+                                        TopBarButton(buttonType: .undo, action: nil, isLoading: .constant(false), onlyVisual: true)
                                     }
-                                    .buttonStyle(.bordered)
-                                    .tint(Color.pastelRed)
                                     Text("Put it all together")
                             }
                         }

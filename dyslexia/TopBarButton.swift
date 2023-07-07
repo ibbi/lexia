@@ -35,14 +35,14 @@ enum ButtonType {
 
 struct TopBarButton: View {
     var buttonType: ButtonType
-    var action: () -> Void
+    var action: (() -> Void)?
     @Binding var isLoading: Bool
     let onlyVisual: Bool
 
     var body: some View {
         Button(action: {
             isLoading = true
-            action()
+            action!()
         }) {
             HStack {
                 if isLoading {
@@ -55,7 +55,7 @@ struct TopBarButton: View {
                         .imageScale(.large)
                         .frame(width: 25, height: 25, alignment: .center)
                 }
-                if buttonType != .undo {
+                if buttonType != .undo && action != nil  {
                     Text(buttonType.label)
                 }
                     
