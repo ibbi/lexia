@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct IntroPage: View {
+    let isKeyboardActive: Bool
     let playgrounds = ["speak", "edit", "enhance", "undo"]
+    
 
     var body: some View {
         NavigationView {
@@ -16,13 +18,13 @@ struct IntroPage: View {
                 NavigationLink {
                     switch playground {
                     case "speak":
-                        SpeakPlayground()
+                        SpeakPlayground(isKeyboardActive: isKeyboardActive)
                     case "edit":
-                        EditPlayground()
+                        EditPlayground(isKeyboardActive: isKeyboardActive)
                     case "enhance":
-                        EnhancePlayground()
+                        EnhancePlayground(isKeyboardActive: isKeyboardActive)
                     default:
-                        Playground()
+                        Playground(isKeyboardActive: isKeyboardActive)
                     }
                 } label: {
                     HStack {
@@ -90,6 +92,6 @@ struct IntroPage: View {
 
 struct IntroPage_Previews: PreviewProvider {
     static var previews: some View {
-        IntroPage()
+        IntroPage(isKeyboardActive: true)
     }
 }

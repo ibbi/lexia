@@ -24,7 +24,7 @@ struct ContentView: View {
                 InstallInstructions(isFullAccessEnabled: keyboardState.isFullAccessEnabled, isKeyboardEnabled: keyboardState.isKeyboardEnabled)
             }
             else {
-                IntroPage()
+                IntroPage(isKeyboardActive: keyboardState.isKeyboardActive)
             }
         }
         .onOpenURL { url in

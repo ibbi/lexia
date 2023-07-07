@@ -9,7 +9,7 @@ import KeyboardKit
 import SwiftUI
 
 struct Playground: View {
-    @StateObject private var keyboardState = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*")
+    let isKeyboardActive: Bool
     @State private var isFocused: Bool = false
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
     @State private var prevCursorPosition: Int?
@@ -22,7 +22,7 @@ struct Playground: View {
 
     var body: some View {
         VStack {
-            if !keyboardState.isKeyboardActive {
+            if !isKeyboardActive {
                 Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexboard")
                     .font(.title)
             } else {
@@ -42,7 +42,7 @@ struct Playground: View {
                         self.isFocused = true
                     }
                     .padding(.horizontal)
-                if !isRecording && keyboardState.isKeyboardActive {
+                if !isRecording && isKeyboardActive {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         InAppVoiceRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
@@ -61,6 +61,6 @@ struct Playground: View {
 
 struct Playground_Previews: PreviewProvider {
     static var previews: some View {
-        Playground()
+        Playground(isKeyboardActive: true)
     }
 }
