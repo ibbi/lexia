@@ -20,12 +20,14 @@ struct StopRecording: View {
         }) {
             VStack{
                 Spacer()
-                Image("Stop")
+                Image(systemName: "mic.circle.fill")
                     .resizable()
                     .frame(width: 80, height: 80)
                     .clipShape(Circle())
                     .padding(.bottom)
+                    .foregroundColor(.primary)
                 Text("Tap when you're done talking")
+                    .foregroundColor(.primary)
                 Spacer()
                 
             }
@@ -33,7 +35,6 @@ struct StopRecording: View {
             .frame(maxWidth: .infinity, idealHeight: 216)
         }
             .padding()
-            .background(Color.pastelBlue)
     }
 }
 //struct StopRecordingAndTranscribe_Previews: PreviewProvider {
