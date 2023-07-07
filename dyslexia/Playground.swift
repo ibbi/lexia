@@ -45,13 +45,13 @@ struct Playground: View {
                 if !isRecording && keyboardState.isKeyboardActive {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
-                        Spacer()
                         InAppVoiceRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
+                        Spacer()
                         InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 10)
+                    .padding(6)
+                    .background(Color(UIColor.tertiarySystemGroupedBackground))
                 }
             }
         }

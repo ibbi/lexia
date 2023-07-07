@@ -18,7 +18,8 @@ struct SpeakPlayground: View {
     @State private var selectedText: String = ""
     // Hardcoded length of inputText
     @State private var selectedTextRange: NSRange = NSRange(location: 0, length: 0)
-    
+    @Environment(\.colorScheme) var colorScheme
+
 
     var body: some View {
         VStack {
@@ -47,8 +48,8 @@ struct SpeakPlayground: View {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         Spacer()
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 10)
+                    .padding(6)
+                    .background(Color(UIColor.tertiarySystemGroupedBackground))
                 }
             }
         }

@@ -38,7 +38,6 @@ struct TopBarButton: View {
     var action: () -> Void
     @Binding var isLoading: Bool
     let onlyVisual: Bool
-    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         Button(action: {
