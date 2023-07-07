@@ -51,14 +51,7 @@ struct InAppRewriteButton: View {
     }
 
     var body: some View {
-        Button(action: {
-            tryRewriteText()
-        }) {
-            Text(isLoading ? "Loading..." : "Rewrite")
-        }
-        .disabled(isLoading)
-        .buttonStyle(.bordered)
-        .tint(Color.pastelYellow)
+        TopBarButton(buttonType: ButtonType.enhance, action: {tryRewriteText()}, isLoading: $isLoading, onlyVisual: false)
     }
 }
 

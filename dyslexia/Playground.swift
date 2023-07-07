@@ -50,6 +50,7 @@ struct Playground: View {
                         InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }
+                    .padding(.horizontal)
                     .padding(.bottom, 10)
                 }
             }

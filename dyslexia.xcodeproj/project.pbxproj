@@ -12,6 +12,8 @@
 		283E22302A57C6130023BA3A /* EditPlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E222F2A57C6130023BA3A /* EditPlayground.swift */; };
 		283E22322A57C6200023BA3A /* EnhancePlayground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E22312A57C6200023BA3A /* EnhancePlayground.swift */; };
 		283E22342A57C6630023BA3A /* TextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E22332A57C6630023BA3A /* TextViewWrapper.swift */; };
+		283E22362A58777F0023BA3A /* TopBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E22352A58777F0023BA3A /* TopBarButton.swift */; };
+		283E22372A58A68E0023BA3A /* TopBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E22352A58777F0023BA3A /* TopBarButton.swift */; };
 		28432C942A5637B9001D1AC1 /* VoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */; };
 		28432C962A565089001D1AC1 /* InAppVoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */; };
 		285943292A5013CE003038F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F11CA729EE2E6900ED00D9 /* Assets.xcassets */; };
@@ -101,6 +103,7 @@
 		283E222F2A57C6130023BA3A /* EditPlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPlayground.swift; sourceTree = "<group>"; };
 		283E22312A57C6200023BA3A /* EnhancePlayground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnhancePlayground.swift; sourceTree = "<group>"; };
 		283E22332A57C6630023BA3A /* TextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWrapper.swift; sourceTree = "<group>"; };
+		283E22352A58777F0023BA3A /* TopBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarButton.swift; sourceTree = "<group>"; };
 		28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRewriteButton.swift; sourceTree = "<group>"; };
 		28432C952A565089001D1AC1 /* InAppVoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppVoiceRewriteButton.swift; sourceTree = "<group>"; };
 		2859432A2A502067003038F2 /* InAppTranscribeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppTranscribeButton.swift; sourceTree = "<group>"; };
@@ -199,6 +202,7 @@
 				28CF45062A33D08B00B8F52C /* API.swift */,
 				2880023D2A0C3B5200045F40 /* InstallInstructions.swift */,
 				2880023F2A0C3BB600045F40 /* Playground.swift */,
+				283E22352A58777F0023BA3A /* TopBarButton.swift */,
 				283E22332A57C6630023BA3A /* TextViewWrapper.swift */,
 				283E222D2A57C5DD0023BA3A /* SpeakPlayground.swift */,
 				283E222F2A57C6130023BA3A /* EditPlayground.swift */,
@@ -396,6 +400,7 @@
 				2859432D2A50D15D003038F2 /* InAppRewriteButton.swift in Sources */,
 				28F11CA629EE2E6700ED00D9 /* ContentView.swift in Sources */,
 				285943332A532D41003038F2 /* InAppUndoButton.swift in Sources */,
+				283E22362A58777F0023BA3A /* TopBarButton.swift in Sources */,
 				28CF450B2A38EA4800B8F52C /* AudioRecorder.swift in Sources */,
 				283E22342A57C6630023BA3A /* TextViewWrapper.swift in Sources */,
 				28432C962A565089001D1AC1 /* InAppVoiceRewriteButton.swift in Sources */,
@@ -424,6 +429,7 @@
 				28EE554429EE360000CEF0C6 /* KeyboardActionHandler.swift in Sources */,
 				28CF450E2A3A249600B8F52C /* API.swift in Sources */,
 				28B9A7E92A47CD0100109C6C /* StopRecording.swift in Sources */,
+				283E22372A58A68E0023BA3A /* TopBarButton.swift in Sources */,
 				285943312A532633003038F2 /* KeyHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

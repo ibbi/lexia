@@ -144,23 +144,17 @@ struct VoiceRewriteButton: View {
     }
 
     var body: some View {
-        Button(action: {
+        TopBarButton(buttonType: ButtonType.edit, action: {
             if hasTextToRewrite() {
                 let urlHandler = URLHandler()
                 urlHandler.openURL("dyslexia://edit_dictation")
-            }
-        }) {
-            Text(isLoading ? "Loading..." : "Edit")
-        }
-        .disabled(isLoading)
-        .tint(Color.pastelGreen)
+            }}, isLoading: $isLoading, onlyVisual: false)
         .onChange(of: fullText) { newValue in
             if (!newValue.isEmpty && hasTextToRewrite()) {
                 rewriteTextWithAudioInstructions(fullText, shouldDelete: true)
                 fullText = ""
             }
         }
-        .buttonStyle(.bordered)
         .onAppear{
             tryGetContext()
         }

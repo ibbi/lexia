@@ -13,6 +13,7 @@ struct UndoButton: View {
     @Binding var rewrittenText: String
     @Binding var prewrittenText: String
     @Binding var prevContext: String?
+    @State var isLoading: Bool = false
     
     func hasRecentRewrite() -> Bool {
         if rewrittenText.isEmpty || prewrittenText.isEmpty {
@@ -32,20 +33,11 @@ struct UndoButton: View {
         controller.textDocumentProxy.insertText(prewrittenText)
         prewrittenText = ""
         rewrittenText = ""
-        
+        isLoading = false
     }
     
     var body: some View {
-        HStack {
-            Button(action: {
-                tryUndo()
-            }) {
-                Text("Undo")
-            }
-            .buttonStyle(.bordered)
-            .tint(Color.pastelRed)
-            .padding(.horizontal)
-        }
+        TopBarButton(buttonType: ButtonType.undo, action: {tryUndo()}, isLoading: $isLoading, onlyVisual: false)
     }
     
 }

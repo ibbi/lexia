@@ -110,20 +110,15 @@ struct RewriteButton: View {
     }
 
     var body: some View {
-        Button(action: {
+        TopBarButton(buttonType: ButtonType.enhance, action: {
             decideSelectionOrEntire()
-        }) {
-            Text(isLoading ? "Loading..." : "Enhance")
-        }
-        .disabled(isLoading)
+        }, isLoading: $isLoading, onlyVisual: false)
         .onChange(of: fullText) { newValue in
             if (!newValue.isEmpty) {
                 rewriteText(fullText, shouldDelete: true)
                 fullText = ""
             }
         }
-        .buttonStyle(.bordered)
-        .tint(Color.pastelYellow)
     }
 }
 

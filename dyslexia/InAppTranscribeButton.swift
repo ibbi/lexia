@@ -67,19 +67,12 @@ struct InAppTranscribeButton: View {
     }
     
     var body: some View {
-        HStack {
-            Button(action: {
-                audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)
-            }) {
-                Text(isTranscribing ? "Loading..." : "Speak")
-            }
-            .buttonStyle(.bordered)
-            .tint(Color.pastelBlue)
-            .disabled(isTranscribing)
+        TopBarButton(buttonType: ButtonType.speak, action: {
+            audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)
+        }, isLoading: $isTranscribing, onlyVisual: false)
             .onAppear {
                 tryTranscribe()
             }
-        }
     }
 }
 //struct TranscribeButton_Previews: PreviewProvider {

@@ -10,6 +10,7 @@ import KeyboardKit
 
 struct InAppUndoButton: View {
     @Binding var inputText: String
+    @State var isLoading: Bool = false
     var prevInputText: String
     
     func hasRecentRewrite() -> Bool {
@@ -24,19 +25,12 @@ struct InAppUndoButton: View {
             return
         }
         inputText = prevInputText
+        isLoading = false
         // TODO: restore cursor position here
     }
     
     var body: some View {
-        HStack {
-            Button(action: {
-                tryUndo()
-            }) {
-                Text("Undo")
-            }
-            .buttonStyle(.bordered)
-            .tint(Color.pastelRed)
-        }
+        TopBarButton(buttonType: ButtonType.undo, action: {tryUndo()}, isLoading: $isLoading, onlyVisual: false)
     }
     
 }

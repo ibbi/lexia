@@ -29,12 +29,7 @@ struct IntroPage: View {
                         VStack(alignment: .leading) {
                             switch playground {
                             case "speak":
-                                    Button(action: {
-                                    }) {
-                                        Text("Speak")
-                                    }
-                                    .buttonStyle(.bordered)
-                                    .tint(Color.pastelBlue)
+                                    Image(systemName: "mic.fill")
                                     Text("Speech to text in any language")
                             case "edit":
                                     Button(action: {
