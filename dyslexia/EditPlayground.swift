@@ -50,6 +50,7 @@ struct EditPlayground: View {
                         Spacer()
                         InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
                     }
+                    .frame(minHeight: 42)
                     .padding(6)
                     .background(Color(UIColor.tertiarySystemGroupedBackground))
                 }

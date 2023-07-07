@@ -51,7 +51,9 @@ struct InAppRewriteButton: View {
     }
 
     var body: some View {
-        TopBarButton(buttonType: ButtonType.enhance, action: {tryRewriteText()}, isLoading: $isLoading, onlyVisual: false)
+        if !inputText.isEmpty {
+            TopBarButton(buttonType: ButtonType.enhance, action: {tryRewriteText()}, isLoading: $isLoading, onlyVisual: false)
+        }
     }
 }
 

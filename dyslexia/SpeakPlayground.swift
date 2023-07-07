@@ -48,6 +48,7 @@ struct SpeakPlayground: View {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
                         Spacer()
                     }
+                    .frame(minHeight: 42)
                     .padding(6)
                     .background(Color(UIColor.tertiarySystemGroupedBackground))
                 }

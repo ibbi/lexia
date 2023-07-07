@@ -64,7 +64,6 @@ struct TopBarButton: View {
         .buttonStyle(.bordered)
         .foregroundColor(.primary)
         .disabled(isLoading || onlyVisual)
-            
         }
     }
 

@@ -8,6 +8,25 @@
 import SwiftUI
 import KeyboardKit
 
+struct PulsingCircle: View {
+    @State var scale = 1.0
+
+    var body: some View {
+        Circle()
+            .frame(width: 80, height: 80)
+            .scaleEffect(scale)
+            .onAppear {
+                let baseAnimation = Animation.easeInOut(duration: 1.5)
+                let repeated = baseAnimation.repeatForever(autoreverses: true)
+
+                withAnimation(repeated) {
+                    scale = 1.5
+                }
+            }
+            .foregroundColor(.secondary)
+    }
+}
+
 struct StopRecording: View {
     var body: some View {
         Button(action: {
@@ -20,12 +39,16 @@ struct StopRecording: View {
         }) {
             VStack{
                 Spacer()
-                Image(systemName: "mic.circle.fill")
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .clipShape(Circle())
-                    .padding(.bottom)
-                    .foregroundColor(.primary)
+                ZStack {
+                    PulsingCircle()
+                        .ignoresSafeArea()
+                    Image(systemName: "mic.circle.fill")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .clipShape(Circle())
+                        .foregroundColor(.primary)
+                }
+                .padding(.bottom)
                 Text("Tap when you're done talking")
                     .foregroundColor(.primary)
                 Spacer()

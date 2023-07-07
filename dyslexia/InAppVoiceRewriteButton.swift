@@ -73,12 +73,13 @@ struct InAppVoiceRewriteButton: View {
     }
     
     var body: some View {
-        TopBarButton(buttonType: ButtonType.edit, action: {
-            if !inputText.isEmpty {
-                audioRecorder.startRecording(shouldJumpBack: false, isEdit: true)
-            }        }, isLoading: $isLoading, onlyVisual: false)
-        .onAppear{
-            tryGetContext()
+        if !inputText.isEmpty {
+            TopBarButton(buttonType: ButtonType.edit, action: {
+                    audioRecorder.startRecording(shouldJumpBack: false, isEdit: true)
+                }, isLoading: $isLoading, onlyVisual: false)
+            .onAppear{
+                tryGetContext()
+            }
         }
     }
 }
