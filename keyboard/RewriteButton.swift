@@ -14,6 +14,7 @@ struct RewriteButton: View {
     @Binding var rewrittenText: String
     @Binding var prewrittenText: String
     @Binding var prevContext: String?
+    @State var forceUpdateButtons: Bool
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @State private var prevText = ""
@@ -110,15 +111,19 @@ struct RewriteButton: View {
     }
 
     var body: some View {
-        TopBarButton(buttonType: ButtonType.enhance, action: {
-            decideSelectionOrEntire()
-        }, isLoading: $isLoading, onlyVisual: false)
-        .onChange(of: fullText) { newValue in
-            if (!newValue.isEmpty) {
-                rewriteText(fullText, shouldDelete: true)
-                fullText = ""
+        if (!((controller.keyboardTextContext.selectedText ?? "").isEmpty) || !((controller.textDocumentProxy.documentContext ?? "").isEmpty)) {
+            TopBarButton(buttonType: ButtonType.enhance, action: {
+                decideSelectionOrEntire()
+            }, isLoading: $isLoading, onlyVisual: false)
+            .onChange(of: fullText) { newValue in
+                if (!newValue.isEmpty) {
+                    rewriteText(fullText, shouldDelete: true)
+                    fullText = ""
+                }
             }
+            .id(forceUpdateButtons)
         }
+
     }
 }
 

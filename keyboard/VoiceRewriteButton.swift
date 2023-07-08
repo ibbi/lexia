@@ -15,6 +15,7 @@ struct VoiceRewriteButton: View {
     @Binding var rewrittenText: String
     @Binding var prewrittenText: String
     @Binding var prevContext: String?
+    @State var forceUpdateButtons: Bool
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @State private var prevText = ""
@@ -144,19 +145,22 @@ struct VoiceRewriteButton: View {
     }
 
     var body: some View {
-        TopBarButton(buttonType: ButtonType.edit, action: {
-            if hasTextToRewrite() {
-                let urlHandler = URLHandler()
-                urlHandler.openURL("dyslexia://edit_dictation")
-            }}, isLoading: $isLoading, onlyVisual: false)
-        .onChange(of: fullText) { newValue in
-            if (!newValue.isEmpty && hasTextToRewrite()) {
-                rewriteTextWithAudioInstructions(fullText, shouldDelete: true)
-                fullText = ""
+        if (!((controller.keyboardTextContext.selectedText ?? "").isEmpty) || !((controller.textDocumentProxy.documentContext ?? "").isEmpty)) {
+            TopBarButton(buttonType: ButtonType.edit, action: {
+                if hasTextToRewrite() {
+                    let urlHandler = URLHandler()
+                    urlHandler.openURL("dyslexia://edit_dictation")
+                }}, isLoading: $isLoading, onlyVisual: false)
+            .onChange(of: fullText) { newValue in
+                if (!newValue.isEmpty && hasTextToRewrite()) {
+                    rewriteTextWithAudioInstructions(fullText, shouldDelete: true)
+                    fullText = ""
+                }
             }
-        }
-        .onAppear{
-            tryGetContext()
+            .onAppear{
+                tryGetContext()
+            }
+            .id(forceUpdateButtons)
         }
     }
 }

@@ -17,6 +17,9 @@ struct KeyboardView: View {
     @State private var prewrittenText: String = ""
     @State private var prevContext: String? = ""
     
+    // Hack to get inserttext to update views
+    @State var forceUpdateButtons: Bool = false
+    
 
 
     var body: some View {
@@ -26,15 +29,14 @@ struct KeyboardView: View {
             VStack(spacing: 0) {
                 if controller.hostBundleId != "ibbi.dyslexia" {
                     HStack {
-                        TranscribeButton(controller: controller)
-                        VoiceRewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
-                        RewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
+                        TranscribeButton(controller: controller, forceUpdateButtons: $forceUpdateButtons)
+                        VoiceRewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons)
+                        RewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons)
                         Spacer()
                         UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
                     }
                     .padding(6)
                     .padding(.top, 6)
-//                    .padding(.horizontal)
                     
                 }
                 SystemKeyboard(
