@@ -61,7 +61,8 @@ struct TopBarButton: View {
                     
             }
         }
-        .buttonStyle(.bordered)
+        .buttonStyle(.borderedProminent)
+        .tint(Color.standardButtonBackground)
         .foregroundColor(.primary)
         .disabled(isLoading || onlyVisual)
         }

@@ -50,7 +50,7 @@ struct EditPlayground: View {
                     }
                     .frame(minHeight: 42)
                     .padding(6)
-                    .background(Color(UIColor.tertiarySystemGroupedBackground))
+                    .background(Color.standardKeyboardBackground)
                 }
             }
         }
