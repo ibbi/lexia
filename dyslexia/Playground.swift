@@ -23,7 +23,7 @@ struct Playground: View {
     var body: some View {
         VStack {
             if !isKeyboardActive {
-                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexboard")
+                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Wordflow")
                     .font(.title)
                 Divider()
             }

@@ -14,7 +14,7 @@ struct EditPlayground: View {
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
     @State private var prevCursorPosition: Int?
     @State private var prevInputText = ""
-    @State private var inputText: String = "Once a silent keyboard in a tech shop, Lexboard found its voice when a lightning bolt zapped it into the cyberworld. From observer to participant, it evolved, learning to reach billions of iPhone users. It offered innovative suggestions, simplified tasks, and sparked creativity, turning its dormant ideas into dynamic user experiences. \n\nFrom a mere keyboard to a global influencer, Lexboard transformed into an unsung pocket hero."
+    @State private var inputText: String = "Once a silent keyboard in a tech shop, Wordflow found its voice when a lightning bolt zapped it into the cyberworld. From observer to participant, it evolved, learning to reach billions of iPhone users. It offered innovative suggestions, simplified tasks, and sparked creativity, turning its dormant ideas into dynamic user experiences. \n\nFrom a mere keyboard to a global influencer, Wordflow transformed into an unsung pocket hero."
     @State private var selectedText: String = ""
     // Hardcoded length of inputText
     @State private var selectedTextRange: NSRange = NSRange(location: 432, length: 0)
@@ -23,7 +23,7 @@ struct EditPlayground: View {
     var body: some View {
         VStack {
             if !isKeyboardActive {
-                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexboard")
+                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Wordflow")
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
@@ -31,7 +31,7 @@ struct EditPlayground: View {
                         .font(.title)
                         .padding(.bottom)
                     
-                    Text("Here are some ideas:\n- \"make this story shorter and clearer\"\n- \"turn this into a poem\"\n- \"replace all instances of Lexboard with Jeremy\"")
+                    Text("Here are some ideas:\n- \"make this story shorter and clearer\"\n- \"turn this into a poem\"\n- \"replace all instances of Wordflow with Jeremy\"")
                 }
                 .padding()
             }
