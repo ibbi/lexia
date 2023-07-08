@@ -31,8 +31,7 @@ struct SpeakPlayground: View {
                     Text("Tap \(Image(systemName: "mic")), and then speak")
                         .font(.title)
                         .padding(.bottom)
-                    Text("When was the last time you saw a cow?")
-                    Text("How big was it?")
+                    Text("Tell me about the last time you saw a cow. How big was it? Did it have horns?")
                 }
                 .padding()
             }

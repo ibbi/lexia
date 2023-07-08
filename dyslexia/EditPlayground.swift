@@ -27,14 +27,11 @@ struct EditPlayground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Tap \(Image(systemName: "square.and.pencil")) and tell me how to edit")
+                    Text("Tap \(Image(systemName: "square.and.pencil")) and tell me what to do with your text")
                         .font(.title)
                         .padding(.bottom)
                     
-                    Text("Here are some ideas:")
-                    Text("- \"make this story shorter and clearer\"")
-                    Text("- \"turn this into a poem\"")
-                    Text("- \"replace all instances of Lexboard with Jeremy\"")
+                    Text("Here are some ideas:\n- \"make this story shorter and clearer\"\n- \"turn this into a poem\"\n- \"replace all instances of Lexboard with Jeremy\"")
                 }
                 .padding()
             }
