@@ -29,7 +29,7 @@ struct EnhancePlayground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Use \(Image(systemName: "globe")) to apply your saved request to text")
+                    Text("Use \(Image(systemName: "wand.and.stars")) to apply your saved request to text")
                         .font(.title)
                         .padding(.bottom)
                     

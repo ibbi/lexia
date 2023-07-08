@@ -27,7 +27,7 @@ struct EditPlayground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Use \(Image(systemName: "globe")) to tell me how to change the text (or just a slected portion)")
+                    Text("Use \(Image(systemName: "square.and.pencil")) to tell me how to change the text (or just a slected portion)")
                         .font(.title)
                         .padding(.bottom)
                     

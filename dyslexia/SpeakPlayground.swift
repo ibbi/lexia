@@ -28,7 +28,7 @@ struct SpeakPlayground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Use \(Image(systemName: "globe")) to dictate, in any language")
+                    Text("Use \(Image(systemName: "mic")) to dictate, in any language")
                         .font(.title)
                         .padding(.bottom)
                     Text("When was the last time you saw a cow?")
