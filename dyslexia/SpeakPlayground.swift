@@ -28,12 +28,13 @@ struct SpeakPlayground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Use \(Image(systemName: "mic")) to dictate, in any language")
+                    Text("Tap \(Image(systemName: "mic")), and then speak")
                         .font(.title)
                         .padding(.bottom)
                     Text("When was the last time you saw a cow?")
                     Text("How big was it?")
                 }
+                .padding()
             }
             Divider()
             VStack {

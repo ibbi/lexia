@@ -33,18 +33,25 @@ struct EnhancePlayground: View {
                         .font(.title)
                         .padding(.bottom)
                     
-                    Text("Request ")
+                    Text("Customize your request:")
                     HStack {
-                        TextField("Request", text: $promptText, prompt: Text("Required"))
-                            .textFieldStyle(.roundedBorder)
+                        TextField("Request", text: $promptText)
+                            .padding(5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(Color.primary)
+                            )
+                            .padding(0)
+                                                
                         Button("Update", action: {
                             UserDefaults(suiteName: "group.lexia")?.set(promptText, forKey: "quick_prompt")
                             userDefPrompt = promptText
                         })
                         .buttonStyle(.borderedProminent)
-                        .disabled(userDefPrompt == promptText)
+                        .disabled(userDefPrompt == promptText || promptText.isEmpty)
                     }
                 }
+                .padding()
             }
             Divider()
             VStack {

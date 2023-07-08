@@ -24,7 +24,16 @@ struct TextViewWrapper: UIViewRepresentable {
         textView.isEditable = self.isEditable
         textView.isScrollEnabled = true
         textView.isUserInteractionEnabled = true
+        textView.backgroundColor = .secondarySystemBackground
+        textView.textColor = .secondaryLabel
         textView.font = UIFont.preferredFont(forTextStyle: .body)
+        textView.layer.cornerRadius = 10
+        textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        textView.layer.shadowColor = UIColor.gray.cgColor;
+        textView.layer.shadowOffset = CGSize(width: 0.75, height: 0.75)
+        textView.layer.shadowOpacity = 0.4
+        textView.layer.shadowRadius = 10
+//        textView.layer.masksToBounds = false
         return textView
     }
 

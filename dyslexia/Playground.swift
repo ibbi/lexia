@@ -25,23 +25,15 @@ struct Playground: View {
             if !isKeyboardActive {
                 Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexboard")
                     .font(.title)
-            } else {
-                VStack(alignment: .leading) {
-                    Text("Here are some extra tips")
-                        .font(.title)
-                        .padding(.bottom)
-                    Text("You can apply your changes to only a portion of selected text")
-                    Text("The undo button only remembers the most recent edit")
-                    Text("You can use the edit commands to translate your text to another language!")
-                }
+                Divider()
             }
-            Divider()
             VStack {
                 TextViewWrapper(text: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange, isFocused: $isFocused)
                     .onAppear { // Focus the TextViewWrapper when it appears
                         self.isFocused = true
                     }
                     .padding(.horizontal)
+                    .padding(.top)
                 if !isRecording && isKeyboardActive {
                     HStack {
                         InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
