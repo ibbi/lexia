@@ -24,7 +24,7 @@ struct SpeakPlayground: View {
     var body: some View {
         VStack {
             if !isKeyboardActive {
-                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Wordflow")
+                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexy")
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {

@@ -25,7 +25,7 @@ struct EnhancePlayground: View {
     var body: some View {
         VStack {
             if !isKeyboardActive {
-                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Wordflow")
+                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexia")
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {

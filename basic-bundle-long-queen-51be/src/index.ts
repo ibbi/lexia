@@ -72,7 +72,7 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
     console.log(promptWrapped);
 
     const response = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       messages: [{ role: 'user', content: promptWrapped }],
     });
 
