@@ -31,20 +31,20 @@ struct IntroPage: View {
                         VStack(alignment: .leading) {
                             switch playground {
                             case "speak":
-                                TopBarButton(buttonType: .speak, action: {}, isLoading: .constant(false), onlyVisual: true)
+                                TopBarButton(buttonType: .speak, action: {}, isLoading: .constant(false), onlyVisual: true, isInBadContext: false)
                                 Text("Speech to text in any language")
                             case "edit":
-                                TopBarButton(buttonType: .edit, action: {}, isLoading: .constant(false), onlyVisual: true)
+                                TopBarButton(buttonType: .edit, action: {}, isLoading: .constant(false), onlyVisual: true, isInBadContext: false)
                                     Text("Text edits using voice commands")
                             case "enhance":
-                                TopBarButton(buttonType: .enhance, action: {}, isLoading: .constant(false), onlyVisual: true)
+                                TopBarButton(buttonType: .enhance, action: {}, isLoading: .constant(false), onlyVisual: true, isInBadContext: false)
                                     Text("One tap edits, with saved presets")
                             default:
                                     HStack {
-                                        TopBarButton(buttonType: .speak, action: nil, isLoading: .constant(false), onlyVisual: true)
-                                        TopBarButton(buttonType: .edit, action: nil, isLoading: .constant(false), onlyVisual: true)
-                                        TopBarButton(buttonType: .enhance, action: nil, isLoading: .constant(false), onlyVisual: true)
-                                        TopBarButton(buttonType: .undo, action: nil, isLoading: .constant(false), onlyVisual: true)
+                                        TopBarButton(buttonType: .speak, action: nil, isLoading: .constant(false), onlyVisual: true, isInBadContext: false)
+                                        TopBarButton(buttonType: .edit, action: nil, isLoading: .constant(false), onlyVisual: true, isInBadContext: false)
+                                        TopBarButton(buttonType: .enhance, action: nil, isLoading: .constant(false), onlyVisual: true, isInBadContext: false)
+                                        TopBarButton(buttonType: .undo, action: nil, isLoading: .constant(false), onlyVisual: true, isInBadContext: false)
                                     }
                                     Text("Put it all together")
                             }

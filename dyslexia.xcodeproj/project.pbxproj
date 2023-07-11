@@ -571,7 +571,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = dyslexia/dyslexia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"dyslexia/Preview Content\"";
 				DEVELOPMENT_TEAM = 372X4548N8;
 				ENABLE_PREVIEWS = YES;
@@ -606,7 +606,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = dyslexia/dyslexia.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"dyslexia/Preview Content\"";
 				DEVELOPMENT_TEAM = 372X4548N8;
 				ENABLE_PREVIEWS = YES;
@@ -640,7 +640,7 @@
 				DEVELOPMENT_TEAM = 372X4548N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = keyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Wordflow;
+				INFOPLIST_KEY_CFBundleDisplayName = Lexy;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -666,7 +666,7 @@
 				DEVELOPMENT_TEAM = 372X4548N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = keyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Wordflow;
+				INFOPLIST_KEY_CFBundleDisplayName = Lexy;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

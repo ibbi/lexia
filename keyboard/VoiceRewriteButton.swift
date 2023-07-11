@@ -145,12 +145,11 @@ struct VoiceRewriteButton: View {
     }
 
     var body: some View {
-        if (!((controller.keyboardTextContext.selectedText ?? "").isEmpty) || !((controller.textDocumentProxy.documentContext ?? "").isEmpty)) {
             TopBarButton(buttonType: ButtonType.edit, action: {
                 if hasTextToRewrite() {
                     let urlHandler = URLHandler()
                     urlHandler.openURL("dyslexia://edit_dictation")
-                }}, isLoading: $isLoading, onlyVisual: false)
+                }}, isLoading: $isLoading, onlyVisual: false, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
             .onChange(of: fullText) { newValue in
                 if (!newValue.isEmpty && hasTextToRewrite()) {
                     rewriteTextWithAudioInstructions(fullText, shouldDelete: true)
@@ -161,7 +160,6 @@ struct VoiceRewriteButton: View {
                 tryGetContext()
             }
             .id(forceUpdateButtons)
-        }
     }
 }
 

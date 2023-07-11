@@ -111,10 +111,9 @@ struct RewriteButton: View {
     }
 
     var body: some View {
-        if (!((controller.keyboardTextContext.selectedText ?? "").isEmpty) || !((controller.textDocumentProxy.documentContext ?? "").isEmpty)) {
             TopBarButton(buttonType: ButtonType.enhance, action: {
                 decideSelectionOrEntire()
-            }, isLoading: $isLoading, onlyVisual: false)
+            }, isLoading: $isLoading, onlyVisual: false, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
             .onChange(of: fullText) { newValue in
                 if (!newValue.isEmpty) {
                     rewriteText(fullText, shouldDelete: true)
@@ -122,7 +121,6 @@ struct RewriteButton: View {
                 }
             }
             .id(forceUpdateButtons)
-        }
 
     }
 }

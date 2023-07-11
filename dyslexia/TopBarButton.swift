@@ -16,9 +16,9 @@ enum ButtonType {
 
     var icon: Image {
         switch self {
-            case .speak: return Image(systemName: "mic")
-            case .edit: return Image(systemName: "square.and.pencil")
-            case .enhance: return Image(systemName: "wand.and.stars")
+            case .speak: return Image(systemName: "mic.fill")
+            case .edit: return Image(systemName: "pencil")
+            case .enhance: return Image(systemName: "bolt.fill")
             case .undo: return Image(systemName: "arrow.counterclockwise")
         }
     }
@@ -31,6 +31,15 @@ enum ButtonType {
         case .undo: return ""
         }
     }
+    
+    var disabledIcon: Image {
+        switch self {
+            case .speak: return Image(systemName: "mic.slash.fill")
+            case .edit: return Image(systemName: "pencil.slash")
+            case .enhance: return Image(systemName: "bolt.slash.fill")
+            case .undo: return Image(systemName: "arrow.counterclockwise")
+        }
+    }
 }
 
 struct TopBarButton: View {
@@ -38,6 +47,7 @@ struct TopBarButton: View {
     var action: (() -> Void)?
     @Binding var isLoading: Bool
     let onlyVisual: Bool
+    let isInBadContext: Bool
 
     var body: some View {
         Button(action: {
@@ -50,21 +60,23 @@ struct TopBarButton: View {
                         .progressViewStyle(CircularProgressViewStyle())
                         .frame(width: 25, height: 25, alignment: .center)
 
+                } else if isInBadContext {
+                    buttonType.disabledIcon
+                        .imageScale(.large)
+                        .frame(width: 25, height: 25, alignment: .center)
+                    
                 } else {
                     buttonType.icon
                         .imageScale(.large)
                         .frame(width: 25, height: 25, alignment: .center)
+
                 }
-                if buttonType != .undo && action != nil  {
-                    Text(buttonType.label)
-                }
-                    
             }
         }
         .buttonStyle(.borderedProminent)
         .tint(Color.standardButtonBackground)
         .foregroundColor(.primary)
-        .disabled(isLoading || onlyVisual)
+        .disabled(isLoading || onlyVisual || isInBadContext)
         }
     }
 
@@ -72,6 +84,6 @@ struct TopBarButton: View {
 
 struct TopBarButton_Previews: PreviewProvider {
     static var previews: some View {
-        TopBarButton(buttonType: ButtonType.edit, action: {}, isLoading: .constant(false), onlyVisual: false)
+        TopBarButton(buttonType: ButtonType.edit, action: {}, isLoading: .constant(false), onlyVisual: false, isInBadContext: false)
     }
 }

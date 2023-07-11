@@ -61,7 +61,7 @@ struct TranscribeButton: View {
         TopBarButton(buttonType: ButtonType.speak, action: {
             let urlHandler = URLHandler()
             urlHandler.openURL("dyslexia://dictation")
-        }, isLoading: $isTranscribing, onlyVisual: false)
+        }, isLoading: $isTranscribing, onlyVisual: false, isInBadContext: false)
             .onAppear {
                 tryTranscribe()
             }

@@ -69,7 +69,7 @@ struct InAppTranscribeButton: View {
     var body: some View {
         TopBarButton(buttonType: ButtonType.speak, action: {
             audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)
-        }, isLoading: $isTranscribing, onlyVisual: false)
+        }, isLoading: $isTranscribing, onlyVisual: false, isInBadContext: false)
             .onAppear {
                 tryTranscribe()
             }
