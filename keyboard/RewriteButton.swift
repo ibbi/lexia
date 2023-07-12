@@ -15,6 +15,7 @@ struct RewriteButton: View {
     @Binding var prewrittenText: String
     @Binding var prevContext: String?
     @State var forceUpdateButtons: Bool
+    @Binding var keyboardStatus: KeyboardStatus
     let isGmail: Bool
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
@@ -80,7 +81,9 @@ struct RewriteButton: View {
             controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
             beforeCancellable?.cancel()
             fullText = prevText
-            print(fullText, prevText, afterText)
+            print("prevText", prevText)
+            print("fullText", fullText)
+            print("afterText", afterText)
             afterText = ""
             prevText = ""
             return true
@@ -94,9 +97,11 @@ struct RewriteButton: View {
     func rewriteText(_ text: String, shouldDelete: Bool) {
         isLoading = true
         prewrittenText = text
+        keyboardStatus = .rewriting
         API.sendTranscribedText(text) { result in
             DispatchQueue.main.async {
                 isLoading = false
+                keyboardStatus = .available
                 switch result {
                 case .success(var transformed):
                     if shouldDelete {
@@ -116,6 +121,7 @@ struct RewriteButton: View {
         if let selectedText = controller.keyboardTextContext.selectedText {
             rewriteText(selectedText, shouldDelete: false)
         } else if controller.textDocumentProxy.documentContext != nil {
+            keyboardStatus = .reading
             self.moveToEndCancellable = self.moveToEndTimer.sink { _ in
                 DispatchQueue.main.async {
                     self.moveCursorToEnd()
@@ -130,21 +136,11 @@ struct RewriteButton: View {
             }, isLoading: $isLoading, onlyVisual: false, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
             .onChange(of: fullText) { newValue in
                 if (!newValue.isEmpty) {
-                    if (false) {
-                        let justResponse = KeyHelper.truncateRepliesInGmail(str: fullText)
-                        // try killing the grep when it encounters its first response maybe?
-                        // always look at one direction maybe?
-
-                        controller.adjustTextPosition(byCharacterOffset: -(fullText.utf8.count - justResponse.utf8.count))
-                        rewriteText(justResponse, shouldDelete: true)
-                    } else {
-                        rewriteText(fullText, shouldDelete: true)
-                    }
+                    rewriteText(fullText, shouldDelete: true)
                     fullText = ""
                 }
             }
             .id(forceUpdateButtons)
-
     }
 }
 

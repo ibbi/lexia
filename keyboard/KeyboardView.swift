@@ -8,6 +8,12 @@
 import SwiftUI
 import KeyboardKit
 
+enum KeyboardStatus {
+    case available
+    case reading
+    case rewriting
+}
+
 struct KeyboardView: View {
     unowned var controller: KeyboardInputViewController
     @EnvironmentObject
@@ -16,13 +22,16 @@ struct KeyboardView: View {
     @State private var rewrittenText: String = ""
     @State private var prewrittenText: String = ""
     @State private var prevContext: String? = ""
+    @State private var keyboardStatus: KeyboardStatus = .available
     
     // Hack to get inserttext to update views
     @State var forceUpdateButtons: Bool = false
     
+    
 
 
     var body: some View {
+        let isGmail = controller.hostBundleId == "com.google.Gmail"
         if isRecording {
             StopRecording()
         } else {
@@ -30,8 +39,9 @@ struct KeyboardView: View {
                 if controller.hostBundleId != "ibbi.dyslexia" {
                     HStack {
                         TranscribeButton(controller: controller, forceUpdateButtons: $forceUpdateButtons)
-                        VoiceRewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, isGmail: controller.hostBundleId == "com.google.Gmail")
-                        RewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, isGmail: controller.hostBundleId == "com.google.Gmail")
+                        VoiceRewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail)
+                        RewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail)
+                        Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
                         Spacer()
                         UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
                     }

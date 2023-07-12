@@ -16,6 +16,7 @@ struct VoiceRewriteButton: View {
     @Binding var prewrittenText: String
     @Binding var prevContext: String?
     @State var forceUpdateButtons: Bool
+    @Binding var keyboardStatus: KeyboardStatus
     let isGmail: Bool
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
@@ -99,7 +100,6 @@ struct VoiceRewriteButton: View {
             controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
             beforeCancellable?.cancel()
             fullText = prevText
-            print(fullText, prevText, afterText)
             afterText = ""
             prevText = ""
             return true
@@ -112,14 +112,12 @@ struct VoiceRewriteButton: View {
 
     func rewriteTextWithAudioInstructions(_ text: String, shouldDelete: Bool) {
         let audioURL = getAudioURL()
-//        if (isGmail) {
-//            text = truncateRepliesInGmail(str: text)
-//        }
         prewrittenText = text
-        
+        keyboardStatus = .rewriting
         API.sendAudioAndText(audioURL: audioURL, contextText: text) { result in
             DispatchQueue.main.async {
                 isLoading = false
+                keyboardStatus = .available
                 switch result {
                 case .success(let transformed):
                     if shouldDelete {
@@ -145,6 +143,7 @@ struct VoiceRewriteButton: View {
         if let selectedText = controller.keyboardTextContext.selectedText {
             rewriteTextWithAudioInstructions(selectedText, shouldDelete: false)
         } else if controller.textDocumentProxy.documentContext != nil {
+            keyboardStatus = .reading
             self.moveToEndCancellable = self.moveToEndTimer.sink { _ in
                 DispatchQueue.main.async {
                     self.moveCursorToEnd()
