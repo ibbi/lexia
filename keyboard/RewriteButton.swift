@@ -70,6 +70,9 @@ struct RewriteButton: View {
                 return true
             }
         }
+        if (afterTries > 0 && afterText != afterText + (after ?? "")) {
+            afterTries = 0
+        }
         afterText = afterText + (after ?? "")
         let len = (after?.count ?? 0)
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)

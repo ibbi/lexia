@@ -50,7 +50,7 @@ struct VoiceRewriteButton: View {
     
     func getTextContextBefore() -> Bool {
 
-        var before = controller.textDocumentProxy.documentContextBeforeInput
+        let before = controller.textDocumentProxy.documentContextBeforeInput
         if ((before == nil) || (before!.isEmpty)){
             controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
             beforeCancellable?.cancel()
@@ -62,14 +62,14 @@ struct VoiceRewriteButton: View {
             return true
         }
         prevText = (before ?? "") + prevText
-        var len = (before?.count ?? 0) * -1
+        let len = (before?.count ?? 0) * -1
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
         return false
     }
     
     func getTextContextAfter() -> Bool {
  
-        var after = controller.textDocumentProxy.documentContextAfterInput
+        let after = controller.textDocumentProxy.documentContextAfterInput
         if ((after == nil) || (after!.isEmpty)){
             // silly hack because sometimes newlines break this jank thing i wrote lel. It breaks if there are more than 10 unexpected newlines
             if (afterTries < 10) {
@@ -88,8 +88,11 @@ struct VoiceRewriteButton: View {
                 return true
             }
         }
+        if (afterTries > 0 && afterText != afterText + (after ?? "")) {
+            afterTries = 0
+        }
         afterText = afterText + (after ?? "")
-        var len = (after?.count ?? 0)
+        let len = (after?.count ?? 0)
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
         return false
     }
