@@ -61,6 +61,21 @@ class AudioRecorder: ObservableObject {
                     UIApplication.shared.endBackgroundTask(self.backgroundTask)
                     self.backgroundTask = .invalid
                 }
+                let isDiscardingRecording = self.sharedDefaults?.bool(forKey: "discard_recording") ?? false
+                if isDiscardingRecording {
+                    self.audioRecorder.stop()
+                    do {
+                        let fileManager = FileManager.default
+                        try fileManager.removeItem(at: audioURL)
+                    } catch {
+                        print("Error deleting file: \(error)")
+                    }
+                    self.sharedDefaults?.set(false, forKey: "discard_recording")
+                    self.sharedDefaults?.set(false, forKey: "recording")
+                    timer.invalidate()
+                    UIApplication.shared.endBackgroundTask(self.backgroundTask)
+                    self.backgroundTask = .invalid
+                }
             }
         } catch {
             print("Failed to start recording: \(error)")
