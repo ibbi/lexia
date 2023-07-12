@@ -1,6 +1,9 @@
 import { Configuration, OpenAIApi } from 'openai';
 import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 
+const zapPrompt =
+  "Direct, empathetic, conversational, and transparent - these are the words that best describe the voice and tone of this brand. This brand speaks to its audience as if they're long-time friends, using a warm, personal tone that's both inviting and respectful. It's not afraid to delve into technical details, but does so in a way that's accessible and easy to understand. When writing for this brand, remember to maintain a balance between friendliness and professionalism. Use first-person pronouns to create a sense of connection and familiarity. Be open about the brand's processes and challenges, but also be clear about its expectations and requirements. Don't shy away from asking direct questions or providing constructive feedback - this brand values honesty and transparency above all else. Remember to show appreciation for the audience's efforts and contributions.";
+
 const configuration = new Configuration({
   apiKey: OPENAI_KEY,
   baseOptions: {
@@ -67,7 +70,8 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
     const requestBody = await request.json();
     const userMessage = requestBody.message;
     const userPrompt = requestBody.prompt || 'Please rewrite this:';
-    const promptWrapped = `${userPrompt} \n"${userMessage}"\n:`;
+    // const promptWrapped = `${userPrompt} \n"${userMessage}"\n:`;
+    const promptWrapped = `Rewrite this text:\n"${userMessage}"\n\nIn this voice:\n"${zapPrompt}":`;
 
     console.log(promptWrapped);
 
@@ -133,7 +137,6 @@ async function handleVoiceEdit(request: Request): Promise<Response> {
       },
     });
     const { text } = await whisperResponse.json();
-
     const promptWrapped = `Apply the following instructions:\n---\n${text}\n---\n\nto the following text:\n---\n${contextText}\n---\n`;
     const gptResponse = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
