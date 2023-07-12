@@ -29,8 +29,10 @@ struct PulsingCircle: View {
 
 struct StopRecording: View {
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
+    @State private var isUserDismissing = false
     var body: some View {
         Button(action: {
+            isUserDismissing = true
             sharedDefaults?.set(true, forKey: "stopping_recording")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -40,6 +42,7 @@ struct StopRecording: View {
             VStack{
                 HStack {
                     Button(action: {
+                        isUserDismissing = true
                         sharedDefaults?.set(true, forKey: "discard_recording")
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -70,6 +73,18 @@ struct StopRecording: View {
             .frame(maxWidth: .infinity, idealHeight: 216)
         }
             .padding()
+            .onDisappear{
+                if (isUserDismissing) {
+                    isUserDismissing = false
+                }
+                else {
+                    sharedDefaults?.set(true, forKey: "discard_recording")
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        sharedDefaults?.set(false, forKey: "recording")
+                    }
+                }
+            }
     }
 }
 //struct StopRecordingAndTranscribe_Previews: PreviewProvider {
