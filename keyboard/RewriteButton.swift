@@ -81,9 +81,6 @@ struct RewriteButton: View {
             controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
             beforeCancellable?.cancel()
             fullText = prevText
-            print("prevText", prevText)
-            print("fullText", fullText)
-            print("afterText", afterText)
             afterText = ""
             prevText = ""
             return true

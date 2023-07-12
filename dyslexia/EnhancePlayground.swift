@@ -29,27 +29,27 @@ struct EnhancePlayground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Use \(Image(systemName: "bolt.fill")) to apply your saved request to text")
+                    Text("Use \(Image(systemName: "bolt.fill")) to quickly fix the tone and clarity of your text")
                         .font(.title)
                         .padding(.bottom)
                     
-                    Text("Customize your request:")
-                    HStack {
-                        TextField("Request", text: $promptText)
-                            .padding(5)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 4)
-                                    .stroke(Color.primary)
-                            )
-                            .padding(0)
-                                                
-                        Button("Update", action: {
-                            UserDefaults(suiteName: "group.lexia")?.set(promptText, forKey: "quick_prompt")
-                            userDefPrompt = promptText
-                        })
-                        .buttonStyle(.borderedProminent)
-                        .disabled(userDefPrompt == promptText || promptText.isEmpty)
-                    }
+//                    Text("Customize your request:")
+//                    HStack {
+//                        TextField("Request", text: $promptText)
+//                            .padding(5)
+//                            .overlay(
+//                                RoundedRectangle(cornerRadius: 4)
+//                                    .stroke(Color.primary)
+//                            )
+//                            .padding(0)
+//
+//                        Button("Update", action: {
+//                            UserDefaults(suiteName: "group.lexia")?.set(promptText, forKey: "quick_prompt")
+//                            userDefPrompt = promptText
+//                        })
+//                        .buttonStyle(.borderedProminent)
+//                        .disabled(userDefPrompt == promptText || promptText.isEmpty)
+//                    }
                 }
                 .padding()
             }
