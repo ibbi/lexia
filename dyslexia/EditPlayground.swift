@@ -27,7 +27,7 @@ struct EditPlayground: View {
                     .font(.title)
             } else {
                 VStack(alignment: .leading) {
-                    Text("Tap \(Image(systemName: "square.and.pencil")) and tell me what to do with your text")
+                    Text("Tap \(Image(systemName: "pencil")) and tell me what to do with your text")
                         .font(.title)
                         .padding(.bottom)
                     

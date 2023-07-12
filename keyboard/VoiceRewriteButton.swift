@@ -16,6 +16,7 @@ struct VoiceRewriteButton: View {
     @Binding var prewrittenText: String
     @Binding var prevContext: String?
     @State var forceUpdateButtons: Bool
+    let isGmail: Bool
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @State private var prevText = ""
@@ -24,12 +25,11 @@ struct VoiceRewriteButton: View {
     @State private var afterTries = 0
     @State var isTranscribing: Bool = false
 
-    let beforeTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
-    let afterTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
-    let sharedDefaults = UserDefaults(suiteName: "group.lexia")
+    let beforeTextTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
+    let moveToEndTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     @State private var beforeCancellable: AnyCancellable?
-    @State private var afterCancellable: AnyCancellable?
-    
+    @State private var moveToEndCancellable: AnyCancellable?
+
     func getAudioURL() -> URL {
         let fileManager = FileManager.default
         let sharedDataPath = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")!
@@ -48,46 +48,41 @@ struct VoiceRewriteButton: View {
         }
     }
     
-    func getTextContextBefore() -> Bool {
-
-        let before = controller.textDocumentProxy.documentContextBeforeInput
-        if ((before == nil) || (before!.isEmpty)){
-            controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
-            beforeCancellable?.cancel()
-            self.afterCancellable = self.afterTimer.sink { _ in
+    func moveCursorToEnd () -> Bool {
+        let after = controller.textDocumentProxy.documentContextAfterInput
+        
+        if (isGmail && KeyHelper.containsGmailReplyPattern(str: after ?? "")) {
+            moveToEndCancellable?.cancel()
+            afterText = String(afterText.dropLast(afterTries))
+            afterTries = 0
+            // for some reason character before reply line is special
+            controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: -1)
+            self.beforeCancellable = self.beforeTextTimer.sink { _ in
                 DispatchQueue.main.async {
-                    self.getTextContextAfter()
+                    self.getTextContextBefore()
                 }
             }
             return true
         }
-        prevText = (before ?? "") + prevText
-        let len = (before?.count ?? 0) * -1
-        controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
-        return false
-    }
-    
-    func getTextContextAfter() -> Bool {
- 
-        let after = controller.textDocumentProxy.documentContextAfterInput
         if ((after == nil) || (after!.isEmpty)){
-            // silly hack because sometimes newlines break this jank thing i wrote lel. It breaks if there are more than 10 unexpected newlines
+            // silly hack because sometimes newlines break this jank thing i wrote lel. It breaks if there are more than 10 unexpected newlines in a row.
             if (afterTries < 10) {
                 controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: 1)
                 afterText += "\n"
                 afterTries += 1
             } else {
+                moveToEndCancellable?.cancel()
+                afterText = String(afterText.dropLast(afterTries))
                 afterTries = 0
-                afterCancellable?.cancel()
-                while afterText.hasSuffix("\n") {
-                    afterText = String(afterText.dropLast())
+                self.beforeCancellable = self.beforeTextTimer.sink { _ in
+                    DispatchQueue.main.async {
+                        self.getTextContextBefore()
+                    }
                 }
-                fullText = prevText + afterText
-                afterText = ""
-                prevText = ""
                 return true
             }
         }
+        
         if (afterTries > 0 && afterText != afterText + (after ?? "")) {
             afterTries = 0
         }
@@ -97,9 +92,29 @@ struct VoiceRewriteButton: View {
         return false
     }
 
+    
+    func getTextContextBefore() -> Bool {
+        let before = controller.textDocumentProxy.documentContextBeforeInput
+        if ((before == nil) || (before!.isEmpty)){
+            controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
+            beforeCancellable?.cancel()
+            fullText = prevText
+            print(fullText, prevText, afterText)
+            afterText = ""
+            prevText = ""
+            return true
+        }
+        prevText = (before ?? "") + prevText
+        let len = (before?.count ?? 0) * -1
+        controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
+        return false
+    }
 
     func rewriteTextWithAudioInstructions(_ text: String, shouldDelete: Bool) {
         let audioURL = getAudioURL()
+//        if (isGmail) {
+//            text = truncateRepliesInGmail(str: text)
+//        }
         prewrittenText = text
         
         API.sendAudioAndText(audioURL: audioURL, contextText: text) { result in
@@ -130,9 +145,9 @@ struct VoiceRewriteButton: View {
         if let selectedText = controller.keyboardTextContext.selectedText {
             rewriteTextWithAudioInstructions(selectedText, shouldDelete: false)
         } else if controller.textDocumentProxy.documentContext != nil {
-            self.beforeCancellable = self.beforeTimer.sink { _ in
+            self.moveToEndCancellable = self.moveToEndTimer.sink { _ in
                 DispatchQueue.main.async {
-                    self.getTextContextBefore()
+                    self.moveCursorToEnd()
                 }
             }
         }
