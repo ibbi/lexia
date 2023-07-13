@@ -14,9 +14,9 @@ struct InstallInstructions: View {
     
     let installTodos: [(image: Image, text: String)] = [
         (Image("SettingsIcon"), "Open Settings"),
-        (Image("Democon"), "Lexia"),
+        (Image("Democon"), "Lexy"),
         (Image("KeyboardIcon"), "Keyboards"),
-        (Image("ToggleIcon"), "Enable Lexia"),
+        (Image("ToggleIcon"), "Enable Lexy"),
         (Image("ToggleIcon"), "Allow Full Access"),
         (Image(systemName: "return"), "Come back here!")
     ]
@@ -24,7 +24,7 @@ struct InstallInstructions: View {
     var body: some View {
         VStack {
             
-            Text("Enable Lexia")
+            Text("Enable Lexy")
                 .font(.largeTitle)
                 .padding()
             
@@ -60,7 +60,7 @@ struct InstallInstructions: View {
                     .font(.body)
                     .strikethrough(isDone)
                 Spacer()
-                if text == "Lexia" {
+                if text == "Lexy" {
                     Button("Take me there", action: {
                         Helper.openAppSettings()
                     })
