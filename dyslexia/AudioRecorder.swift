@@ -23,6 +23,8 @@ class AudioRecorder: ObservableObject {
     }
 
     func startRecording(shouldJumpBack: Bool, isEdit: Bool) {
+        self.sharedDefaults?.set(false, forKey: "discard_recording")
+        self.sharedDefaults?.set(false, forKey: "stopping_recording")
         if (shouldJumpBack) {
             backgroundTask = UIApplication.shared.beginBackgroundTask {
                 UIApplication.shared.endBackgroundTask(self.backgroundTask)
