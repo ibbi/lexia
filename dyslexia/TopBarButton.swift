@@ -51,7 +51,7 @@ struct TopBarButton: View {
 
     var body: some View {
         Button(action: {
-            isLoading = true
+//            isLoading = true
             action!()
         }) {
             HStack {

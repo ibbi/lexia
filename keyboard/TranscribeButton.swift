@@ -60,7 +60,11 @@ struct TranscribeButton: View {
     var body: some View {
         TopBarButton(buttonType: ButtonType.speak, action: {
             let urlHandler = URLHandler()
-            urlHandler.openURL("dyslexia://dictation")
+            if controller.hostBundleId != "ibbi.dyslexia" {
+                urlHandler.openURL("dyslexia://dictation")
+            } else {
+                urlHandler.openURL("dyslexia://dictation_inapp")
+            }
         }, isLoading: $isTranscribing, onlyVisual: false, isInBadContext: false)
             .onAppear {
                 tryTranscribe()

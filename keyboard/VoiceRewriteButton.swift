@@ -165,8 +165,11 @@ struct VoiceRewriteButton: View {
             TopBarButton(buttonType: ButtonType.edit, action: {
                 if hasTextToRewrite() {
                     let urlHandler = URLHandler()
-                    urlHandler.openURL("dyslexia://edit_dictation")
-                }}, isLoading: $isLoading, onlyVisual: false, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
+                    if controller.hostBundleId != "ibbi.dyslexia" {
+                        urlHandler.openURL("dyslexia://edit_dictation")
+                    } else {
+                        urlHandler.openURL("dyslexia://edit_dictation_inapp")
+                    }                }}, isLoading: $isLoading, onlyVisual: false, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
             .onChange(of: fullText) { newValue in
                 if (!newValue.isEmpty && hasTextToRewrite()) {
                     rewriteTextWithAudioInstructions(fullText, shouldDelete: true)

@@ -11,10 +11,11 @@ import KeyboardKit
 struct ContentView: View {
     @StateObject private var keyboardState = KeyboardEnabledState(bundleId: "ibbi.dyslexia.*")
     @State private var deeplinkedURL: String?
+    @StateObject private var audioRecorder = AudioRecorder()
     
     var body: some View {
+//        Playground(isKeyboardActive: false)
         Group {
-
             if deeplinkedURL == "dictation" {
                 DictationWhisper(isEdit: false, deeplinkedURL: $deeplinkedURL)
             }
@@ -25,12 +26,20 @@ struct ContentView: View {
                 InstallInstructions(isFullAccessEnabled: keyboardState.isFullAccessEnabled, isKeyboardEnabled: keyboardState.isKeyboardEnabled)
             }
             else {
-                IntroPage(isKeyboardActive: keyboardState.isKeyboardActive)
+                Playground(isKeyboardActive: keyboardState.isKeyboardActive)
             }
         }
         .onOpenURL { url in
             guard let host = url.host else { return }
             deeplinkedURL = host
+            switch host {
+            case "dictation_inapp":
+                audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)
+            case "edit_dictation_inapp":
+                audioRecorder.startRecording(shouldJumpBack: false, isEdit: true)
+            default:
+                print("Weird URL")
+            }
         }
     }
 }

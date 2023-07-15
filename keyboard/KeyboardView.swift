@@ -36,19 +36,16 @@ struct KeyboardView: View {
             StopRecording()
         } else {
             VStack(spacing: 0) {
-                if controller.hostBundleId != "ibbi.dyslexia" {
-                    HStack {
-                        TranscribeButton(controller: controller, forceUpdateButtons: $forceUpdateButtons)
-                        VoiceRewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail)
-                        RewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail)
-                        Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
-                        Spacer()
-                        UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
-                    }
-                    .padding(6)
-                    .padding(.top, 6)
-                    
+                HStack {
+                    TranscribeButton(controller: controller, forceUpdateButtons: $forceUpdateButtons)
+                    VoiceRewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail)
+                    RewriteButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail)
+                    Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
+                    Spacer()
+                    UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
                 }
+                .padding(6)
+                .padding(.top, 6)
                 SystemKeyboard(
                     controller: controller,
                     autocompleteToolbar: .none
