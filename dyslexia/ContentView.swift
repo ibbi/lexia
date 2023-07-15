@@ -13,20 +13,23 @@ struct ContentView: View {
     @State private var deeplinkedURL: String?
     
     var body: some View {
-        Group {
-            if deeplinkedURL == "dictation" {
-                DictationWhisper(isEdit: false, deeplinkedURL: $deeplinkedURL)
-            }
-            else if deeplinkedURL == "edit_dictation" {
-                DictationWhisper(isEdit: true, deeplinkedURL: $deeplinkedURL)
-            }
-            else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
-                InstallInstructions(isFullAccessEnabled: keyboardState.isFullAccessEnabled, isKeyboardEnabled: keyboardState.isKeyboardEnabled)
-            }
-            else {
-                IntroPage(isKeyboardActive: keyboardState.isKeyboardActive)
-            }
-        }
+        InstallInstructions(isFullAccessEnabled: keyboardState.isFullAccessEnabled, isKeyboardEnabled: keyboardState.isKeyboardEnabled)
+
+//        Group {
+//
+//            if deeplinkedURL == "dictation" {
+//                DictationWhisper(isEdit: false, deeplinkedURL: $deeplinkedURL)
+//            }
+//            else if deeplinkedURL == "edit_dictation" {
+//                DictationWhisper(isEdit: true, deeplinkedURL: $deeplinkedURL)
+//            }
+//            else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
+//                InstallInstructions(isFullAccessEnabled: keyboardState.isFullAccessEnabled, isKeyboardEnabled: keyboardState.isKeyboardEnabled)
+//            }
+//            else {
+//                IntroPage(isKeyboardActive: keyboardState.isKeyboardActive)
+//            }
+//        }
         .onOpenURL { url in
             guard let host = url.host else { return }
             deeplinkedURL = host

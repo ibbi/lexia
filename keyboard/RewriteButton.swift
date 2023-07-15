@@ -150,7 +150,7 @@ struct RewriteButton: View {
                                     Button(action: {
                                         sharedDefaults?.set(option.id, forKey: "zap_mode_id")
                                     }) {
-                                        Text(option.icon + option.description)
+                                        Text(option.icon + " " + option.description)
                                     }
                                 }
                             }

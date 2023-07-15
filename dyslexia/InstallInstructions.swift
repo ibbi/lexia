@@ -37,7 +37,6 @@ struct InstallInstructions: View {
             }
             .listStyle(PlainListStyle())
         }
-        .onAppear(perform: requestMicPermissions)
     }
     
     struct TodoItem: View {
@@ -47,44 +46,51 @@ struct InstallInstructions: View {
         let isDone: Bool
         
         var body: some View {
-            HStack {
-                Text("\(index + 1)")
-                    .font(.headline)
-                    .padding(.trailing)
-                image
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(.pastelBlue)
-                    .padding(.trailing)
-                Text(text)
-                    .font(.body)
-                    .strikethrough(isDone)
-                Spacer()
-                if text == "Lexy" {
-                    Button("Take me there", action: {
-                        Helper.openAppSettings()
-                    })
-                    .buttonStyle(.borderedProminent)
-                    .shadow(color: .gray, radius: 3, x: 0, y: 1)
+                HStack {
+                    Text("\(index + 1)")
+                        .font(.headline)
+                        .padding(.trailing)
+                    image
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.pastelBlue)
+                        .padding(.trailing)
+                    VStack(alignment: .leading) {
+                        Text(text)
+                            .font(.body)
+                            .strikethrough(isDone)
+                        if text == "Allow Full Access" {
+                            Text("We _only_ read what you ask us to rewrite, and _never_ store anything.")
+                                .font(.caption2)
+                        }
+                    }
+                    Spacer()
+                    if text == "Lexy" {
+                        Button("Take me there", action: {
+                            Helper.openAppSettings()
+                        })
+                        .buttonStyle(.borderedProminent)
+                        .shadow(color: .gray, radius: 3, x: 0, y: 1)
 
+                    }
+                   
                 }
-            }
-            .opacity(isDone ? 0.4 : 1)
-            .grayscale(isDone ? 1.0 : 0)
+                .opacity(isDone ? 0.4 : 1)
+                .grayscale(isDone ? 1.0 : 0)
         }
     }
     
-    func requestMicPermissions() {
-        let audioSession = AVAudioSession.sharedInstance()
-        audioSession.requestRecordPermission { granted in
-            if granted {
-                print("Mic permissions granted")
-            } else {
-                print("Mic permissions denied")
-                // TODO: Add microphone access todo if they don't grant it, deeplinked into settings
-            }
-        }
-    }
+//    func requestMicPermissions() {
+//        let audioSession = AVAudioSession.sharedInstance()
+//        audioSession.requestRecordPermission { granted in
+//            if granted {
+//                print("Mic permissions granted")
+//            } else {
+//                print("Mic permissions denied")
+//                // TODO: Add microphone access todo if they don't grant it, deeplinked into settings
+//            }
+//        }
+//    }
     
     struct InstallInstructions_Previews: PreviewProvider {
         static var previews: some View {
