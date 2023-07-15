@@ -9,11 +9,13 @@ import KeyboardKit
 import SwiftUI
 
 struct Playground: View {
+
     let isKeyboardActive: Bool
     @State private var isFocused: Bool = false
     @AppStorage("finished_tour", store: UserDefaults(suiteName: "group.lexia")) var finishedTour: Bool = false
     @State private var inputText: String = ""
     @State private var generatorLoading: Bool = false
+    @FocusState private var inFocus: Bool
     
     func generateText() {
         generatorLoading = true
@@ -31,35 +33,49 @@ struct Playground: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            
             HStack {
                 Text("Playground")
                     .font(.title)
-                
                 Spacer()
-                
                 Button(action: {
-                    generateText()
+                    UserDefaults(suiteName: "group.lexia")?.set(false, forKey: "finished_tour")
                 }) {
-                    HStack {
-                        if (generatorLoading) {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle())
-                                .frame(alignment: .center)
-                                .padding(.trailing)
-                        }
-                        Text(generatorLoading ? "Generating" : "Generate text")
-                        
-                    }
+                    Text("Run tutorial")
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(generatorLoading)
+                .buttonStyle(.bordered)
+                
             }
             Divider()
+            Button(action: {
+                generateText()
+            }) {
+                HStack {
+                    if (generatorLoading) {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .frame(alignment: .center)
+                            .padding(.trailing)
+                    }
+                    Text(generatorLoading ? "Generating" : "Generate text")
+                    
+                }
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(generatorLoading)
+            .padding(.top)
             TextEditor(text: $inputText)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .border(.foreground.opacity(0.1))
+                .focused($inFocus)
         }
         .padding()
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                inFocus = true
+            }
+        }
     }
 }
 
