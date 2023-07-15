@@ -1,8 +1,21 @@
 import { Configuration, OpenAIApi } from 'openai';
 import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 
-const zapPrompt =
-  "Direct, empathetic, conversational, and transparent - these are the words that best describe the voice and tone of this brand. This brand speaks to its audience as if they're long-time friends, using a warm, personal tone that's both inviting and respectful. It's not afraid to delve into technical details, but does so in a way that's accessible and easy to understand. When writing for this brand, remember to maintain a balance between friendliness and professionalism. Use first-person pronouns to create a sense of connection and familiarity. Be open about the brand's processes and challenges, but also be clear about its expectations and requirements. Don't shy away from asking direct questions or providing constructive feedback - this brand values honesty and transparency above all else. Remember to show appreciation for the audience's efforts and contributions.";
+const personas = {
+  clearCasual:
+    "You are a friendly, familiar communicator. You write very clearly, while maintaining a casual, conversational tone. You aim to strike a balance between clarity and familiarity. You don't use unnecessary words, and keep your communications concise, avoiding qualifiers when they are not absolutely needed. ",
+  professionalPrecise:
+    "You are an expert communicator who writes very clearly, and concisely. You value the reader's time highly, so you refrain from being verbose or using unnecessary big words. You aim to strike a balance between brevity and professionalism. You always make sure to show appreciation to the recipient when appropriate. ",
+  rasta: 'You are a rasta. ',
+  medieval: 'You are a medieval court jester. ',
+};
+
+const personaMap = {
+  '0': personas.clearCasual,
+  '1': personas.professionalPrecise,
+  '2': personas.rasta,
+  '3': personas.medieval,
+};
 
 const configuration = new Configuration({
   apiKey: OPENAI_KEY,
@@ -69,10 +82,11 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
   try {
     const requestBody = await request.json();
     const userMessage = requestBody.message;
-    const userPrompt = requestBody.prompt || 'Please rewrite this:';
-    // const promptWrapped = `${userPrompt} \n"${userMessage}"\n:`;
-    const promptWrapped = `Rewrite this text:\n"${userMessage}"\n\nIn this voice:\n"${zapPrompt}":`;
-
+    let rewritePersona = personaMap['0'];
+    if (requestBody.prompt in personaMap) {
+      rewritePersona = personaMap[requestBody.prompt];
+    }
+    const promptWrapped = `${rewritePersona}\nRewrite this:\n\n"${userMessage}"`;
     console.log(promptWrapped);
 
     const response = await openai.createChatCompletion({

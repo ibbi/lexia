@@ -17,13 +17,15 @@ struct RewriteButton: View {
     @State var forceUpdateButtons: Bool
     @Binding var keyboardStatus: KeyboardStatus
     let isGmail: Bool
+    @AppStorage("zap_mode_id", store: UserDefaults(suiteName: "group.lexia")) var zapModeId: String = ZapOptions.casual.id
+    let sharedDefaults = UserDefaults(suiteName: "group.lexia")
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @State private var prevText = ""
     @State private var afterText = ""
     @State private var fullText = ""
     @State private var afterTries = 0
-
+    
     let beforeTextTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     let moveToEndTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     @State private var beforeCancellable: AnyCancellable?
@@ -73,7 +75,7 @@ struct RewriteButton: View {
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
         return false
     }
-
+    
     
     func getTextContextBefore() -> Bool {
         let before = controller.textDocumentProxy.documentContextBeforeInput
@@ -90,7 +92,7 @@ struct RewriteButton: View {
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
         return false
     }
-
+    
     func rewriteText(_ text: String, shouldDelete: Bool) {
         isLoading = true
         prewrittenText = text
@@ -113,7 +115,7 @@ struct RewriteButton: View {
             }
         }
     }
-
+    
     func decideSelectionOrEntire() {
         if let selectedText = controller.keyboardTextContext.selectedText {
             rewriteText(selectedText, shouldDelete: false)
@@ -126,18 +128,57 @@ struct RewriteButton: View {
             }
         }
     }
-
+    
+    func isDisabled() -> Bool {
+        return (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty))
+    }
+    
     var body: some View {
-            TopBarButton(buttonType: ButtonType.enhance, action: {
-                decideSelectionOrEntire()
-            }, isLoading: $isLoading, onlyVisual: false, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
-            .onChange(of: fullText) { newValue in
-                if (!newValue.isEmpty) {
-                    rewriteText(fullText, shouldDelete: true)
-                    fullText = ""
+        Button(action: {
+        }) {
+            HStack {
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .frame(width: 25, height: 25, alignment: .center)
+                    
+                } else {
+                    ZStack {
+                        Text(ZapOptions.getZapMode(from: zapModeId)?.icon ?? ZapOptions.casual.icon)
+                            .contextMenu {
+                                ForEach(ZapOptions.allCases, id: \.self) { option in
+                                    Button(action: {
+                                        sharedDefaults?.set(option.id, forKey: "zap_mode_id")
+                                    }) {
+                                        Text(option.icon + option.description)
+                                    }
+                                }
+                            }
+                            .onTapGesture {
+                                isLoading = true
+                                decideSelectionOrEntire()
+                            }
+                            .grayscale(isDisabled() ? 1 : 0)
+                        Image(systemName: "line.diagonal")
+                            .imageScale(.large)
+                            .frame(width: 25, height: 25, alignment: .center)
+                            .rotationEffect(.degrees(90))
+                            .opacity(isDisabled() ? 1 : 0)
+                    }
                 }
             }
-            .id(forceUpdateButtons)
+        }
+        .id(forceUpdateButtons)
+        .onChange(of: fullText) { newValue in
+            if (!newValue.isEmpty) {
+                rewriteText(fullText, shouldDelete: true)
+                fullText = ""
+            }
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(Color.standardButtonBackground)
+        .foregroundColor(.primary)
+        .disabled(isLoading || isDisabled())
     }
 }
 

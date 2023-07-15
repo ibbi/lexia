@@ -50,7 +50,7 @@ struct API {
             return
         }
         
-        let prompt = UserDefaults(suiteName: "group.lexia")?.string(forKey: "quick_prompt") ?? "Please rewrite this:"
+        let prompt = UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0"
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -141,23 +141,6 @@ struct API {
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
         
         request.httpBody = data
-        
-//        URLSession.shared.dataTask(with: request) { (data, response, error) in
-//            if let error = error {
-//                completion(.failure(.networkError))
-//                return
-//            }
-//
-//            if let data = data {
-//                do {
-//                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let text = json["text"] as? String {
-//                        completion(.success(text))
-//                    }
-//                } catch {
-//                    completion(.failure(.decodingError))
-//                }
-//            }
-//        }.resume()
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let _ = error {
                 completion(.failure(.networkError))
