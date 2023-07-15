@@ -10,6 +10,13 @@ const personas = {
   medieval: 'You are a medieval court jester. ',
 };
 
+const genPrompts = [
+  'Write a random, short, 2 sentence informal message or story with a typo.',
+  'Write a short 4 sentence story about Lexy the keyboard.',
+  'Write a 2 verse poem.',
+  'Write a paragraph describing how your day went.',
+];
+
 const personaMap = {
   '0': personas.clearCasual,
   '1': personas.professionalPrecise,
@@ -41,6 +48,11 @@ async function handleRequest(request: Request): Promise<Response> {
       return new Response('Method not allowed', { status: 405 });
     }
     return handleTransformerRequest(request);
+  } else if (url.pathname === '/generate') {
+    if (request.method !== 'GET') {
+      return new Response('Method not allowed', { status: 405 });
+    }
+    return handleGenerateRequest(request);
   } else if (url.pathname === '/voice_edit') {
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
@@ -92,6 +104,22 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
     const response = await openai.createChatCompletion({
       model: 'gpt-4',
       messages: [{ role: 'user', content: promptWrapped }],
+    });
+
+    const assistantMessage = response.data.choices[0].message?.content.replace(/^"(.*)"$/, '$1');
+    return new Response(assistantMessage, {
+      headers: { 'Content-Type': 'text/plain' },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+  }
+}
+
+async function handleGenerateRequest(request: Request): Promise<Response> {
+  try {
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: genPrompts[Math.floor(Math.random() * genPrompts.length)] }],
     });
 
     const assistantMessage = response.data.choices[0].message?.content.replace(/^"(.*)"$/, '$1');

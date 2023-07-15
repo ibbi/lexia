@@ -24,7 +24,7 @@ struct IntroPage: View {
                     case "enhance":
                         EnhancePlayground(isKeyboardActive: isKeyboardActive)
                     default:
-                        Playground(isKeyboardActive: isKeyboardActive)
+                        Playground1(isKeyboardActive: isKeyboardActive)
                     }
                 } label: {
                     HStack {

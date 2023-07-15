@@ -30,7 +30,7 @@ struct InstallInstructions: View {
             
             List {
                 ForEach(0..<installTodos.count, id: \.self) { index in
-                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text, isDone: (index < 4 && isKeyboardEnabled) || index == 4 && isFullAccessEnabled )
+                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text, isDone: (index < 4 && isKeyboardEnabled) || index == 4 && isFullAccessEnabled, isButtonDisabled: isKeyboardEnabled && isFullAccessEnabled )
                         .frame(height: 60)
                         .padding(.horizontal)
                 }
@@ -44,6 +44,7 @@ struct InstallInstructions: View {
         let image: Image
         let text: String
         let isDone: Bool
+        let isButtonDisabled: Bool
         
         var body: some View {
                 HStack {
@@ -70,13 +71,11 @@ struct InstallInstructions: View {
                             Helper.openAppSettings()
                         })
                         .buttonStyle(.borderedProminent)
-                        .shadow(color: .gray, radius: 3, x: 0, y: 1)
-
+                        .disabled(isButtonDisabled)
                     }
                    
                 }
                 .opacity(isDone ? 0.4 : 1)
-                .grayscale(isDone ? 1.0 : 0)
         }
     }
     
@@ -94,7 +93,7 @@ struct InstallInstructions: View {
     
     struct InstallInstructions_Previews: PreviewProvider {
         static var previews: some View {
-            InstallInstructions(isFullAccessEnabled: false, isKeyboardEnabled: false)
+            InstallInstructions(isFullAccessEnabled: false, isKeyboardEnabled: true)
         }
     }
 }

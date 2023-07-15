@@ -16,6 +16,7 @@ enum BackendAPIError: Error {
 struct API {
     static let assemblyURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/assembly"
     static let transformerURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/transformer"
+    static let generateURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/generate"
     static let whisperURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/whisper"
     static let voiceEditURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/voice_edit"
     static let whisperWebSocketURL = "wss://basic-bundle-long-queen-51be.ibm456.workers.dev/whisper"
@@ -69,6 +70,36 @@ struct API {
             
             if let transformedText = String(data: data, encoding: .utf8) {
                 completion(.success(transformedText))
+            } else {
+                completion(.failure(.decodingError))
+            }
+        }.resume()
+    }
+    
+    
+    static func generateText(completion: @escaping (Result<String, BackendAPIError>) -> Void) {
+        guard let url = URL(string: generateURL) else {
+            completion(.failure(.urlError))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let _ = error {
+                completion(.failure(.networkError))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.decodingError))
+                return
+            }
+            
+            if let generatedText = String(data: data, encoding: .utf8) {
+                completion(.success(generatedText))
             } else {
                 completion(.failure(.decodingError))
             }

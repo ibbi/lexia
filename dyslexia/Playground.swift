@@ -2,7 +2,7 @@
 //  Playground.swift
 //  dyslexia
 //
-//  Created by ibbi on 5/10/23.
+//  Created by ibbi on 7/15/23.
 //
 
 import KeyboardKit
@@ -11,43 +11,55 @@ import SwiftUI
 struct Playground: View {
     let isKeyboardActive: Bool
     @State private var isFocused: Bool = false
-    @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
-    @State private var prevCursorPosition: Int?
-    @State private var prevInputText = ""
+    @AppStorage("finished_tour", store: UserDefaults(suiteName: "group.lexia")) var finishedTour: Bool = false
     @State private var inputText: String = ""
-    @State private var selectedText: String = ""
-    // Hardcoded length of inputText
-    @State private var selectedTextRange: NSRange = NSRange(location: 0, length: 0)
+    @State private var generatorLoading: Bool = false
     
-
-    var body: some View {
-        VStack {
-            if !isKeyboardActive {
-                Text("Tap and hold the \(Image(systemName: "globe")) below, then select Lexy")
-                    .font(.title)
-                Divider()
-            }
-            VStack {
-                TextViewWrapper(text: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange, isFocused: $isFocused)
-                    .onAppear { // Focus the TextViewWrapper when it appears
-                        self.isFocused = true
-                    }
-                    .padding(.horizontal)
-                    .padding(.top)
-                if !isRecording && isKeyboardActive {
-                    HStack {
-                        InAppTranscribeButton(inputText: $inputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
-                        InAppVoiceRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
-                        InAppRewriteButton(inputText: $inputText, prevInputText: $prevInputText, selectedText: $selectedText, selectedTextRange: $selectedTextRange)
-                        Spacer()
-                        InAppUndoButton(inputText: $inputText, prevInputText: prevInputText)
-                    }
-                    .frame(minHeight: 42)
-                    .padding(6)
-                    .background(Color.standardKeyboardBackground)
+    func generateText() {
+        generatorLoading = true
+        API.generateText() { result in
+            DispatchQueue.main.async {
+                generatorLoading = false
+                switch result {
+                case .success(let generated):
+                    inputText = generated
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
                 }
             }
         }
+    }
+
+    var body: some View {
+        VStack {
+            HStack {
+                Text("Playground")
+                    .font(.title)
+                
+                Spacer()
+                
+                Button(action: {
+                    generateText()
+                }) {
+                    HStack {
+                        if (generatorLoading) {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .frame(alignment: .center)
+                                .padding(.trailing)
+                        }
+                        Text(generatorLoading ? "Generating" : "Generate text")
+                        
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(generatorLoading)
+            }
+            Divider()
+            TextEditor(text: $inputText)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .padding()
     }
 }
 

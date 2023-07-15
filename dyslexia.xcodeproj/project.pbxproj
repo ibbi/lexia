@@ -27,9 +27,11 @@
 		285A81792A12E77F00ED7608 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A81772A12E77F00ED7608 /* Constants.swift */; };
 		285A817B2A12E93100ED7608 /* TranscribeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A817A2A12E93100ED7608 /* TranscribeButton.swift */; };
 		285A817C2A12E93100ED7608 /* TranscribeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285A817A2A12E93100ED7608 /* TranscribeButton.swift */; };
+		285D973D2A630A1B00E5AECD /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285D973C2A630A1B00E5AECD /* Playground.swift */; };
+		285D97402A630E0B00E5AECD /* Instructions in Frameworks */ = {isa = PBXBuildFile; productRef = 285D973F2A630E0B00E5AECD /* Instructions */; };
 		28741D6E2A06F5EC00D29899 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28741D6D2A06F5EC00D29899 /* Helper.swift */; };
 		2880023E2A0C3B5200045F40 /* InstallInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023D2A0C3B5200045F40 /* InstallInstructions.swift */; };
-		288002402A0C3BB600045F40 /* Playground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023F2A0C3BB600045F40 /* Playground.swift */; };
+		288002402A0C3BB600045F40 /* Playground1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2880023F2A0C3BB600045F40 /* Playground1.swift */; };
 		289584DA2A182FB7001425B8 /* DictationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289584D92A182FB7001425B8 /* DictationAssembly.swift */; };
 		2895851B2A23D88C001425B8 /* AssemblySocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2895851A2A23D88C001425B8 /* AssemblySocket.swift */; };
 		289585212A273B6A001425B8 /* StreamingAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289585202A273B6A001425B8 /* StreamingAudioRecorder.swift */; };
@@ -114,9 +116,10 @@
 		285A81742A12E46A00ED7608 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
 		285A81772A12E77F00ED7608 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		285A817A2A12E93100ED7608 /* TranscribeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribeButton.swift; sourceTree = "<group>"; };
+		285D973C2A630A1B00E5AECD /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
 		28741D6D2A06F5EC00D29899 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		2880023D2A0C3B5200045F40 /* InstallInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallInstructions.swift; sourceTree = "<group>"; };
-		2880023F2A0C3BB600045F40 /* Playground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground.swift; sourceTree = "<group>"; };
+		2880023F2A0C3BB600045F40 /* Playground1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playground1.swift; sourceTree = "<group>"; };
 		289584D92A182FB7001425B8 /* DictationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationAssembly.swift; sourceTree = "<group>"; };
 		289584DB2A18309E001425B8 /* dyslexia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = dyslexia.entitlements; sourceTree = "<group>"; };
 		289584DC2A1830A6001425B8 /* keyboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = keyboard.entitlements; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28EE553E29EE34B600CEF0C6 /* KeyboardKit in Frameworks */,
+				285D97402A630E0B00E5AECD /* Instructions in Frameworks */,
 				28CF450F2A3A397200B8F52C /* URLProxy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,8 +204,9 @@
 				28C14E782A0D7E7C00106EA3 /* Settings.bundle */,
 				28F11CA529EE2E6700ED00D9 /* ContentView.swift */,
 				28CF45062A33D08B00B8F52C /* API.swift */,
+				285D973C2A630A1B00E5AECD /* Playground.swift */,
 				2880023D2A0C3B5200045F40 /* InstallInstructions.swift */,
-				2880023F2A0C3BB600045F40 /* Playground.swift */,
+				2880023F2A0C3BB600045F40 /* Playground1.swift */,
 				283E222D2A57C5DD0023BA3A /* SpeakPlayground.swift */,
 				283E222F2A57C6130023BA3A /* EditPlayground.swift */,
 				283E22312A57C6200023BA3A /* EnhancePlayground.swift */,
@@ -280,6 +285,7 @@
 			name = dyslexia;
 			packageProductDependencies = (
 				28EE553D29EE34B600CEF0C6 /* KeyboardKit */,
+				285D973F2A630E0B00E5AECD /* Instructions */,
 			);
 			productName = dyslexia;
 			productReference = 28F11CA029EE2E6700ED00D9 /* dyslexia.app */;
@@ -334,6 +340,7 @@
 			mainGroup = 28F11C9729EE2E6700ED00D9;
 			packageReferences = (
 				28EE553C29EE34B600CEF0C6 /* XCRemoteSwiftPackageReference "KeyboardKit" */,
+				285D973E2A630E0B00E5AECD /* XCRemoteSwiftPackageReference "Instructions" */,
 			);
 			productRefGroup = 28F11CA129EE2E6700ED00D9 /* Products */;
 			projectDirPath = "";
@@ -394,8 +401,9 @@
 				283E222C2A57518C0023BA3A /* IntroPage.swift in Sources */,
 				289585212A273B6A001425B8 /* StreamingAudioRecorder.swift in Sources */,
 				285A81782A12E77F00ED7608 /* Constants.swift in Sources */,
-				288002402A0C3BB600045F40 /* Playground.swift in Sources */,
+				288002402A0C3BB600045F40 /* Playground1.swift in Sources */,
 				285A817B2A12E93100ED7608 /* TranscribeButton.swift in Sources */,
+				285D973D2A630A1B00E5AECD /* Playground.swift in Sources */,
 				2859432B2A502067003038F2 /* InAppTranscribeButton.swift in Sources */,
 				2859432D2A50D15D003038F2 /* InAppRewriteButton.swift in Sources */,
 				28F11CA629EE2E6700ED00D9 /* ContentView.swift in Sources */,
@@ -716,6 +724,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		285D973E2A630E0B00E5AECD /* XCRemoteSwiftPackageReference "Instructions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ephread/Instructions";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		28EE553C29EE34B600CEF0C6 /* XCRemoteSwiftPackageReference "KeyboardKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/KeyboardKit/KeyboardKit.git";
@@ -727,6 +743,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		285D973F2A630E0B00E5AECD /* Instructions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 285D973E2A630E0B00E5AECD /* XCRemoteSwiftPackageReference "Instructions" */;
+			productName = Instructions;
+		};
 		28EE553D29EE34B600CEF0C6 /* KeyboardKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 28EE553C29EE34B600CEF0C6 /* XCRemoteSwiftPackageReference "KeyboardKit" */;
