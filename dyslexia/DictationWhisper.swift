@@ -22,16 +22,10 @@ struct DictationWhisper: View {
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {
                 audioRecorder.startRecording(shouldJumpBack: true, isEdit: isEdit)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { 
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     deeplinkedURL = ""
                 }
             }
         }
     }
 }
-
-//struct DictationWhisper_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DictationWhisper(isEdit: false, isDictating: false)
-//    }
-//}

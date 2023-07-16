@@ -37,6 +37,7 @@ struct InstallInstructions: View {
             }
             .listStyle(PlainListStyle())
         }
+        .onAppear(perform: requestMicPermissions)
     }
     
     struct TodoItem: View {
@@ -79,17 +80,17 @@ struct InstallInstructions: View {
         }
     }
     
-//    func requestMicPermissions() {
-//        let audioSession = AVAudioSession.sharedInstance()
-//        audioSession.requestRecordPermission { granted in
-//            if granted {
-//                print("Mic permissions granted")
-//            } else {
-//                print("Mic permissions denied")
-//                // TODO: Add microphone access todo if they don't grant it, deeplinked into settings
-//            }
-//        }
-//    }
+    func requestMicPermissions() {
+        let audioSession = AVAudioSession.sharedInstance()
+        audioSession.requestRecordPermission { granted in
+            if granted {
+                print("Mic permissions granted")
+            } else {
+                print("Mic permissions denied")
+                // TODO: Add microphone access todo if they don't grant it, deeplinked into settings
+            }
+        }
+    }
     
     struct InstallInstructions_Previews: PreviewProvider {
         static var previews: some View {
