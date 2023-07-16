@@ -137,6 +137,16 @@ struct ZapButton: View {
         Button(action: {
         }) {
             HStack {
+                    Menu("\(Image(systemName: "chevron.right"))") {
+                        ForEach(ZapOptions.allCases, id: \.self) { option in
+                            Button(action: {
+                                sharedDefaults?.set(option.id, forKey: "zap_mode_id")
+                            }) {
+                                Text(option.icon + " " + option.description)
+                            }
+                        }
+                    }
+                Divider()
                 if isLoading {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
