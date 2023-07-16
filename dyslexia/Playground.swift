@@ -30,13 +30,19 @@ struct Playground: View {
     func getTutorialSteps() -> [TutorialStep] {
         [
             TutorialStep(id: .dictate, onNext: {
-                if inputText.isEmpty {
+                if inputText.isEmpty || inputText.count < 4 {
                     inputText = "I hate the smell of butter!"
+                } else {
+                    withAnimation {currentStep += 1}
                 }
             }),
             TutorialStep(id: .edit, onNext: { withAnimation {currentStep += 1} }),
             TutorialStep(id: .zapSelect, onNext: {
-                sharedDefaults?.set(ZapOptions.rasta.id, forKey: "zap_mode_id")
+                if zapModeID == ZapOptions.rasta.id {
+                    withAnimation {currentStep += 1}
+                } else {
+                    sharedDefaults?.set(ZapOptions.rasta.id, forKey: "zap_mode_id")
+                }
             }),
             TutorialStep(id: .zap, onNext: { withAnimation {currentStep += 1} }),
             TutorialStep(id: .undo, onNext: {
@@ -109,10 +115,10 @@ struct Playground: View {
                 }
             }
             if !isKeyboardActive {
-                CoachMark(coachID: Coachy.selectLexy, onNext: nil, onSkip: nil )
+                CoachMark(coachID: Coachy.selectLexy, onNext: nil, onPrev: nil, onSkip: nil )
             }
             else if !finishedTour {
-                CoachMark(coachID: tutorialSteps[currentStep].id, onNext: tutorialSteps[currentStep].onNext, onSkip: {
+                CoachMark(coachID: tutorialSteps[currentStep].id, onNext: tutorialSteps[currentStep].onNext, onPrev: tutorialSteps[currentStep].id == .dictate ? nil : { withAnimation {currentStep = currentStep - 1} },  onSkip: {
                     sharedDefaults?.set(true, forKey: "finished_tour")
                     currentStep = 0
                 } )

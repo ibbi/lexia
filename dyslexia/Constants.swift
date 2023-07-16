@@ -73,7 +73,7 @@ enum Coachy {
         case .edit: return ["subText": "Try saying 'Make this more aggressive, and all caps", "tipText": "Tip: You can partially edit text by selecting it first"]
         case .zapSelect: return ["subText": "Try selecting \(ZapOptions.rasta.icon) \(ZapOptions.rasta.description)", "tipText": "Tip: We always remember your last voice"]
         case .zap: return ["subText": "", "tipText": ""]
-        case .undo: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else since the last edit"]
+        case .undo: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else \nsince the last edit"]
         }
     }
     
@@ -90,13 +90,14 @@ enum Coachy {
     
     var arrowPosition: CGFloat {
         let buttonWidth = 58.0
+        let padding = 14.0
         switch self {
         case .selectLexy: return 0
-        case .dictate: return buttonWidth / 2
-        case .edit: return buttonWidth * 1.5
-        case .zapSelect: return buttonWidth * 2.5
-        case .zap: return buttonWidth * 2.5
-        case .undo: return UIScreen.main.bounds.width - (buttonWidth/2)
+        case .dictate: return (buttonWidth / 2) - padding + 3
+        case .edit: return (buttonWidth * 1.5) - padding
+        case .zapSelect: return (buttonWidth * 2.5) - padding
+        case .zap: return (buttonWidth * 2.5) - padding
+        case .undo: return UIScreen.main.bounds.width - (buttonWidth/2) - padding - 3
         }
     }
 }
