@@ -15,10 +15,10 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if deeplinkedURL == "dictation" {
+            if deeplinkedURL == Deeplinks.transcribe.path {
                 DictationWhisper(isEdit: false, deeplinkedURL: $deeplinkedURL)
             }
-            else if deeplinkedURL == "edit_dictation" {
+            else if deeplinkedURL == Deeplinks.edit.path {
                 DictationWhisper(isEdit: true, deeplinkedURL: $deeplinkedURL)
             }
             else if !keyboardState.isKeyboardEnabled || !keyboardState.isFullAccessEnabled {
@@ -31,9 +31,9 @@ struct ContentView: View {
         .onOpenURL { url in
             guard let host = url.host else { return }
             switch host {
-            case "dictation_inapp":
+            case Deeplinks.inAppTranscribe.path:
                 audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)
-            case "edit_dictation_inapp":
+            case Deeplinks.inAppEdit.path:
                 audioRecorder.startRecording(shouldJumpBack: false, isEdit: true)
             default:
                 deeplinkedURL = host

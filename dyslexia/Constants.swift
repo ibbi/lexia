@@ -100,3 +100,24 @@ enum Coachy {
         }
     }
 }
+
+enum Deeplinks {
+    case transcribe
+    case edit
+    case inAppTranscribe
+    case inAppEdit
+    
+    var path: String {
+        switch self {
+        case .transcribe: return "dictation"
+        case .edit: return "edit_dictation"
+        case .inAppTranscribe: return "dictation_inapp"
+        case .inAppEdit: return "edit_dictation_inapp"
+        }
+    }
+
+    var URL: String {
+        let prefix = "dyslexia://"
+        return prefix + path
+    }
+}

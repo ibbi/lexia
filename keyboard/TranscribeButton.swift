@@ -61,9 +61,9 @@ struct TranscribeButton: View {
         TopBarButton(buttonType: ButtonType.speak, action: {
             let urlHandler = URLHandler()
             if controller.hostBundleId != "ibbi.dyslexia" {
-                urlHandler.openURL("dyslexia://dictation")
+                urlHandler.openURL(Deeplinks.transcribe.URL)
             } else {
-                urlHandler.openURL("dyslexia://dictation_inapp")
+                urlHandler.openURL(Deeplinks.inAppTranscribe.URL)
             }
         }, isLoading: $isTranscribing, isInBadContext: false)
             .onAppear {

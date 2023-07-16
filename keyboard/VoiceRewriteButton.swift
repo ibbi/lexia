@@ -165,9 +165,9 @@ struct EditButton: View {
                 if hasTextToRewrite() {
                     let urlHandler = URLHandler()
                     if controller.hostBundleId != "ibbi.dyslexia" {
-                        urlHandler.openURL("dyslexia://edit_dictation")
+                        urlHandler.openURL(Deeplinks.edit.URL)
                     } else {
-                        urlHandler.openURL("dyslexia://edit_dictation_inapp")
+                        urlHandler.openURL(Deeplinks.inAppEdit.URL)
                     }                }}, isLoading: $isLoading, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
             .onChange(of: fullText) { newValue in
                 if (!newValue.isEmpty && hasTextToRewrite()) {
