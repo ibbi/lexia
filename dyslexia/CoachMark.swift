@@ -42,7 +42,7 @@ struct CoachMark: View {
                     HStack {
                         Spacer()
                                if colorScheme == .dark {
-                                   Button(action: {}) {
+                                   Button(action: onSkip!) {
                                        Text("Skip")
                                            .font(.title3)
                                    }
@@ -50,7 +50,7 @@ struct CoachMark: View {
                                    .padding()
                                    .tint(.red)
                                } else {
-                                   Button(action: {}) {
+                                   Button(action: onSkip!) {
                                        Text("Skip")
                                            .font(.title3)
                                    }
