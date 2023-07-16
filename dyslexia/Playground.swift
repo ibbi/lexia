@@ -14,7 +14,10 @@ struct Playground: View {
     let isKeyboardActive: Bool
     @State private var isFocused: Bool = false
     @AppStorage("finished_tour", store: UserDefaults(suiteName: "group.lexia")) var finishedTour: Bool = false
+    @AppStorage("zap_mode_id", store: UserDefaults(suiteName: "group.lexia")) var zapModeID: String?
+    @State private var oldZapModeID: String?
     @State private var inputText: String = ""
+    @State private var oldInputText: String = ""
     @State private var generatorLoading: Bool = false
     @FocusState private var inFocus: Bool
     @State var currentStep: Int = 0
@@ -30,16 +33,14 @@ struct Playground: View {
                 if inputText.isEmpty {
                     inputText = "I hate the smell of butter!"
                 }
-                withAnimation {self.currentStep += 1}
             }),
-            TutorialStep(id: .edit, onNext: { withAnimation {self.currentStep += 1} }),
+            TutorialStep(id: .edit, onNext: { withAnimation {currentStep += 1} }),
             TutorialStep(id: .zapSelect, onNext: {
-                withAnimation {self.currentStep += 1}
                 sharedDefaults?.set(ZapOptions.rasta.id, forKey: "zap_mode_id")
             }),
-            TutorialStep(id: .zap, onNext: { withAnimation {self.currentStep += 1} }),
+            TutorialStep(id: .zap, onNext: { withAnimation {currentStep += 1} }),
             TutorialStep(id: .undo, onNext: {
-                self.currentStep = 0
+                currentStep = 0
                 sharedDefaults?.set(true, forKey: "finished_tour")
             })
         ]
@@ -115,6 +116,40 @@ struct Playground: View {
                     sharedDefaults?.set(true, forKey: "finished_tour")
                     currentStep = 0
                 } )
+            }
+        }
+        .onChange(of: inputText) { newValue in
+            if !finishedTour {
+                if newValue != oldInputText {
+                    switch tutorialSteps[currentStep].id {
+                    case .dictate:
+                        // TODO: Maybe look at recording state instead? Fine for now cus can't edit text
+                        if (newValue.count - oldInputText.count > 1) {
+                            withAnimation {currentStep += 1}
+                        }
+                    case .edit, .zap:
+                        if (!newValue.contains(oldInputText) && !oldInputText.contains(newValue)) {
+                            withAnimation {currentStep += 1}
+                        }
+//                    case .undo:
+//                        if (oldInputText == newValue && !newValue.contains(oldInputText) && !oldInputText.contains(newValue)) {
+//                            currentStep = 0
+//                            sharedDefaults?.set(true, forKey: "finished_tour")
+//                        }
+                    default:
+                        print("inputText changed")
+                    }
+                    oldInputText = newValue
+                }
+                
+            }
+        }
+        .onChange(of: zapModeID) { newValue in
+            if !finishedTour && tutorialSteps[currentStep].id == .zapSelect {
+                if newValue == ZapOptions.rasta.id {
+                    withAnimation {currentStep += 1}
+                    oldZapModeID = newValue
+                }
             }
         }
     }
