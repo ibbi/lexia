@@ -38,12 +38,7 @@ addEventListener('fetch', (event: any) => {
 
 async function handleRequest(request: Request): Promise<Response> {
   const url = new URL(request.url);
-  if (url.pathname === '/assembly') {
-    if (request.method !== 'GET') {
-      return new Response('Method not allowed', { status: 405 });
-    }
-    return handleAssemblyRequest(request);
-  } else if (url.pathname === '/transformer') {
+  if (url.pathname === '/transform') {
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
@@ -52,8 +47,8 @@ async function handleRequest(request: Request): Promise<Response> {
     if (request.method !== 'GET') {
       return new Response('Method not allowed', { status: 405 });
     }
-    return handleGenerateRequest(request);
-  } else if (url.pathname === '/voice_edit') {
+    return handleGeneratorRequest(request);
+  } else if (url.pathname === '/edit') {
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
@@ -68,25 +63,6 @@ async function handleRequest(request: Request): Promise<Response> {
     }
   } else {
     return new Response('Not found', { status: 404 });
-  }
-}
-
-async function handleAssemblyRequest(request: Request): Promise<Response> {
-  try {
-    const response = await fetch('https://api.assemblyai.com/v2/realtime/token', {
-      method: 'POST',
-      body: JSON.stringify({ expires_in: 3600 }),
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: ASSEMBLY_KEY,
-      },
-    });
-    const data = await response.json();
-    return new Response(JSON.stringify(data), {
-      headers: { 'Content-Type': 'application/json' },
-    });
-  } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
 }
 
@@ -115,7 +91,7 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
   }
 }
 
-async function handleGenerateRequest(request: Request): Promise<Response> {
+async function handleGeneratorRequest(request: Request): Promise<Response> {
   try {
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
@@ -193,40 +169,4 @@ async function handleVoiceEdit(request: Request): Promise<Response> {
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
-}
-
-async function handleWhisperWebSocket(request: Request): Promise<Response> {
-  // @ts-ignore
-  const webSocketPair = new WebSocketPair();
-  const [client, server] = Object.values(webSocketPair);
-
-  // @ts-ignore
-  server.accept();
-
-  // @ts-ignore
-  server.addEventListener('message', async (event) => {
-    const audioBuffer = new Uint8Array(event.data);
-    const formData = new FormData();
-    formData.append('file', new Blob([audioBuffer], { type: 'audio/mpeg' }));
-    formData.append('model', 'whisper-1');
-
-    const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${OPENAI_KEY}`,
-      },
-    });
-
-    const data = await response.json();
-    const text = data['text'] || '';
-    // @ts-ignore
-    server.send(text);
-  });
-
-  return new Response(null, {
-    status: 101,
-    // @ts-ignore
-    webSocket: client,
-  });
 }

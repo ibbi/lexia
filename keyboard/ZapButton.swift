@@ -1,5 +1,5 @@
 //
-//  RewriteButton.swift
+//  ZapButton.swift
 //  keyboard
 //
 //  Created by ibbi on 6/14/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import KeyboardKit
 import Combine
 
-struct RewriteButton: View {
+struct ZapButton: View {
     let controller: KeyboardInputViewController
     @Binding var rewrittenText: String
     @Binding var prewrittenText: String
@@ -93,11 +93,11 @@ struct RewriteButton: View {
         return false
     }
     
-    func rewriteText(_ text: String, shouldDelete: Bool) {
+    func zapText(_ text: String, shouldDelete: Bool) {
         isLoading = true
         prewrittenText = text
         keyboardStatus = .rewriting
-        API.sendTranscribedText(text) { result in
+        API.sendTextForZap(text) { result in
             DispatchQueue.main.async {
                 isLoading = false
                 keyboardStatus = .available
@@ -118,7 +118,7 @@ struct RewriteButton: View {
     
     func decideSelectionOrEntire() {
         if let selectedText = controller.keyboardTextContext.selectedText {
-            rewriteText(selectedText, shouldDelete: false)
+            zapText(selectedText, shouldDelete: false)
         } else if controller.textDocumentProxy.documentContext != nil {
             keyboardStatus = .reading
             self.moveToEndCancellable = self.moveToEndTimer.sink { _ in
@@ -171,7 +171,7 @@ struct RewriteButton: View {
         .id(forceUpdateButtons)
         .onChange(of: fullText) { newValue in
             if (!newValue.isEmpty) {
-                rewriteText(fullText, shouldDelete: true)
+                zapText(fullText, shouldDelete: true)
                 fullText = ""
             }
         }
@@ -181,9 +181,3 @@ struct RewriteButton: View {
         .disabled(isLoading || isDisabled())
     }
 }
-
-//struct RewriteButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RewriteButton()
-//    }
-//}

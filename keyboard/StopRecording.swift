@@ -87,9 +87,4 @@ struct StopRecording: View {
             }
     }
 }
-//struct StopRecordingAndTranscribe_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TranscribeButton()
-//    }
-//}
 

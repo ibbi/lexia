@@ -65,15 +65,10 @@ struct TranscribeButton: View {
             } else {
                 urlHandler.openURL("dyslexia://dictation_inapp")
             }
-        }, isLoading: $isTranscribing, onlyVisual: false, isInBadContext: false)
+        }, isLoading: $isTranscribing, isInBadContext: false)
             .onAppear {
                 tryTranscribe()
             }
     }
     
 }
-//struct TranscribeButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TranscribeButton()
-//    }
-//}

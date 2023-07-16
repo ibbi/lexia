@@ -14,38 +14,13 @@ enum BackendAPIError: Error {
 }
 
 struct API {
-    static let assemblyURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/assembly"
-    static let transformerURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/transformer"
-    static let generateURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/generate"
+    static let transformerURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/transform"
+    static let generatorURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/generate"
     static let whisperURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/whisper"
-    static let voiceEditURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/voice_edit"
-    static let whisperWebSocketURL = "wss://basic-bundle-long-queen-51be.ibm456.workers.dev/whisper"
+    static let editURL = "https://basic-bundle-long-queen-51be.ibm456.workers.dev/edit"
 
     
-    static func getAssemblyToken(completion: @escaping (Result<String, BackendAPIError>) -> Void) {
-        guard let url = URL(string: assemblyURL) else {
-            completion(.failure(.urlError))
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let _ = error {
-                completion(.failure(.networkError))
-                return
-            }
-            
-            guard let data = data,
-                  let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                  let token = json["token"] as? String else {
-                completion(.failure(.decodingError))
-                return
-            }
-            
-            completion(.success(token))
-        }.resume()
-    }
-    
-    static func sendTranscribedText(_ text: String, completion: @escaping (Result<String, BackendAPIError>) -> Void) {
+    static func sendTextForZap(_ text: String, completion: @escaping (Result<String, BackendAPIError>) -> Void) {
         guard let url = URL(string: transformerURL) else {
             completion(.failure(.urlError))
             return
@@ -78,7 +53,7 @@ struct API {
     
     
     static func generateText(completion: @escaping (Result<String, BackendAPIError>) -> Void) {
-        guard let url = URL(string: generateURL) else {
+        guard let url = URL(string: generatorURL) else {
             completion(.failure(.urlError))
             return
         }
@@ -147,8 +122,8 @@ struct API {
         }.resume()
     }
     
-    static func sendAudioAndText(audioURL: URL, contextText: String, completion: @escaping (Result<String, BackendAPIError>) -> Void) {
-        guard let url = URL(string: voiceEditURL) else {
+    static func sendAudioAndTextForEdit(audioURL: URL, contextText: String, completion: @escaping (Result<String, BackendAPIError>) -> Void) {
+        guard let url = URL(string: editURL) else {
             completion(.failure(.urlError))
             return
         }

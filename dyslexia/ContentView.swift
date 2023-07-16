@@ -30,7 +30,6 @@ struct ContentView: View {
         }
         .onOpenURL { url in
             guard let host = url.host else { return }
-            print(host)
             switch host {
             case "dictation_inapp":
                 audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)

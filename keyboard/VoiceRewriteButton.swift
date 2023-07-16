@@ -1,5 +1,5 @@
 //
-//  VoiceRewriteButton.swift
+//  EditButton.swift
 //  keyboard
 //
 //  Created by ibbi on 7/5/23.
@@ -10,7 +10,7 @@ import KeyboardKit
 import Combine
 import URLProxy
 
-struct VoiceRewriteButton: View {
+struct EditButton: View {
     let controller: KeyboardInputViewController
     @Binding var rewrittenText: String
     @Binding var prewrittenText: String
@@ -43,7 +43,6 @@ struct VoiceRewriteButton: View {
         let fileManager = FileManager.default
         
         if fileManager.fileExists(atPath: audioURL.path) {
-            print("file exists")
             isLoading = true
             decideSelectionOrEntire()
         }
@@ -114,7 +113,7 @@ struct VoiceRewriteButton: View {
         let audioURL = getAudioURL()
         prewrittenText = text
         keyboardStatus = .rewriting
-        API.sendAudioAndText(audioURL: audioURL, contextText: text) { result in
+        API.sendAudioAndTextForEdit(audioURL: audioURL, contextText: text) { result in
             DispatchQueue.main.async {
                 isLoading = false
                 keyboardStatus = .available
@@ -169,7 +168,7 @@ struct VoiceRewriteButton: View {
                         urlHandler.openURL("dyslexia://edit_dictation")
                     } else {
                         urlHandler.openURL("dyslexia://edit_dictation_inapp")
-                    }                }}, isLoading: $isLoading, onlyVisual: false, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
+                    }                }}, isLoading: $isLoading, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
             .onChange(of: fullText) { newValue in
                 if (!newValue.isEmpty && hasTextToRewrite()) {
                     rewriteTextWithAudioInstructions(fullText, shouldDelete: true)
@@ -182,9 +181,3 @@ struct VoiceRewriteButton: View {
             .id(forceUpdateButtons)
     }
 }
-
-//struct VoiceRewriteButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VoiceRewriteButton()
-//    }
-//}

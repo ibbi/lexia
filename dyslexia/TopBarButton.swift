@@ -46,7 +46,6 @@ struct TopBarButton: View {
     var buttonType: ButtonType
     var action: (() -> Void)?
     @Binding var isLoading: Bool
-    let onlyVisual: Bool
     let isInBadContext: Bool
 
     var body: some View {
@@ -90,7 +89,7 @@ struct TopBarButton: View {
         .buttonStyle(.borderedProminent)
         .tint(Color.standardButtonBackground)
         .foregroundColor(.primary)
-        .disabled(isLoading || onlyVisual || isInBadContext)
+        .disabled(isLoading || isInBadContext)
         }
     }
 
@@ -98,6 +97,6 @@ struct TopBarButton: View {
 
 struct TopBarButton_Previews: PreviewProvider {
     static var previews: some View {
-        TopBarButton(buttonType: ButtonType.edit, action: {}, isLoading: .constant(false), onlyVisual: false, isInBadContext: false)
+        TopBarButton(buttonType: ButtonType.edit, action: {}, isLoading: .constant(false), isInBadContext: false)
     }
 }
