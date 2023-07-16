@@ -75,6 +75,7 @@ struct Playground: View {
                         Text("Run tutorial")
                     }
                     .buttonStyle(.bordered)
+                    .disabled(generatorLoading || !finishedTour || !isKeyboardActive)
                     
                 }
                 Divider()
@@ -93,7 +94,7 @@ struct Playground: View {
                     }
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(generatorLoading)
+                .disabled(generatorLoading || !finishedTour || !isKeyboardActive)
                 .padding(.top)
                 TextEditor(text: $inputText)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -14,10 +14,22 @@ struct CoachMark: View {
     
     
     var body: some View {
+        let isSelectLexy = coachID == .selectLexy
         
         ZStack {
             Rectangle()
-                .fill(Color.black.opacity(0.7))
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(
+                            stops: [
+                                .init(color: Color.black.opacity(0.7), location: 0.0),
+                                .init(color: Color.black.opacity(isSelectLexy ? 0.7 : 0), location: 0.35),
+                                .init(color: Color.black.opacity(isSelectLexy ? 0.7 : 0), location: 1.0)
+                            ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                )
                 .ignoresSafeArea()
             
             if onSkip != nil {
@@ -43,7 +55,7 @@ struct CoachMark: View {
                     VStack(alignment: .leading) {
                         coachID.mainText
                             .font(.body)
-                            .padding(.bottom, coachID == .selectLexy ? 0 : 6)
+                            .padding(.bottom, isSelectLexy ? 0 : 6)
                                 if !(coachID.lowerText["subText"]?.isEmpty ?? true) {
                                     Text(coachID.lowerText["subText"]!)
                                         .font(.caption)
@@ -67,7 +79,7 @@ struct CoachMark: View {
                 .padding()
                 .background(Color.accentColor)
                 .cornerRadius(15)
-                if coachID != .selectLexy {
+                if !isSelectLexy {
                     VStack {
                         Path { path in
                             let position = coachID.arrowPosition
