@@ -30,14 +30,14 @@ struct ContentView: View {
         }
         .onOpenURL { url in
             guard let host = url.host else { return }
-            deeplinkedURL = host
+            print(host)
             switch host {
             case "dictation_inapp":
                 audioRecorder.startRecording(shouldJumpBack: false, isEdit: false)
             case "edit_dictation_inapp":
                 audioRecorder.startRecording(shouldJumpBack: false, isEdit: true)
             default:
-                print("Weird URL")
+                deeplinkedURL = host
             }
         }
     }
