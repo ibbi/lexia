@@ -56,3 +56,47 @@ enum ZapOptions: CaseIterable {
         }
     }
 }
+
+enum Coachy {
+
+    case selectLexy
+    case dictate
+    case edit
+    case zapSelect
+    case zap
+    case undo
+    
+    var lowerText: [String: String] {
+        switch self {
+        case .selectLexy: return ["subText": "", "tipText": ""]
+        case .dictate: return ["subText": "Try saying 'I hate the smell of butter!'", "tipText": ""]
+        case .edit: return ["subText": "Try saying 'Make this more aggressive, and all caps", "tipText": "Tip: You can partially edit text by selecting it first"]
+        case .zapSelect: return ["subText": "Try selecting \(ZapOptions.rasta.icon) \(ZapOptions.rasta.description)", "tipText": "Tip: We always remember your last voice"]
+        case .zap: return ["subText": "", "tipText": ""]
+        case .undo: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else since the last edit"]
+        }
+    }
+    
+    var mainText: Text {
+        switch self {
+        case .selectLexy: return Text("Hold \(Image(systemName: "globe")) below, and select Lexy")
+        case .dictate: return Text("Tap \(Image(systemName: "mic.fill")) to dictate, in any language.")
+        case .edit: return Text("Tap \(Image(systemName: "pencil")) to make custom voice edits.")
+        case .zapSelect: return Text("Hold \(ZapOptions.getZapMode(from: UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0")?.icon ?? ZapOptions.rasta.icon) to select a voice.")
+        case .zap: return Text("Now tap \(ZapOptions.getZapMode(from: UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0")?.icon ?? ZapOptions.rasta.icon) to rewrite in the selected voice.")
+        case .undo: return Text("Tap \(Image(systemName: "arrow.counterclockwise")) to undo your most recent edit")
+        }
+    }
+    
+    var arrowPosition: CGFloat {
+        let buttonWidth = 58.0
+        switch self {
+        case .selectLexy: return 0
+        case .dictate: return buttonWidth / 2
+        case .edit: return buttonWidth * 1.5
+        case .zapSelect: return buttonWidth * 2.5
+        case .zap: return buttonWidth * 2.5
+        case .undo: return UIScreen.main.bounds.width - (buttonWidth/2)
+        }
+    }
+}

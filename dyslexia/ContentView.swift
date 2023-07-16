@@ -14,7 +14,6 @@ struct ContentView: View {
     @StateObject private var audioRecorder = AudioRecorder()
     
     var body: some View {
-//        Playground(isKeyboardActive: false)
         Group {
             if deeplinkedURL == "dictation" {
                 DictationWhisper(isEdit: false, deeplinkedURL: $deeplinkedURL)

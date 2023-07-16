@@ -51,7 +51,7 @@ struct TopBarButton: View {
 
     var body: some View {
         Button(action: {
-//            isLoading = true
+            isLoading = true
             action!()
         }) {
             HStack {
@@ -61,9 +61,23 @@ struct TopBarButton: View {
                         .frame(width: 25, height: 25, alignment: .center)
 
                 } else if isInBadContext {
-                    buttonType.disabledIcon
-                        .imageScale(.large)
-                        .frame(width: 25, height: 25, alignment: .center)
+                    if buttonType == .undo {
+                        ZStack {
+                            buttonType.icon
+                                .imageScale(.large)
+                                .frame(width: 25, height: 25, alignment: .center)
+                            Image(systemName: "line.diagonal")
+                                .imageScale(.large)
+                                .frame(width: 25, height: 25, alignment: .center)
+                                .rotationEffect(.degrees(90))
+                        }
+
+                    }
+                    else {
+                        buttonType.disabledIcon
+                            .imageScale(.large)
+                            .frame(width: 25, height: 25, alignment: .center)
+                    }
                     
                 } else {
                     buttonType.icon

@@ -37,9 +37,7 @@ struct UndoButton: View {
     }
     
     var body: some View {
-        if hasRecentRewrite() {
-            TopBarButton(buttonType: ButtonType.undo, action: {tryUndo()}, isLoading: $isLoading, onlyVisual: false, isInBadContext: false)
-        }
+        TopBarButton(buttonType: ButtonType.undo, action: {tryUndo()}, isLoading: $isLoading, onlyVisual: false, isInBadContext: !hasRecentRewrite())
     }
     
 }
