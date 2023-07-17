@@ -16,6 +16,22 @@ extension Color {
     static let pastelGreen = Color(red: 0.60, green: 0.88, blue: 0.85)
 }
 
+extension View {
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+}
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        return Path(path.cgPath)
+    }
+}
+
 enum ZapOptions: CaseIterable {
     case casual
     case professional
@@ -72,7 +88,7 @@ enum Coachy {
         case .dictate: return ["subText": "Try saying 'I hate the smell of butter!'", "tipText": ""]
         case .edit: return ["subText": "Try saying 'Make this more aggressive, and all caps", "tipText": "Tip: You can partially edit text by selecting it first"]
         case .zapSelect: return ["subText": "Try selecting \(ZapOptions.rasta.icon) \(ZapOptions.rasta.description)", "tipText": "Tip: We always remember your last voice"]
-        case .zap: return ["subText": "", "tipText": ""]
+        case .zap: return ["subText": "", "tipText": "Tip: This is only available when there is text around the cursor"]
         case .undo: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else \nsince the last edit"]
         }
     }
@@ -81,8 +97,8 @@ enum Coachy {
         switch self {
         case .selectLexy: return Text("Hold \(Image(systemName: "globe")) below, and select Lexy")
         case .dictate: return Text("Tap \(Image(systemName: "mic.fill")) to dictate, in any language.")
-        case .edit: return Text("Tap \(Image(systemName: "pencil")) to make custom voice edits.")
-        case .zapSelect: return Text("Hold \(ZapOptions.getZapMode(from: UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0")?.icon ?? ZapOptions.rasta.icon) to select a voice.")
+        case .edit: return Text("Tap \(Image(systemName: "waveform.and.mic")) to make custom voice edits.")
+        case .zapSelect: return Text("Tap ⋮ to select a voice.")
         case .zap: return Text("Now tap \(ZapOptions.getZapMode(from: UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0")?.icon ?? ZapOptions.rasta.icon) to rewrite in the selected voice.")
         case .undo: return Text("Tap \(Image(systemName: "arrow.counterclockwise")) to undo your most recent edit")
         }
@@ -94,9 +110,9 @@ enum Coachy {
         switch self {
         case .selectLexy: return 0
         case .dictate: return (buttonWidth / 2) - padding + 3
-        case .edit: return (buttonWidth * 1.5) - padding
-        case .zapSelect: return (buttonWidth * 2.5) - padding
-        case .zap: return (buttonWidth * 2.5) - padding
+        case .edit: return UIScreen.main.bounds.width - (buttonWidth * 1.5) - padding
+        case .zapSelect: return UIScreen.main.bounds.width - (buttonWidth * 3) - padding
+        case .zap: return UIScreen.main.bounds.width - (buttonWidth * 2.5) - padding
         case .undo: return UIScreen.main.bounds.width - (buttonWidth/2) - padding - 3
         }
     }

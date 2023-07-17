@@ -25,6 +25,7 @@ struct ZapButton: View {
     @State private var afterText = ""
     @State private var fullText = ""
     @State private var afterTries = 0
+    @State private var isMenuOpen: Bool = false
     
     let beforeTextTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     let moveToEndTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
@@ -134,10 +135,10 @@ struct ZapButton: View {
     }
     
     var body: some View {
-        Button(action: {
-        }) {
+        Button(action: {}) {
             HStack {
-                    Menu("\(Image(systemName: "chevron.right"))") {
+                Button( action: {}) {
+                    Menu {
                         ForEach(ZapOptions.allCases, id: \.self) { option in
                             Button(action: {
                                 sharedDefaults?.set(option.id, forKey: "zap_mode_id")
@@ -146,36 +147,39 @@ struct ZapButton: View {
                             }
                         }
                     }
+                label: {
+                    Image(systemName: "ellipsis")
+                        .imageScale(.large)
+                        .frame(width: 10, height: 25, alignment: .center)
+                        .rotationEffect(.degrees(90))
+                }
+                .onDisappear {
+                    isMenuOpen = false
+                }
+                }
                 Divider()
-                if isLoading {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                        .frame(width: 25, height: 25, alignment: .center)
-                    
-                } else {
-                    ZStack {
-                        Text(ZapOptions.getZapMode(from: zapModeId)?.icon ?? ZapOptions.casual.icon)
-                            .contextMenu {
-                                ForEach(ZapOptions.allCases, id: \.self) { option in
-                                    Button(action: {
-                                        sharedDefaults?.set(option.id, forKey: "zap_mode_id")
-                                    }) {
-                                        Text(option.icon + " " + option.description)
-                                    }
-                                }
-                            }
-                            .onTapGesture {
-                                isLoading = true
-                                decideSelectionOrEntire()
-                            }
-                            .grayscale(isDisabled() ? 1 : 0)
-                        Image(systemName: "line.diagonal")
-                            .imageScale(.large)
+                Button( action: {
+                    isLoading = true
+                    decideSelectionOrEntire()
+                }) {
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
                             .frame(width: 25, height: 25, alignment: .center)
-                            .rotationEffect(.degrees(90))
-                            .opacity(isDisabled() ? 1 : 0)
+                        
+                    } else {
+                        ZStack {
+                            Text(ZapOptions.getZapMode(from: zapModeId)?.icon ?? ZapOptions.casual.icon)
+                                .grayscale(isDisabled() ? 1 : 0)
+                            Image(systemName: "line.diagonal")
+                                .imageScale(.large)
+                                .frame(width: 25, height: 25, alignment: .center)
+                                .rotationEffect(.degrees(90))
+                                .opacity(isDisabled() ? 1 : 0)
+                        }
                     }
                 }
+                .disabled(isLoading || isDisabled())
             }
         }
         .id(forceUpdateButtons)
@@ -188,6 +192,5 @@ struct ZapButton: View {
         .buttonStyle(.borderedProminent)
         .tint(Color.standardButtonBackground)
         .foregroundColor(.primary)
-        .disabled(isLoading || isDisabled())
     }
 }

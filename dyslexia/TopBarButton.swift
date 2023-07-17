@@ -17,7 +17,7 @@ enum ButtonType {
     var icon: Image {
         switch self {
             case .speak: return Image(systemName: "mic.fill")
-            case .edit: return Image(systemName: "pencil")
+            case .edit: return Image(systemName: "waveform.and.mic")
             case .enhance: return Image(systemName: "bolt.fill")
             case .undo: return Image(systemName: "arrow.counterclockwise")
         }
@@ -32,14 +32,6 @@ enum ButtonType {
         }
     }
     
-    var disabledIcon: Image {
-        switch self {
-            case .speak: return Image(systemName: "mic.slash.fill")
-            case .edit: return Image(systemName: "pencil.slash")
-            case .enhance: return Image(systemName: "bolt.slash.fill")
-            case .undo: return Image(systemName: "arrow.counterclockwise")
-        }
-    }
 }
 
 struct TopBarButton: View {
@@ -58,31 +50,17 @@ struct TopBarButton: View {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle())
                         .frame(width: 25, height: 25, alignment: .center)
-
-                } else if isInBadContext {
-                    if buttonType == .undo {
-                        ZStack {
-                            buttonType.icon
-                                .imageScale(.large)
-                                .frame(width: 25, height: 25, alignment: .center)
-                            Image(systemName: "line.diagonal")
-                                .imageScale(.large)
-                                .frame(width: 25, height: 25, alignment: .center)
-                                .rotationEffect(.degrees(90))
-                        }
-
-                    }
-                    else {
-                        buttonType.disabledIcon
+                } else {
+                    ZStack {
+                        buttonType.icon
                             .imageScale(.large)
                             .frame(width: 25, height: 25, alignment: .center)
+                        Image(systemName: "line.diagonal")
+                            .imageScale(.large)
+                            .frame(width: 25, height: 25, alignment: .center)
+                            .rotationEffect(.degrees(90))
+                            .opacity(isInBadContext ? 1 : 0)
                     }
-                    
-                } else {
-                    buttonType.icon
-                        .imageScale(.large)
-                        .frame(width: 25, height: 25, alignment: .center)
-
                 }
             }
         }

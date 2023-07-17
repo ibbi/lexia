@@ -63,7 +63,7 @@ struct CoachMark: View {
                 }
             }
             
-            VStack(alignment: (coachID == .undo ? .trailing : .leading), spacing: 0) {
+            VStack(alignment: (coachID == .dictate ? .leading : .trailing), spacing: 0) {
                 Spacer()
                     VStack(alignment: .leading) {
                         coachID.mainText

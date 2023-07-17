@@ -36,7 +36,6 @@ struct Playground: View {
                     withAnimation {currentStep += 1}
                 }
             }),
-            TutorialStep(id: .edit, onNext: { withAnimation {currentStep += 1} }),
             TutorialStep(id: .zapSelect, onNext: {
                 if zapModeID == ZapOptions.rasta.id {
                     withAnimation {currentStep += 1}
@@ -45,6 +44,7 @@ struct Playground: View {
                 }
             }),
             TutorialStep(id: .zap, onNext: { withAnimation {currentStep += 1} }),
+            TutorialStep(id: .edit, onNext: { withAnimation {currentStep += 1} }),
             TutorialStep(id: .undo, onNext: {
                 currentStep = 0
                 sharedDefaults?.set(true, forKey: "finished_tour")
