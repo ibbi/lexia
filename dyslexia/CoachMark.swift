@@ -9,6 +9,24 @@ import SwiftUI
 import UIKit
 import KeyboardKit
 
+struct Arrow: Shape {
+    var position: CGFloat
+
+    var animatableData: CGFloat {
+        get { position }
+        set { position = newValue }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: position, y: 15))
+        path.addLine(to: CGPoint(x: position - 15, y: 0))
+        path.addLine(to: CGPoint(x: position + 15, y: 0))
+        path.closeSubpath()
+        return path
+    }
+}
+
 struct CoachMark: View {
     let coachID: Coachy
     let onNext: (() -> Void)?
@@ -109,16 +127,10 @@ struct CoachMark: View {
                 .fixedSize()
                 if !isSelectLexy {
                     VStack {
-                        Path { path in
-                            let position = coachID.arrowPosition
-                            path.move(to: CGPoint(x: position, y: 15))
-                            path.addLine(to: CGPoint(x: position - 15, y: 0))
-                            path.addLine(to: CGPoint(x: position + 15, y: 0))
-                            path.closeSubpath()
-                        }
-                        .fill(Color.accentColor)
-                        .frame(height: 15)
-                        .padding(.top, -7)
+                        Arrow(position: coachID.arrowPosition)
+                            .fill(Color.accentColor)
+                            .frame(height: 15)
+                            .padding(.top, -7)
                     }
                 }
                 else {

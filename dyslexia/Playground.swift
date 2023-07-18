@@ -8,8 +8,6 @@
 import KeyboardKit
 import SwiftUI
 
-
-
 struct Playground: View {
     let isKeyboardActive: Bool
     @State private var isFocused: Bool = false
