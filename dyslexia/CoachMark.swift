@@ -36,7 +36,7 @@ struct CoachMark: View {
     
     
     var body: some View {
-        let isSelectLexy = coachID == .selectLexy
+        let isSelectLexi = coachID == .selectLexi
         
         ZStack {
             Rectangle()
@@ -45,8 +45,8 @@ struct CoachMark: View {
                         gradient: Gradient(
                             stops: [
                                 .init(color: Color.black.opacity(0.7), location: 0.0),
-                                .init(color: Color.black.opacity(isSelectLexy ? 0.7 : 0), location: 0.35),
-                                .init(color: Color.black.opacity(isSelectLexy ? 0.7 : 0), location: 1.0)
+                                .init(color: Color.black.opacity(isSelectLexi ? 0.7 : 0), location: 0.35),
+                                .init(color: Color.black.opacity(isSelectLexi ? 0.7 : 0), location: 1.0)
                             ]),
                             startPoint: .top,
                             endPoint: .bottom
@@ -86,7 +86,7 @@ struct CoachMark: View {
                     VStack(alignment: .leading) {
                         coachID.mainText
                             .font(.body)
-                            .padding(.bottom, isSelectLexy ? 0 : 6)
+                            .padding(.bottom, isSelectLexi ? 0 : 6)
                             .foregroundColor(.white)
                                 if !(coachID.lowerText["subText"]?.isEmpty ?? true) {
                                     Text(coachID.lowerText["subText"]!)
@@ -125,7 +125,7 @@ struct CoachMark: View {
                 .background(Color.accentColor)
                 .cornerRadius(15)
                 .fixedSize()
-                if !isSelectLexy {
+                if !isSelectLexi {
                     VStack {
                         Arrow(position: coachID.arrowPosition)
                             .fill(Color.accentColor)

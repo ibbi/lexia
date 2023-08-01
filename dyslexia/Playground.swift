@@ -113,7 +113,7 @@ struct Playground: View {
                 }
             }
             if !isKeyboardActive {
-                CoachMark(coachID: Coachy.selectLexy, onNext: nil, onPrev: nil, onSkip: nil )
+                CoachMark(coachID: Coachy.selectLexi, onNext: nil, onPrev: nil, onSkip: nil )
             }
             else if !finishedTour {
                 CoachMark(coachID: tutorialSteps[currentStep].id, onNext: tutorialSteps[currentStep].onNext, onPrev: tutorialSteps[currentStep].id == .dictate ? nil : { withAnimation {currentStep = currentStep - 1} },  onSkip: {

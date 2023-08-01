@@ -75,7 +75,7 @@ enum ZapOptions: CaseIterable {
 
 enum Coachy {
 
-    case selectLexy
+    case selectLexi
     case dictate
     case edit
     case zapSelect
@@ -84,7 +84,7 @@ enum Coachy {
     
     var lowerText: [String: String] {
         switch self {
-        case .selectLexy: return ["subText": "", "tipText": ""]
+        case .selectLexi: return ["subText": "", "tipText": ""]
         case .dictate: return ["subText": "Try saying 'I hate the smell of butter!'", "tipText": ""]
         case .edit: return ["subText": "Try saying 'Make this more aggressive, and all caps", "tipText": "Tip: You can partially edit text by selecting it first"]
         case .zapSelect: return ["subText": "Try selecting \(ZapOptions.rasta.icon) \(ZapOptions.rasta.description)", "tipText": "Tip: We always remember your last voice"]
@@ -95,7 +95,7 @@ enum Coachy {
     
     var mainText: Text {
         switch self {
-        case .selectLexy: return Text("Hold \(Image(systemName: "globe")) below, and select Lexy")
+        case .selectLexi: return Text("Hold \(Image(systemName: "globe")) below, and select Lexi")
         case .dictate: return Text("Tap \(Image(systemName: "mic.fill")) to dictate, in any language.")
         case .edit: return Text("Tap \(Image(systemName: "waveform.and.mic")) to make custom voice edits.")
         case .zapSelect: return Text("Tap ⋮ to select a voice.")
@@ -108,7 +108,7 @@ enum Coachy {
         let buttonWidth = 58.0
         let padding = 14.0
         switch self {
-        case .selectLexy: return 0
+        case .selectLexi: return 0
         case .dictate: return (buttonWidth / 2) - padding + 3
         case .edit: return UIScreen.main.bounds.width - (buttonWidth * 1.5) - padding
         case .zapSelect: return UIScreen.main.bounds.width - (buttonWidth * 3) - padding

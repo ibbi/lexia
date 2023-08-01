@@ -590,7 +590,7 @@
 				DEVELOPMENT_TEAM = 372X4548N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = keyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Lexy;
+				INFOPLIST_KEY_CFBundleDisplayName = Lexi;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -616,7 +616,7 @@
 				DEVELOPMENT_TEAM = 372X4548N8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = keyboard/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Lexy;
+				INFOPLIST_KEY_CFBundleDisplayName = Lexi;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
