@@ -38,68 +38,67 @@ struct KeyboardView: View {
         let isGmail = controller.hostBundleId == "com.google.Gmail"
         
 // TODO: Clean up this conditional mess
-            VStack(spacing: 0) {
-                if isInEditMode && !isRecording {
-                    HStack {
-                        TopBarButton(buttonType: .discard, action:{
-                            withAnimation {
-                                isInEditMode = false
-                            }
-                        }, isLoading: .constant(false), isInBadContext: false)
-                        Spacer()
-                        TopBarButton(buttonType: .confirm, action:{
-                            withAnimation {
-                                isInEditMode = false
-                                print(buttonRowSize)
-                            }
-                        }, isLoading: .constant(false), isInBadContext: false)
-                    }
-                    .padding(6)
-                    .padding(.top, 6)
-                }
-                if isInEditMode {
-                    KeyboardTextView(text: $editText, controller: controller)
-                        .padding(3)
-                        .frame(height: isRecording ? buttonRowSize.height : keyboardSize.height - buttonRowSize.height)
-                    if isRecording {
-                        StopRecording(height: keyboardSize.height)
-                    }
-                }
-                if !isRecording {
-                    HStack {
-                        TranscribeButton(controller: controller, forceUpdateButtons: $forceUpdateButtons)
-                        Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
-                        Spacer()
-                        ZapButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail)
-                        EditButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail)
-                        if isInEditMode {
-                            UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
-                            TopBarButton(buttonType: .redo, action:{}, isLoading: .constant(false), isInBadContext: false)
-                        } else {
-                            Divider()
-                            TopBarButton(buttonType: .editView, action:{
-                                withAnimation {
-                                    isInEditMode = true
-                                }
-                            }, isLoading: .constant(false), isInBadContext: false)
+        VStack(spacing: 0) {
+            if isInEditMode && !isRecording {
+                HStack {
+                    TopBarButton(buttonType: .discard, action:{
+                        withAnimation {
+                            isInEditMode = false
                         }
-                    }
-                    .padding(6)
-                    .padding(.top, 6)
-                    // BOommmmomom
-                    .saveSize(in: $buttonRowSize)
-                    if (!isInEditMode) {
-                        SystemKeyboard(
-                            controller: controller,
-                            autocompleteToolbar: .none
-                        )
-                        .saveSize(in: $keyboardSize)
-                    }
+                    }, isLoading: .constant(false), isInBadContext: false)
+                    Spacer()
+                    TopBarButton(buttonType: .confirm, action:{
+                        withAnimation {
+                            isInEditMode = false
+                        }
+                    }, isLoading: .constant(false), isInBadContext: false)
                 }
-                else if !isInEditMode {
-                    StopRecording(height: keyboardSize.height + buttonRowSize.height)
+                .padding(6)
+                .padding(.top, 6)
+            }
+            if isInEditMode {
+                KeyboardTextView(text: $editText, controller: controller)
+                    .padding(3)
+                    .frame(height: isRecording ? buttonRowSize.height : keyboardSize.height - buttonRowSize.height)
+                if isRecording {
+                    StopRecording(height: keyboardSize.height)
                 }
             }
+            if !isRecording {
+                HStack {
+                    TranscribeButton(controller: controller, forceUpdateButtons: $forceUpdateButtons)
+                    Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
+                    Spacer()
+                    ZapButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail)
+                    EditButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail)
+                    if isInEditMode {
+                        UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
+                        TopBarButton(buttonType: .redo, action:{}, isLoading: .constant(false), isInBadContext: false)
+                    } else {
+                        Divider()
+                        TopBarButton(buttonType: .editView, action:{
+                            withAnimation {
+                                isInEditMode = true
+                            }
+                        }, isLoading: .constant(false), isInBadContext: false)
+                    }
+                }
+                .padding(6)
+                .padding(.top, 6)
+                .fixedSize(horizontal: false, vertical: true)
+                .saveSize(in: $buttonRowSize)
+                if (!isInEditMode) {
+                    SystemKeyboard(
+                        controller: controller,
+                        autocompleteToolbar: .none
+                    )
+                    .saveSize(in: $keyboardSize)
+                }
+            }
+            else if !isInEditMode {
+                StopRecording(height: keyboardSize.height + buttonRowSize.height)
+            }
+        }
     }
 }
 
