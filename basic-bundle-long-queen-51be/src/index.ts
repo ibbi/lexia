@@ -12,7 +12,7 @@ const personas = {
 
 const genPrompts = [
   'Write a random, short, 2 sentence informal message or story with a typo.',
-  'Write a short 4 sentence story about Lexy the keyboard.',
+  'Write a short 4 sentence story about Lexi the keyboard.',
   'Write a 2 verse poem.',
   'Write a paragraph describing how your day went.',
 ];

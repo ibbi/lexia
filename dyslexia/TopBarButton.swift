@@ -13,22 +13,29 @@ enum ButtonType {
     case edit
     case enhance
     case undo
+    case redo
+    case confirm
+    case discard
+    case editView
 
     var icon: Image {
         switch self {
-            case .speak: return Image(systemName: "mic.fill")
-            case .edit: return Image(systemName: "waveform.and.mic")
-            case .enhance: return Image(systemName: "bolt.fill")
-            case .undo: return Image(systemName: "arrow.counterclockwise")
+        case .speak: return Image(systemName: "mic.fill")
+        case .edit: return Image(systemName: "waveform.and.mic")
+        case .enhance: return Image(systemName: "bolt.fill")
+        case .undo: return Image(systemName: "arrow.uturn.backward")
+        case .redo: return Image(systemName: "arrow.uturn.forward")
+        case .confirm: return Image(systemName: "checkmark.circle.fill")
+        case .discard: return Image(systemName: "trash.fill")
+        case .editView: return Image(systemName: "text.viewfinder")
         }
     }
     
-    var label: String {
+    var tint: Color {
         switch self {
-        case .speak: return "Speak"
-        case .edit: return "Edit"
-        case .enhance: return "Fix"
-        case .undo: return ""
+        case .discard: return .pastelRed
+        case .confirm: return .pastelGreen
+        default: return .primary
         }
     }
     
@@ -39,6 +46,7 @@ struct TopBarButton: View {
     var action: (() -> Void)?
     @Binding var isLoading: Bool
     let isInBadContext: Bool
+
 
     var body: some View {
         Button(action: {
@@ -65,8 +73,8 @@ struct TopBarButton: View {
             }
         }
         .buttonStyle(.borderedProminent)
-        .tint(Color.standardButtonBackground)
-        .foregroundColor(.primary)
+        .tint(.standardButtonBackground)
+        .foregroundColor(buttonType.tint)
         .disabled(isLoading || isInBadContext)
         }
     }

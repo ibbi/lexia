@@ -28,6 +28,7 @@ struct PulsingCircle: View {
 }
 
 struct StopRecording: View {
+    @State var height: CGFloat
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
     @State private var isUserDismissing = false
     var body: some View {
@@ -53,6 +54,7 @@ struct StopRecording: View {
                     }
                     Spacer()
                 }
+                .padding()
                 Spacer()
                 ZStack {
                     PulsingCircle()
@@ -69,10 +71,8 @@ struct StopRecording: View {
                 Spacer()
                 
             }
-            // TODO: Make height not hardcorded
-            .frame(maxWidth: .infinity, idealHeight: 216)
+            .frame(maxWidth: .infinity, minHeight: height)
         }
-            .padding()
             .onDisappear{
                 if (isUserDismissing) {
                     isUserDismissing = false

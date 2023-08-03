@@ -13,12 +13,32 @@ extension Color {
     static let pastelGray = Color(red: 0.93, green: 0.93, blue: 0.93)
     static let pastelYellow = Color(red: 1.00, green: 0.87, blue: 0.51)
     static let pastelRed = Color(red: 1.00, green: 0.66, blue: 0.64)
-    static let pastelGreen = Color(red: 0.60, green: 0.88, blue: 0.85)
+    static let pastelGreen = Color(red: 0.60, green: 0.88, blue: 0.65)
+}
+
+struct SizeCalculator: ViewModifier {
+    
+    @Binding var size: CGSize
+    
+    func body(content: Content) -> some View {
+        content
+            .background(
+                GeometryReader { proxy in
+                    Color.clear // we just want the reader to get triggered, so let's use an empty color
+                        .onAppear {
+                            size = proxy.size
+                        }
+                }
+            )
+    }
 }
 
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+    func saveSize(in size: Binding<CGSize>) -> some View {
+        modifier(SizeCalculator(size: size))
     }
 }
 struct RoundedCorner: Shape {
