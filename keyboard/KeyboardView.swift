@@ -24,9 +24,11 @@ struct KeyboardView: View {
     @State private var prevContext: String? = ""
     @State private var keyboardStatus: KeyboardStatus = .available
     @State private var isInEditMode: Bool = false
+    @FocusState private var isInputFocused: Bool
     // Hack to get inserttext to update views
     @State var forceUpdateButtons: Bool = false
     @State var editText: String = ""
+    @FocusState private var isEditInputFocused: Bool
     @State var keyboardSize: CGSize = .zero
     @State var buttonRowSize: CGSize = .zero
 
@@ -46,6 +48,7 @@ struct KeyboardView: View {
                             isInEditMode = false
                         }
                     }, isLoading: .constant(false), isInBadContext: false)
+                    Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
                     Spacer()
                     TopBarButton(buttonType: .confirm, action:{
                         withAnimation {
@@ -58,29 +61,32 @@ struct KeyboardView: View {
             }
             if isInEditMode {
                 KeyboardTextView(text: $editText, controller: controller)
-                    .padding(3)
+                    .focused($isInputFocused)
+                    .padding(6)
                     .frame(height: isRecording ? buttonRowSize.height : keyboardSize.height - buttonRowSize.height)
+                    .onAppear{
+                        isInputFocused = true
+                    }
                 if isRecording {
                     StopRecording(height: keyboardSize.height)
                 }
             }
             if !isRecording {
                 HStack {
-                    TranscribeButton(controller: controller, forceUpdateButtons: $forceUpdateButtons)
-                    Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
-                    Spacer()
-                    ZapButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail)
-                    EditButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail)
+                    if !isInEditMode {
+                        TranscribeButton(controller: controller, forceUpdateButtons: $forceUpdateButtons)
+                        Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
+                        Spacer()
+                    }
+                    ZapButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
+                    EditButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
                     if isInEditMode {
+                        Spacer()
                         UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
                         TopBarButton(buttonType: .redo, action:{}, isLoading: .constant(false), isInBadContext: false)
                     } else {
                         Divider()
-                        TopBarButton(buttonType: .editView, action:{
-                            withAnimation {
-                                isInEditMode = true
-                            }
-                        }, isLoading: .constant(false), isInBadContext: false)
+                        EditModeButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: $isInEditMode, editText: $editText)
                     }
                 }
                 .padding(6)

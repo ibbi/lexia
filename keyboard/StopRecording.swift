@@ -34,21 +34,31 @@ struct StopRecording: View {
     var body: some View {
         Button(action: {
             isUserDismissing = true
-            sharedDefaults?.set(true, forKey: "stopping_recording")
+            withAnimation {
+                sharedDefaults?.set(true, forKey: "stopping_recording")
+            }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                sharedDefaults?.set(false, forKey: "recording")
+                withAnimation {
+                    sharedDefaults?.set(false, forKey: "recording")
+                }
             }
         }) {
             VStack{
                 HStack {
                     Button(action: {
                         isUserDismissing = true
-                        sharedDefaults?.set(true, forKey: "discard_recording")
+                        withAnimation {
+                            sharedDefaults?.set(true, forKey: "discard_recording")
+                        }
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            sharedDefaults?.set(false, forKey: "recording")
-                        }                    }) {
+                            withAnimation {
+                                sharedDefaults?.set(false, forKey: "recording")
+                            }
+                        }
+                    })
+                    {
                         Text("Discard")
                             .foregroundColor(.red)
                     }

@@ -1,54 +1,35 @@
 //
-//  EditButton.swift
+//  EditModeButton.swift
 //  keyboard
 //
-//  Created by ibbi on 7/5/23.
+//  Created by ibbi on 8/3/23.
 //
+
 
 import SwiftUI
 import KeyboardKit
 import Combine
-import URLProxy
 
-struct EditButton: View {
+struct EditModeButton: View {
     let controller: KeyboardInputViewController
     @Binding var rewrittenText: String
     @Binding var prewrittenText: String
     @Binding var prevContext: String?
-    @State var forceUpdateButtons: Bool
     @Binding var keyboardStatus: KeyboardStatus
     let isGmail: Bool
-    let isInEditMode: Bool
+    @Binding var isInEditMode: Bool
     @Binding var editText: String
-    @State private var selectedText: String?
     @State private var isLoading: Bool = false
     @State private var prevText = ""
     @State private var afterText = ""
     @State private var fullText = ""
     @State private var afterTries = 0
-    @State var isTranscribing: Bool = false
-
+    
     let beforeTextTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     let moveToEndTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     @State private var beforeCancellable: AnyCancellable?
     @State private var moveToEndCancellable: AnyCancellable?
-
-    func getAudioURL() -> URL {
-        let fileManager = FileManager.default
-        let sharedDataPath = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.lexia")!
-        return sharedDataPath.appendingPathComponent("edit_recording.m4a")
-    }
-
     
-    func tryGetContext() {
-        let audioURL = getAudioURL()
-        let fileManager = FileManager.default
-        
-        if fileManager.fileExists(atPath: audioURL.path) {
-            isLoading = true
-            decideSelectionOrEntire()
-        }
-    }
     
     func moveCursorToEnd () -> Bool {
         let after = controller.textDocumentProxy.documentContextAfterInput
@@ -93,7 +74,7 @@ struct EditButton: View {
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
         return false
     }
-
+    
     
     func getTextContextBefore() -> Bool {
         let before = controller.textDocumentProxy.documentContextBeforeInput
@@ -101,6 +82,8 @@ struct EditButton: View {
             controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
             beforeCancellable?.cancel()
             fullText = prevText
+            moveTextAndSetEditMode(fullText)
+            fullText = ""
             afterText = ""
             prevText = ""
             return true
@@ -110,43 +93,24 @@ struct EditButton: View {
         controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: len)
         return false
     }
-
-    func rewriteTextWithAudioInstructions(_ text: String, shouldDelete: Bool) {
-        let audioURL = getAudioURL()
+    
+    func moveTextAndSetEditMode(_ text: String) {
         prewrittenText = text
-        keyboardStatus = .rewriting
-        API.sendAudioAndTextForEdit(audioURL: audioURL, contextText: text) { result in
-            DispatchQueue.main.async {
-                isLoading = false
-                keyboardStatus = .available
-                switch result {
-                case .success(let transformed):
-                    if shouldDelete {
-                        controller.textDocumentProxy.deleteBackward(times: text.count)
-                    }
-                    controller.textDocumentProxy.insertText(transformed)
-                    rewrittenText = transformed
-                    prevContext = KeyHelper.getFiveSurroundingChars(controller: controller)
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                }
-                do {
-                    let fileManager = FileManager.default
-                    try fileManager.removeItem(at: audioURL)
-                } catch {
-                    print("Error deleting file: \(error)")
-                }
-            }
+        keyboardStatus = .available
+        editText = text
+        isLoading = false
+        withAnimation {
+            isInEditMode = true
         }
     }
-
+    
     func decideSelectionOrEntire() {
+        isLoading = true
         let selectedText = controller.keyboardTextContext.selectedText
         if !(selectedText?.isEmpty ?? true) {
-            rewriteTextWithAudioInstructions(selectedText!, shouldDelete: false)
-        } else if isInEditMode && !editText.isEmpty {
-            rewriteTextWithAudioInstructions(editText, shouldDelete: true)
-        } else if controller.textDocumentProxy.documentContext != nil {
+            moveTextAndSetEditMode(selectedText!)
+        }
+        else if controller.textDocumentProxy.documentContext != nil {
             keyboardStatus = .reading
             self.moveToEndCancellable = self.moveToEndTimer.sink { _ in
                 DispatchQueue.main.async {
@@ -156,33 +120,13 @@ struct EditButton: View {
         }
     }
     
-    func hasTextToRewrite() -> Bool {
-        if let selectedText = controller.keyboardTextContext.selectedText {
-            return true
-        } else if controller.textDocumentProxy.documentContext != nil {
-            return true
-        }
-        return false
+    func isDisabled() -> Bool {
+        return (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty))
     }
-
+    
     var body: some View {
-            TopBarButton(buttonType: ButtonType.edit, action: {
-                if hasTextToRewrite() {
-                    let urlHandler = URLHandler()
-                    if controller.hostBundleId != "ibbi.dyslexia" {
-                        urlHandler.openURL(Deeplinks.edit.URL)
-                    } else {
-                        urlHandler.openURL(Deeplinks.inAppEdit.URL)
-                    }                }}, isLoading: $isLoading, isInBadContext: (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty)))
-            .onChange(of: fullText) { newValue in
-                if (!newValue.isEmpty && hasTextToRewrite()) {
-                    rewriteTextWithAudioInstructions(fullText, shouldDelete: true)
-                    fullText = ""
-                }
-            }
-            .onAppear{
-                tryGetContext()
-            }
-            .id(forceUpdateButtons)
+        TopBarButton(buttonType: .editView, action: {
+            decideSelectionOrEntire()
+        }, isLoading: $isLoading, isInBadContext: false)
     }
 }

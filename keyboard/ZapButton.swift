@@ -17,6 +17,8 @@ struct ZapButton: View {
     @State var forceUpdateButtons: Bool
     @Binding var keyboardStatus: KeyboardStatus
     let isGmail: Bool
+    let isInEditMode: Bool
+    @Binding var editText: String
     @AppStorage("zap_mode_id", store: UserDefaults(suiteName: "group.lexia")) var zapModeId: String = ZapOptions.casual.id
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
     @State private var selectedText: String?
@@ -118,9 +120,14 @@ struct ZapButton: View {
     }
     
     func decideSelectionOrEntire() {
-        if let selectedText = controller.keyboardTextContext.selectedText {
-            zapText(selectedText, shouldDelete: false)
-        } else if controller.textDocumentProxy.documentContext != nil {
+        let selectedText = controller.keyboardTextContext.selectedText
+        if !(selectedText?.isEmpty ?? true) {
+            zapText(selectedText!, shouldDelete: false)
+        }
+        else if isInEditMode && !editText.isEmpty {
+            zapText(editText, shouldDelete: true)
+        }
+        else if controller.textDocumentProxy.documentContext != nil {
             keyboardStatus = .reading
             self.moveToEndCancellable = self.moveToEndTimer.sink { _ in
                 DispatchQueue.main.async {
