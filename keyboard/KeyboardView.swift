@@ -18,12 +18,13 @@ struct KeyboardView: View {
     unowned var controller: KeyboardInputViewController
     @EnvironmentObject
     private var keyboardContext: KeyboardContext
-    @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
+    @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecordingDefaults: Bool = false
+    @State private var isRecording: Bool = false
     @AppStorage("is_in_edit_mode", store: UserDefaults(suiteName: "group.lexia")) var isInEditModeDefaults: Bool = false
+    @State private var isInEditMode: Bool = false
     @State private var prevContext: String? = ""
     @State private var wasSelectedText: Bool = false
     @State private var keyboardStatus: KeyboardStatus = .available
-    @State private var isInEditMode: Bool = false
     @FocusState private var isInputFocused: Bool
     // Hack to get inserttext to update views
     @State var forceUpdateButtons: Bool = false
@@ -126,6 +127,13 @@ struct KeyboardView: View {
                     withAnimation {
                         isInEditMode = newValue
                     }
+                }
+            }
+        }
+        .onChange(of: isRecordingDefaults) { newValue in
+            if (isRecording != newValue) {
+                withAnimation {
+                    isRecording = newValue
                 }
             }
         }
