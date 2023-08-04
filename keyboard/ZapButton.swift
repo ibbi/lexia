@@ -16,7 +16,7 @@ struct ZapButton: View {
     let isGmail: Bool
     let isInEditMode: Bool
     @Binding var editText: String
-    @AppStorage("zap_mode_id", store: UserDefaults(suiteName: "group.lexia")) var zapModeId: String = ZapOptions.casual.id
+    @AppStorage("zap_mode_id", store: UserDefaults(suiteName: "group.lexia")) var zapModeId: String = ZapOptions.grammar.id
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
     @State private var selectedText: String?
     @State private var isLoading: Bool = false
@@ -163,7 +163,7 @@ struct ZapButton: View {
                     
                 } else {
                     ZStack {
-                        Text(ZapOptions.getZapMode(from: zapModeId)?.icon ?? ZapOptions.casual.icon)
+                        Text(ZapOptions.getZapMode(from: zapModeId)?.icon ?? ZapOptions.grammar.icon)
                             .grayscale(isDisabled() ? 1 : 0)
                         Image(systemName: "line.diagonal")
                             .imageScale(.large)

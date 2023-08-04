@@ -53,41 +53,51 @@ struct RoundedCorner: Shape {
 }
 
 enum ZapOptions: CaseIterable {
-    case casual
-    case professional
+    case grammar
+    case clear
+    case warm
     case rasta
     case medieval
+    case pirate
     
     var id: String {
         switch self {
-        case .casual: return "0"
-        case .professional: return "1"
-        case .rasta: return "2"
-        case .medieval: return"3"
+        case .grammar: return "0"
+        case .clear: return "1"
+        case .warm: return "2"
+        case .rasta: return"3"
+        case .medieval: return"4"
+        case .pirate: return"5"
         }
     }
     var icon: String {
         switch self {
-        case .casual: return "⚡️"
-        case .professional: return "👔"
+        case .grammar: return "⚡️"
+        case .clear: return "🫡"
         case .rasta: return "🇯🇲"
         case .medieval: return"🏰"
+        case .warm: return "👔"
+        case .pirate: return "🏴‍☠️"
         }
     }
     var description: String {
         switch self {
-        case .casual: return "Casual, concise"
-        case .professional: return "Precise, professional"
+        case .clear: return "Clear, concise"
+        case .warm: return "Warm, professional"
         case .rasta: return "Rastafarian"
-        case .medieval: return"Old timey"
+        case .medieval: return "Old timey"
+        case .grammar: return "Grammar, spelling"
+        case .pirate: return "Pirate"
         }
     }
     static func getZapMode(from id: String) -> ZapOptions? {
         switch id {
-        case ZapOptions.casual.id: return .casual
-        case ZapOptions.professional.id: return .professional
+        case ZapOptions.clear.id: return .clear
+        case ZapOptions.warm.id: return .warm
         case ZapOptions.rasta.id: return .rasta
         case ZapOptions.medieval.id: return .medieval
+        case ZapOptions.grammar.id: return .grammar
+        case ZapOptions.pirate.id: return .pirate
         default: return nil
         }
     }
