@@ -12,18 +12,18 @@ import Combine
 
 struct EditModeButton: View {
     let controller: KeyboardInputViewController
-    @Binding var rewrittenText: String
-    @Binding var prewrittenText: String
     @Binding var prevContext: String?
     @Binding var keyboardStatus: KeyboardStatus
     let isGmail: Bool
     @Binding var isInEditMode: Bool
     @Binding var editText: String
+    @Binding var undoRedoStack: [String]
     @State private var isLoading: Bool = false
     @State private var prevText = ""
     @State private var afterText = ""
     @State private var fullText = ""
     @State private var afterTries = 0
+    
     
     let beforeTextTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     let moveToEndTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
@@ -95,9 +95,9 @@ struct EditModeButton: View {
     }
     
     func moveTextAndSetEditMode(_ text: String) {
-        prewrittenText = text
         keyboardStatus = .available
         editText = text
+        undoRedoStack.append(text)
         isLoading = false
         withAnimation {
             isInEditMode = true

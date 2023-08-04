@@ -19,8 +19,6 @@ struct KeyboardView: View {
     @EnvironmentObject
     private var keyboardContext: KeyboardContext
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
-    @State private var rewrittenText: String = ""
-    @State private var prewrittenText: String = ""
     @State private var prevContext: String? = ""
     @State private var keyboardStatus: KeyboardStatus = .available
     @State private var isInEditMode: Bool = false
@@ -31,10 +29,14 @@ struct KeyboardView: View {
     @FocusState private var isEditInputFocused: Bool
     @State var keyboardSize: CGSize = .zero
     @State var buttonRowSize: CGSize = .zero
+    @State var undoRedoStack: [String] = []
+    @State var undoRedoIdx: Int = 0
 
-    
-    
-
+    func resetEditSpace() {
+        undoRedoStack = []
+        undoRedoIdx = 0
+        editText = ""
+    }
 
     var body: some View {
         let isGmail = controller.hostBundleId == "com.google.Gmail"
@@ -44,6 +46,7 @@ struct KeyboardView: View {
             if isInEditMode && !isRecording {
                 HStack {
                     TopBarButton(buttonType: .discard, action:{
+                        resetEditSpace()
                         withAnimation {
                             isInEditMode = false
                         }
@@ -64,8 +67,12 @@ struct KeyboardView: View {
                     .focused($isInputFocused)
                     .padding(6)
                     .frame(height: isRecording ? buttonRowSize.height : keyboardSize.height - buttonRowSize.height)
-                    .onAppear{
+                    .onAppear {
                         isInputFocused = true
+                    }
+                    .onDisappear {
+                        resetEditSpace()
+                        isInEditMode = false
                     }
                 if isRecording {
                     StopRecording(height: keyboardSize.height)
@@ -78,15 +85,14 @@ struct KeyboardView: View {
                         Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
                         Spacer()
                     }
-                    ZapButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
-                    EditButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
+                    ZapButton(controller: controller, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
+                    EditButton(controller: controller, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
                     if isInEditMode {
                         Spacer()
-                        UndoButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext)
-                        TopBarButton(buttonType: .redo, action:{}, isLoading: .constant(false), isInBadContext: false)
+                        UndoRedoButtons(editText: $editText, undoRedoStack: $undoRedoStack, undoRedoIdx: $undoRedoIdx)
                     } else {
                         Divider()
-                        EditModeButton(controller: controller, rewrittenText: $rewrittenText, prewrittenText: $prewrittenText, prevContext: $prevContext, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: $isInEditMode, editText: $editText)
+                        EditModeButton(controller: controller, prevContext: $prevContext, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: $isInEditMode, editText: $editText, undoRedoStack: $undoRedoStack)
                     }
                 }
                 .padding(6)

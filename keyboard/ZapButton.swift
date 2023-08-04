@@ -11,8 +11,6 @@ import Combine
 
 struct ZapButton: View {
     let controller: KeyboardInputViewController
-    @Binding var rewrittenText: String
-    @Binding var prewrittenText: String
     @Binding var prevContext: String?
     @State var forceUpdateButtons: Bool
     @Binding var keyboardStatus: KeyboardStatus
@@ -98,7 +96,6 @@ struct ZapButton: View {
     
     func zapText(_ text: String, shouldDelete: Bool) {
         isLoading = true
-        prewrittenText = text
         keyboardStatus = .rewriting
         API.sendTextForZap(text) { result in
             DispatchQueue.main.async {
@@ -110,7 +107,6 @@ struct ZapButton: View {
                         controller.textDocumentProxy.deleteBackward(times: text.count)
                     }
                     controller.textDocumentProxy.insertText(transformed)
-                    rewrittenText = transformed
                     prevContext = KeyHelper.getFiveSurroundingChars(controller: controller)
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")

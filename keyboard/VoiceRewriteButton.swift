@@ -12,8 +12,6 @@ import URLProxy
 
 struct EditButton: View {
     let controller: KeyboardInputViewController
-    @Binding var rewrittenText: String
-    @Binding var prewrittenText: String
     @Binding var prevContext: String?
     @State var forceUpdateButtons: Bool
     @Binding var keyboardStatus: KeyboardStatus
@@ -113,7 +111,6 @@ struct EditButton: View {
 
     func rewriteTextWithAudioInstructions(_ text: String, shouldDelete: Bool) {
         let audioURL = getAudioURL()
-        prewrittenText = text
         keyboardStatus = .rewriting
         API.sendAudioAndTextForEdit(audioURL: audioURL, contextText: text) { result in
             DispatchQueue.main.async {
@@ -125,7 +122,6 @@ struct EditButton: View {
                         controller.textDocumentProxy.deleteBackward(times: text.count)
                     }
                     controller.textDocumentProxy.insertText(transformed)
-                    rewrittenText = transformed
                     prevContext = KeyHelper.getFiveSurroundingChars(controller: controller)
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")

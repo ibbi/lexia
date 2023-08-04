@@ -13,6 +13,7 @@ class KeyboardViewController: KeyboardInputViewController {
     override func viewDidLoad() {
 
         keyboardContext.setLocale(.english)
+        keyboardFeedbackSettings.enableHapticFeedback()
         /// 💡 Call super to perform the base initialization.
         super.viewDidLoad()
     }
