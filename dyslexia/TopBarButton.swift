@@ -27,7 +27,7 @@ enum ButtonType {
         case .redo: return Image(systemName: "arrow.uturn.forward")
         case .confirm: return Image(systemName: "checkmark.circle.fill")
         case .discard: return Image(systemName: "trash.fill")
-        case .editView: return Image(systemName: "note.text")
+        case .editView: return Image(systemName: "rectangle.and.text.magnifyingglass")
         }
     }
     

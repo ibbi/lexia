@@ -112,7 +112,7 @@ struct CoachMark: View {
                                             .foregroundColor(Color.accentColor)
                                         }
                                         Button(action: onNext!) {
-                                            Text(coachID != .undo ? "\(Image(systemName: "chevron.right"))" : "Finish")
+                                            Text(coachID != .confirm ? "\(Image(systemName: "chevron.right"))" : "Finish")
                                         }
                                         .buttonStyle(.borderedProminent)
                                         .tint(Color.white)

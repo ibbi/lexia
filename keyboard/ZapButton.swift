@@ -136,52 +136,44 @@ struct ZapButton: View {
     }
     
     var body: some View {
-        Button(action: {}) {
-            HStack {
-                Button( action: {}) {
-                    Menu {
-                        ForEach(ZapOptions.allCases, id: \.self) { option in
-                            Button(action: {
-                                sharedDefaults?.set(option.id, forKey: "zap_mode_id")
-                            }) {
-                                Text(option.icon + " " + option.description)
-                            }
-                        }
-                    }
-                label: {
-                    Image(systemName: "ellipsis")
-                        .imageScale(.large)
-                        .frame(width: 10, height: 25, alignment: .center)
-                        .rotationEffect(.degrees(90))
-                }
-                .onDisappear {
-                    isMenuOpen = false
-                }
-                }
-                Divider()
-                Button( action: {
-                    isLoading = true
-                    decideSelectionOrEntire()
-                }) {
-                    if isLoading {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                            .frame(width: 25, height: 25, alignment: .center)
-                        
-                    } else {
-                        ZStack {
-                            Text(ZapOptions.getZapMode(from: zapModeId)?.icon ?? ZapOptions.casual.icon)
-                                .grayscale(isDisabled() ? 1 : 0)
-                            Image(systemName: "line.diagonal")
-                                .imageScale(.large)
-                                .frame(width: 25, height: 25, alignment: .center)
-                                .rotationEffect(.degrees(90))
-                                .opacity(isDisabled() ? 1 : 0)
-                        }
+        HStack(spacing: 4) {
+            Menu {
+                ForEach(ZapOptions.allCases, id: \.self) { option in
+                    Button(action: {
+                        sharedDefaults?.set(option.id, forKey: "zap_mode_id")
+                    }) {
+                        Text(option.icon + " " + option.description)
                     }
                 }
-                .disabled(isLoading || isDisabled())
             }
+            label: {
+                Image(systemName: "arrowtriangle.up.fill")
+                    .imageScale(.small)
+                    .frame(width: 10, height: 25, alignment: .center)
+                    .rotationEffect(.degrees(isInEditMode ? 0 : 180))
+            }
+            Button( action: {
+                isLoading = true
+                decideSelectionOrEntire()
+            }) {
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .frame(width: 25, height: 25, alignment: .center)
+                    
+                } else {
+                    ZStack {
+                        Text(ZapOptions.getZapMode(from: zapModeId)?.icon ?? ZapOptions.casual.icon)
+                            .grayscale(isDisabled() ? 1 : 0)
+                        Image(systemName: "line.diagonal")
+                            .imageScale(.large)
+                            .frame(width: 25, height: 25, alignment: .center)
+                            .rotationEffect(.degrees(90))
+                            .opacity(isDisabled() ? 1 : 0)
+                    }
+                }
+            }
+            .disabled(isLoading || isDisabled())
         }
         .id(forceUpdateButtons)
         .onChange(of: fullText) { newValue in

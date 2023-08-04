@@ -86,6 +86,7 @@ struct KeyboardView: View {
                         Spacer()
                     }
                     ZapButton(controller: controller, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
+                    Divider()
                     EditButton(controller: controller, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
                     if isInEditMode {
                         Spacer()

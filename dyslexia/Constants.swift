@@ -100,7 +100,8 @@ enum Coachy {
     case edit
     case zapSelect
     case zap
-    case undo
+    case editMode
+    case confirm
     
     var lowerText: [String: String] {
         switch self {
@@ -109,7 +110,8 @@ enum Coachy {
         case .edit: return ["subText": "Try saying 'Make this more aggressive, and all caps", "tipText": "Tip: You can partially edit text by selecting it first"]
         case .zapSelect: return ["subText": "Try selecting \(ZapOptions.rasta.icon) \(ZapOptions.rasta.description)", "tipText": "Tip: We always remember your last voice"]
         case .zap: return ["subText": "", "tipText": "Tip: This is only available when there is text around the cursor"]
-        case .undo: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else \nsince the last edit"]
+        case .editMode: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else \nsince the last edit"]
+        case .confirm: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else \nsince the last edit"]
         }
     }
     
@@ -120,7 +122,8 @@ enum Coachy {
         case .edit: return Text("Tap \(Image(systemName: "waveform.and.mic")) to make custom voice edits.")
         case .zapSelect: return Text("Tap ⋮ to select a voice.")
         case .zap: return Text("Now tap \(ZapOptions.getZapMode(from: UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0")?.icon ?? ZapOptions.rasta.icon) to rewrite in the selected voice.")
-        case .undo: return Text("Tap \(Image(systemName: "arrow.counterclockwise")) to undo your most recent edit")
+        case .editMode: return Text("Tap \(Image(systemName: "arrow.counterclockwise")) to undo your most recent edit")
+        case .confirm: return Text("Tap \(Image(systemName: "arrow.counterclockwise")) to undo your most recent edit")
         }
     }
     
@@ -133,7 +136,8 @@ enum Coachy {
         case .edit: return UIScreen.main.bounds.width - (buttonWidth * 1.5) - padding
         case .zapSelect: return UIScreen.main.bounds.width - (buttonWidth * 3) - padding
         case .zap: return UIScreen.main.bounds.width - (buttonWidth * 2.5) - padding
-        case .undo: return UIScreen.main.bounds.width - (buttonWidth/2) - padding - 3
+        case .editMode: return UIScreen.main.bounds.width - (buttonWidth/2) - padding - 3
+        case .confirm: return UIScreen.main.bounds.width - (buttonWidth/2) - padding - 3
         }
     }
 }

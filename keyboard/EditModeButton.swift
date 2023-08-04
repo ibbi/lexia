@@ -125,9 +125,13 @@ struct EditModeButton: View {
         }
     }
     
+    func isDisabled() -> Bool {
+        return (((controller.keyboardTextContext.selectedText ?? "").isEmpty) && ((controller.textDocumentProxy.documentContext ?? "").isEmpty))
+    }
+    
     var body: some View {
         TopBarButton(buttonType: .editView, action: {
             decideSelectionOrEntire()
-        }, isLoading: $isLoading, isInBadContext: false)
+        }, isLoading: $isLoading, isInBadContext: isDisabled())
     }
 }
