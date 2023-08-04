@@ -12,7 +12,6 @@ import URLProxy
 
 struct EditButton: View {
     let controller: KeyboardInputViewController
-    @Binding var prevContext: String?
     @State var forceUpdateButtons: Bool
     @Binding var keyboardStatus: KeyboardStatus
     let isGmail: Bool
@@ -122,7 +121,6 @@ struct EditButton: View {
                         controller.textDocumentProxy.deleteBackward(times: text.count)
                     }
                     controller.textDocumentProxy.insertText(transformed)
-                    prevContext = KeyHelper.getFiveSurroundingChars(controller: controller)
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                 }

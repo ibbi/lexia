@@ -11,6 +11,7 @@
 		283E22372A58A68E0023BA3A /* TopBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283E22352A58777F0023BA3A /* TopBarButton.swift */; };
 		28432C942A5637B9001D1AC1 /* VoiceRewriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */; };
 		285478D62A7C587400175127 /* EditModeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285478D52A7C587400175127 /* EditModeButton.swift */; };
+		285478D82A7CC96A00175127 /* ConfirmEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285478D72A7CC96A00175127 /* ConfirmEditButton.swift */; };
 		285943292A5013CE003038F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28F11CA729EE2E6900ED00D9 /* Assets.xcassets */; };
 		2859432F2A528DA9003038F2 /* UndoRedoButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2859432E2A528DA9003038F2 /* UndoRedoButtons.swift */; };
 		285943312A532633003038F2 /* KeyHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285943302A532633003038F2 /* KeyHelper.swift */; };
@@ -89,6 +90,7 @@
 		283E22352A58777F0023BA3A /* TopBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarButton.swift; sourceTree = "<group>"; };
 		28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRewriteButton.swift; sourceTree = "<group>"; };
 		285478D52A7C587400175127 /* EditModeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModeButton.swift; sourceTree = "<group>"; };
+		285478D72A7CC96A00175127 /* ConfirmEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmEditButton.swift; sourceTree = "<group>"; };
 		2859432E2A528DA9003038F2 /* UndoRedoButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoRedoButtons.swift; sourceTree = "<group>"; };
 		285943302A532633003038F2 /* KeyHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyHelper.swift; sourceTree = "<group>"; };
 		285A81742A12E46A00ED7608 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				28F11CBA29EE312600ED00D9 /* KeyboardViewController.swift */,
 				285A817A2A12E93100ED7608 /* TranscribeButton.swift */,
 				28B9A7E82A47CD0100109C6C /* StopRecording.swift */,
+				285478D72A7CC96A00175127 /* ConfirmEditButton.swift */,
 				28CF45182A3A749900B8F52C /* ZapButton.swift */,
 				28432C932A5637B9001D1AC1 /* VoiceRewriteButton.swift */,
 				285478D52A7C587400175127 /* EditModeButton.swift */,
@@ -373,6 +376,7 @@
 			files = (
 				285A817C2A12E93100ED7608 /* TranscribeButton.swift in Sources */,
 				2859432F2A528DA9003038F2 /* UndoRedoButtons.swift in Sources */,
+				285478D82A7CC96A00175127 /* ConfirmEditButton.swift in Sources */,
 				285A81792A12E77F00ED7608 /* Constants.swift in Sources */,
 				28F11CBB29EE312600ED00D9 /* KeyboardViewController.swift in Sources */,
 				285A81752A12E46A00ED7608 /* KeyboardView.swift in Sources */,

@@ -20,13 +20,14 @@ struct KeyboardView: View {
     private var keyboardContext: KeyboardContext
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
     @State private var prevContext: String? = ""
+    @State private var wasSelectedText: Bool = false
     @State private var keyboardStatus: KeyboardStatus = .available
     @State private var isInEditMode: Bool = false
     @FocusState private var isInputFocused: Bool
     // Hack to get inserttext to update views
     @State var forceUpdateButtons: Bool = false
     @State var editText: String = ""
-    @FocusState private var isEditInputFocused: Bool
+    @State var initialText: String = ""
     @State var keyboardSize: CGSize = .zero
     @State var buttonRowSize: CGSize = .zero
     @State var undoRedoStack: [String] = []
@@ -36,6 +37,9 @@ struct KeyboardView: View {
         undoRedoStack = []
         undoRedoIdx = 0
         editText = ""
+        prevContext = ""
+        wasSelectedText = false
+        initialText = ""
     }
 
     var body: some View {
@@ -53,11 +57,7 @@ struct KeyboardView: View {
                     }, isLoading: .constant(false), isInBadContext: false)
                     Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
                     Spacer()
-                    TopBarButton(buttonType: .confirm, action:{
-                        withAnimation {
-                            isInEditMode = false
-                        }
-                    }, isLoading: .constant(false), isInBadContext: false)
+                    ConfirmEditButton(controller: controller, prevContext: prevContext, wasSelectedText: wasSelectedText, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: $isInEditMode, editText: editText, initialText: initialText, resetEditSpace: resetEditSpace)
                 }
                 .padding(6)
                 .padding(.top, 6)
@@ -85,14 +85,14 @@ struct KeyboardView: View {
                         Text(keyboardStatus  == .reading ? "Reading..." : keyboardStatus == .rewriting ? "Writing..." : "")
                         Spacer()
                     }
-                    ZapButton(controller: controller, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
-                    EditButton(controller: controller, prevContext: $prevContext, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
+                    ZapButton(controller: controller, forceUpdateButtons: forceUpdateButtons,  keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
+                    EditButton(controller: controller, forceUpdateButtons: forceUpdateButtons, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: isInEditMode, editText: $editText)
                     if isInEditMode {
                         Spacer()
                         UndoRedoButtons(editText: $editText, undoRedoStack: $undoRedoStack, undoRedoIdx: $undoRedoIdx)
                     } else {
                         Divider()
-                        EditModeButton(controller: controller, prevContext: $prevContext, keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: $isInEditMode, editText: $editText, undoRedoStack: $undoRedoStack)
+                        EditModeButton(controller: controller, prevContext: $prevContext, wasSelectedText: $wasSelectedText,keyboardStatus: $keyboardStatus, isGmail: isGmail, isInEditMode: $isInEditMode, editText: $editText, initialText: $initialText, undoRedoStack: $undoRedoStack)
                     }
                 }
                 .padding(6)

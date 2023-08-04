@@ -27,7 +27,7 @@ enum ButtonType {
         case .redo: return Image(systemName: "arrow.uturn.forward")
         case .confirm: return Image(systemName: "checkmark.circle.fill")
         case .discard: return Image(systemName: "trash.fill")
-        case .editView: return Image(systemName: "text.viewfinder")
+        case .editView: return Image(systemName: "note.text")
         }
     }
     
@@ -83,6 +83,6 @@ struct TopBarButton: View {
 
 struct TopBarButton_Previews: PreviewProvider {
     static var previews: some View {
-        TopBarButton(buttonType: ButtonType.edit, action: {}, isLoading: .constant(false), isInBadContext: false)
+        TopBarButton(buttonType: ButtonType.editView, action: {}, isLoading: .constant(false), isInBadContext: false)
     }
 }

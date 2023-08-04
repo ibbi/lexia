@@ -1,25 +1,24 @@
 //
-//  EditModeButton.swift
+//  ConfirmEditButton.swift
 //  keyboard
 //
-//  Created by ibbi on 8/3/23.
+//  Created by ibbi on 8/4/23.
 //
-
 
 import SwiftUI
 import KeyboardKit
 import Combine
 
-struct EditModeButton: View {
+struct ConfirmEditButton: View {
     let controller: KeyboardInputViewController
-    @Binding var prevContext: String?
-    @Binding var wasSelectedText: Bool
+    var prevContext: String?
+    var wasSelectedText: Bool
     @Binding var keyboardStatus: KeyboardStatus
     let isGmail: Bool
     @Binding var isInEditMode: Bool
-    @Binding var editText: String
-    @Binding var initialText: String
-    @Binding var undoRedoStack: [String]
+    var editText: String
+    var initialText: String
+    let resetEditSpace: () -> Void
     @State private var isLoading: Bool = false
     @State private var prevText = ""
     @State private var afterText = ""
@@ -84,10 +83,22 @@ struct EditModeButton: View {
             controller.textDocumentProxy.adjustTextPosition(byCharacterOffset: prevText.count)
             beforeCancellable?.cancel()
             fullText = prevText
-            moveTextAndSetEditMode(fullText)
+            if let range = fullText.range(of: initialText) {
+                let replacedText = fullText.replacingCharacters(in: range, with: editText)
+                controller.textDocumentProxy.deleteBackward(times: fullText.count)
+                controller.textDocumentProxy.insertText(replacedText)
+            } else {
+                //TODO: Add some kin of display that says this is happening
+                print("oh shiet")
+                DispatchQueue.main.async {
+                    UIPasteboard.general.string = editText
+                }
+            }
             fullText = ""
             afterText = ""
             prevText = ""
+            keyboardStatus = .available
+            resetEditSpace()
             return true
         }
         prevText = (before ?? "") + prevText
@@ -96,27 +107,26 @@ struct EditModeButton: View {
         return false
     }
     
-    func moveTextAndSetEditMode(_ text: String) {
-        prevContext = KeyHelper.getFiveSurroundingChars(controller: controller)
-        keyboardStatus = .available
-        editText = text
-        initialText = text
-        undoRedoStack.append(text)
-        isLoading = false
-        withAnimation {
-            isInEditMode = true
-        }
-    }
-    
     func decideSelectionOrEntire() {
         isLoading = true
-        let selectedText = controller.keyboardTextContext.selectedText
-        if !(selectedText?.isEmpty ?? true) {
-            wasSelectedText = true
-            moveTextAndSetEditMode(selectedText!)
+        withAnimation {
+            isInEditMode = false
         }
-        else if controller.textDocumentProxy.documentContext != nil {
-            keyboardStatus = .reading
+        
+        keyboardStatus = .rewriting
+        if (initialText == editText) {
+            keyboardStatus = .available
+            // do nothing
+        }
+        //TODO: Select and same context shortcuts don't work because cursor doesn't update in time.
+        else if (KeyHelper.getFiveSurroundingChars(controller: controller) == prevContext) {
+            if (!wasSelectedText) {
+                controller.textDocumentProxy.deleteBackward(times: initialText.count)
+            }
+            controller.textDocumentProxy.insertText(editText)
+            keyboardStatus = .available
+            resetEditSpace()
+        } else {
             self.moveToEndCancellable = self.moveToEndTimer.sink { _ in
                 DispatchQueue.main.async {
                     self.moveCursorToEnd()
@@ -126,7 +136,7 @@ struct EditModeButton: View {
     }
     
     var body: some View {
-        TopBarButton(buttonType: .editView, action: {
+        TopBarButton(buttonType: .confirm, action: {
             decideSelectionOrEntire()
         }, isLoading: $isLoading, isInBadContext: false)
     }
