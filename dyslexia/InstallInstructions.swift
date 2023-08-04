@@ -15,11 +15,22 @@ struct InstallInstructions: View {
     let installTodos: [(image: Image, text: String)] = [
         (Image("SettingsIcon"), "Open Settings"),
         (Image("Democon"), "Lexi"),
+        (Image("ToggleIcon"), "Microphone"),
         (Image("KeyboardIcon"), "Keyboards"),
         (Image("ToggleIcon"), "Enable Lexi"),
         (Image("ToggleIcon"), "Allow Full Access"),
         (Image(systemName: "return"), "Come back here!")
     ]
+    
+    func isDone(index: Int) -> Bool {
+        switch index {
+        case 0, 1: return isKeyboardEnabled && AVAudioSession.sharedInstance().recordPermission == .granted
+        case 2: return AVAudioSession.sharedInstance().recordPermission == .granted
+        case 3, 4: return isKeyboardEnabled
+        case 5: return isFullAccessEnabled
+        default: return false
+        }
+    }
     
     var body: some View {
         VStack {
@@ -30,7 +41,7 @@ struct InstallInstructions: View {
             
             List {
                 ForEach(0..<installTodos.count, id: \.self) { index in
-                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text, isDone: (index < 4 && isKeyboardEnabled) || index == 4 && isFullAccessEnabled, isButtonDisabled: isKeyboardEnabled && isFullAccessEnabled )
+                    TodoItem(index: index, image: installTodos[index].image, text: installTodos[index].text, isDone: isDone(index: index), isButtonDisabled: isKeyboardEnabled && isFullAccessEnabled)
                         .frame(height: 60)
                         .padding(.horizontal)
                 }

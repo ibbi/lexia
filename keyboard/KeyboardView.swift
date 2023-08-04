@@ -41,6 +41,7 @@ struct KeyboardView: View {
         prevContext = ""
         wasSelectedText = false
         initialText = ""
+        isInputFocused = false
     }
 
     var body: some View {
