@@ -19,6 +19,7 @@ struct KeyboardView: View {
     @EnvironmentObject
     private var keyboardContext: KeyboardContext
     @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
+    @AppStorage("is_in_edit_mode", store: UserDefaults(suiteName: "group.lexia")) var isInEditModeDefaults: Bool = false
     @State private var prevContext: String? = ""
     @State private var wasSelectedText: Bool = false
     @State private var keyboardStatus: KeyboardStatus = .available
@@ -110,6 +111,21 @@ struct KeyboardView: View {
             }
             else if !isInEditMode {
                 StopRecording(height: keyboardSize.height + buttonRowSize.height)
+            }
+        }
+        //TODO: Figure out better way to do this, ew
+        .onChange(of: isInEditMode) { newValue in
+            if (newValue != isInEditModeDefaults) {
+                UserDefaults(suiteName: "group.lexia")?.set(newValue, forKey: "is_in_edit_mode")
+            }
+        }
+        .onChange(of: isInEditModeDefaults) { newValue in
+            if (isInEditMode != newValue) {
+                if (newValue == false) {
+                    withAnimation {
+                        isInEditMode = newValue
+                    }
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ struct Playground: View {
     @State private var isFocused: Bool = false
     @AppStorage("finished_tour", store: UserDefaults(suiteName: "group.lexia")) var finishedTour: Bool = false
     @AppStorage("zap_mode_id", store: UserDefaults(suiteName: "group.lexia")) var zapModeID: String?
-    @State private var oldZapModeID: String?
+    @AppStorage("is_in_edit_mode", store: UserDefaults(suiteName: "group.lexia")) var isInEditModeDefaults: Bool?
     @State private var inputText: String = ""
     @State private var oldInputText: String = ""
     @State private var generatorLoading: Bool = false
@@ -21,9 +21,11 @@ struct Playground: View {
     @State var currentStep: Int = 0
     let sharedDefaults = UserDefaults(suiteName: "group.lexia")
     
+
     struct TutorialStep {
         let id: Coachy
         let onNext: () -> Void
+        let onPrev: (() -> Void)?
     }
     func getTutorialSteps() -> [TutorialStep] {
         [
@@ -33,20 +35,26 @@ struct Playground: View {
                 } else {
                     withAnimation {currentStep += 1}
                 }
-            }),
+            }, onPrev: nil),
             TutorialStep(id: .zapSelect, onNext: {
-                if zapModeID == ZapOptions.rasta.id {
+                if zapModeID == ZapOptions.medieval.id {
                     withAnimation {currentStep += 1}
                 } else {
-                    sharedDefaults?.set(ZapOptions.rasta.id, forKey: "zap_mode_id")
+                    sharedDefaults?.set(ZapOptions.medieval.id, forKey: "zap_mode_id")
                 }
-            }),
-            TutorialStep(id: .zap, onNext: { withAnimation {currentStep += 1} }),
-            TutorialStep(id: .edit, onNext: { withAnimation {currentStep += 1} }),
-            TutorialStep(id: .editMode, onNext: { withAnimation {currentStep += 1} }),
+            }, onPrev: {withAnimation {currentStep = currentStep - 1}}),
+            TutorialStep(id: .zap, onNext: { withAnimation {currentStep += 1} }, onPrev: {withAnimation {currentStep = currentStep - 1}}),
+            TutorialStep(id: .edit, onNext: { withAnimation {currentStep += 1} }, onPrev: {withAnimation {currentStep = currentStep - 1}}),
+            TutorialStep(id: .editMode, onNext: {
+                sharedDefaults?.set(true, forKey: "is_in_edit_mode")
+            }, onPrev: {withAnimation {currentStep = currentStep - 1}}),
             TutorialStep(id: .confirm, onNext: {
                 currentStep = 0
                 sharedDefaults?.set(true, forKey: "finished_tour")
+                sharedDefaults?.set(false, forKey: "is_in_edit_mode")
+            }, onPrev: {
+                sharedDefaults?.set(false, forKey: "is_in_edit_mode")
+                withAnimation {currentStep = currentStep - 1}
             })
         ]
     }
@@ -77,6 +85,7 @@ struct Playground: View {
                     Spacer()
                     Button(action: {
                         sharedDefaults?.set(false, forKey: "finished_tour")
+                        sharedDefaults?.set(false, forKey: "is_in_edit_mode")
                     }) {
                         Text("Run tutorial")
                     }
@@ -117,10 +126,10 @@ struct Playground: View {
                 CoachMark(coachID: Coachy.selectLexi, onNext: nil, onPrev: nil, onSkip: nil )
             }
             else if !finishedTour {
-                CoachMark(coachID: tutorialSteps[currentStep].id, onNext: tutorialSteps[currentStep].onNext, onPrev: tutorialSteps[currentStep].id == .dictate ? nil : { withAnimation {currentStep = currentStep - 1} },  onSkip: {
+                CoachMark(coachID: tutorialSteps[currentStep].id, onNext: tutorialSteps[currentStep].onNext, onPrev: tutorialSteps[currentStep].onPrev,  onSkip: {
                     sharedDefaults?.set(true, forKey: "finished_tour")
                     currentStep = 0
-                } )
+                })
             }
         }
         .onChange(of: inputText) { newValue in
@@ -136,11 +145,6 @@ struct Playground: View {
                         if (!newValue.contains(oldInputText) && !oldInputText.contains(newValue)) {
                             withAnimation {currentStep += 1}
                         }
-//                    case .undo:
-//                        if (oldInputText == newValue && !newValue.contains(oldInputText) && !oldInputText.contains(newValue)) {
-//                            currentStep = 0
-//                            sharedDefaults?.set(true, forKey: "finished_tour")
-//                        }
                     default:
                         print("inputText changed")
                     }
@@ -151,10 +155,14 @@ struct Playground: View {
         }
         .onChange(of: zapModeID) { newValue in
             if !finishedTour && tutorialSteps[currentStep].id == .zapSelect {
-                if newValue == ZapOptions.rasta.id {
+                if newValue == ZapOptions.medieval.id {
                     withAnimation {currentStep += 1}
-                    oldZapModeID = newValue
                 }
+            }
+        }
+        .onChange(of: isInEditModeDefaults) { newValue in
+            if (!finishedTour && tutorialSteps[currentStep].id == .editMode && newValue == true) {
+                withAnimation {currentStep += 1}
             }
         }
     }

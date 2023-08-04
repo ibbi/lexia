@@ -20,6 +20,7 @@ struct EditModeButton: View {
     @Binding var editText: String
     @Binding var initialText: String
     @Binding var undoRedoStack: [String]
+    @AppStorage("is_in_edit_mode", store: UserDefaults(suiteName: "group.lexia")) var isInEditModeDefaults: Bool = false
     @State private var isLoading: Bool = false
     @State private var prevText = ""
     @State private var afterText = ""
@@ -133,5 +134,12 @@ struct EditModeButton: View {
         TopBarButton(buttonType: .editView, action: {
             decideSelectionOrEntire()
         }, isLoading: $isLoading, isInBadContext: isDisabled())
+        .onChange(of: isInEditModeDefaults) { newValue in
+            if (isInEditMode != newValue) {
+                if (newValue == true) {
+                    decideSelectionOrEntire()
+                }
+            }
+        }
     }
 }
