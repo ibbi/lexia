@@ -107,11 +107,11 @@ enum Coachy {
         switch self {
         case .selectLexi: return ["subText": "", "tipText": ""]
         case .dictate: return ["subText": "Try saying 'I hate the smell of butter!'", "tipText": ""]
-        case .edit: return ["subText": "Try saying 'Make this more aggressive, and all caps", "tipText": "Tip: You can partially edit text by selecting it first"]
         case .zapSelect: return ["subText": "Try selecting \(ZapOptions.rasta.icon) \(ZapOptions.rasta.description)", "tipText": "Tip: We always remember your last voice"]
         case .zap: return ["subText": "", "tipText": "Tip: This is only available when there is text around the cursor"]
-        case .editMode: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else \nsince the last edit"]
-        case .confirm: return ["subText": "We only remember your last edit, and delete older data", "tipText": "Tip: This only works if you haven't done anything else \nsince the last edit"]
+        case .edit: return ["subText": "Try saying 'Make this more aggressive, and all caps'", "tipText": "Tip: You can partially edit text by selecting it first"]
+        case .editMode: return ["subText": "The selected text, or the text around your cursor moves with you", "tipText": "Tip: This only works if you haven't done anything else \nsince the last edit"]
+        case .confirm: return ["subText": "We replace your older text with the new text when you confirm", "tipText": "Tip: If we can't figure out what text to replace, we put it on your clipboard"]
         }
     }
     
@@ -119,11 +119,11 @@ enum Coachy {
         switch self {
         case .selectLexi: return Text("Hold \(Image(systemName: "globe")) below, and select Lexi")
         case .dictate: return Text("Tap \(Image(systemName: "mic.fill")) to dictate, in any language.")
-        case .edit: return Text("Tap \(Image(systemName: "waveform.and.mic")) to make custom voice edits.")
-        case .zapSelect: return Text("Tap ⋮ to select a voice.")
+        case .zapSelect: return Text("Tap \(Image(systemName: "arrowtriangle.down.fill")) to select a voice.")
         case .zap: return Text("Now tap \(ZapOptions.getZapMode(from: UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0")?.icon ?? ZapOptions.rasta.icon) to rewrite in the selected voice.")
-        case .editMode: return Text("Tap \(Image(systemName: "arrow.counterclockwise")) to undo your most recent edit")
-        case .confirm: return Text("Tap \(Image(systemName: "arrow.counterclockwise")) to undo your most recent edit")
+        case .edit: return Text("Tap \(Image(systemName: "waveform.and.mic")) to make custom voice edits.")
+        case .editMode: return Text("Tap \(Image(systemName: "rectangle.and.text.magnifyingglass")) to move your text into a sandbox")
+        case .confirm: return Text("Play around in the sandbox until you're happy, then tap \(Image(systemName: "checkmark.circle.fill"))")
         }
     }
     
@@ -133,9 +133,9 @@ enum Coachy {
         switch self {
         case .selectLexi: return 0
         case .dictate: return (buttonWidth / 2) - padding + 3
-        case .edit: return UIScreen.main.bounds.width - (buttonWidth * 1.5) - padding
-        case .zapSelect: return UIScreen.main.bounds.width - (buttonWidth * 3) - padding
-        case .zap: return UIScreen.main.bounds.width - (buttonWidth * 2.5) - padding
+        case .zapSelect: return UIScreen.main.bounds.width - (buttonWidth * 3.8)
+        case .zap: return UIScreen.main.bounds.width - (buttonWidth * 3)
+        case .edit: return UIScreen.main.bounds.width - (buttonWidth * 1.9)
         case .editMode: return UIScreen.main.bounds.width - (buttonWidth/2) - padding - 3
         case .confirm: return UIScreen.main.bounds.width - (buttonWidth/2) - padding - 3
         }
