@@ -18,8 +18,8 @@ struct KeyboardView: View {
     unowned var controller: KeyboardInputViewController
     @EnvironmentObject
     private var keyboardContext: KeyboardContext
-    @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecordingDefaults: Bool = false
-    @State private var isRecording: Bool = false
+    @AppStorage("recording", store: UserDefaults(suiteName: "group.lexia")) var isRecording: Bool = false
+//    @State private var isRecording: Bool = false
     @AppStorage("is_in_edit_mode", store: UserDefaults(suiteName: "group.lexia")) var isInEditModeDefaults: Bool = false
     @State private var isInEditMode: Bool = false
     @State private var prevContext: String? = ""
@@ -130,13 +130,13 @@ struct KeyboardView: View {
                 }
             }
         }
-        .onChange(of: isRecordingDefaults) { newValue in
-            if (isRecording != newValue) {
-                withAnimation {
-                    isRecording = newValue
-                }
-            }
-        }
+//        .onChange(of: isRecordingDefaults) { newValue in
+//            if (isRecording != newValue) {
+//                withAnimation {
+//                    isRecording = newValue
+//                }
+//            }
+//        }
     }
 }
 
