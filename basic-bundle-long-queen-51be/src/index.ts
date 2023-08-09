@@ -1,5 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai';
 import fetchAdapter from '@vespaiach/axios-fetch-adapter';
+import { createClient } from '@supabase/supabase-js';
 
 const personas = {
   grammarAndSpelling:
@@ -36,6 +37,15 @@ const configuration = new Configuration({
   },
 });
 
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const routes = {
+  transform: '/transform',
+  generate: '/generate',
+  edit: '/edit',
+  whisper: '/whisper',
+};
+
 const openai = new OpenAIApi(configuration);
 addEventListener('fetch', (event: any) => {
   event.respondWith(handleRequest(event.request));
@@ -43,25 +53,23 @@ addEventListener('fetch', (event: any) => {
 
 async function handleRequest(request: Request): Promise<Response> {
   const url = new URL(request.url);
-  if (url.pathname === '/transform') {
+  if (url.pathname === routes.transform) {
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
     return handleTransformerRequest(request);
-  } else if (url.pathname === '/generate') {
+  } else if (url.pathname === routes.generate) {
     if (request.method !== 'GET') {
       return new Response('Method not allowed', { status: 405 });
     }
     return handleGeneratorRequest(request);
-  } else if (url.pathname === '/edit') {
+  } else if (url.pathname === routes.edit) {
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
     }
     return handleVoiceEdit(request);
-  } else if (url.pathname === '/whisper') {
-    if (request.headers.get('Upgrade') === 'websocket') {
-      return handleWhisperWebSocket(request);
-    } else if (request.method === 'POST') {
+  } else if (url.pathname === routes.whisper) {
+    if (request.method === 'POST') {
       return handleWhisperRequest(request);
     } else {
       return new Response('Method not allowed', { status: 405 });
@@ -79,6 +87,10 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
     if (requestBody.prompt in personaMap) {
       rewritePersona = personaMap[requestBody.prompt];
     }
+    const { data, error } = await supabase
+      .from('logs')
+      .insert([{ request: routes.transform, details: requestBody.prompt }])
+      .select();
     const promptWrapped = `${rewritePersona}\nRewrite this:\n\n"${userMessage}"`;
     console.log(promptWrapped);
 
@@ -102,7 +114,10 @@ async function handleGeneratorRequest(request: Request): Promise<Response> {
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: genPrompts[Math.floor(Math.random() * genPrompts.length)] }],
     });
-
+    const { data, error } = await supabase
+      .from('logs')
+      .insert([{ request: routes.generate }])
+      .select();
     const assistantMessage = response.data.choices[0].message?.content.replace(/^"(.*)"$/, '$1');
     return new Response(assistantMessage, {
       headers: { 'Content-Type': 'text/plain' },
@@ -114,6 +129,10 @@ async function handleGeneratorRequest(request: Request): Promise<Response> {
 
 async function handleWhisperRequest(request: Request): Promise<Response> {
   try {
+    const resp = await supabase
+      .from('logs')
+      .insert([{ request: routes.whisper }])
+      .select();
     const formData = await request.formData();
     const audioFile = formData.get('file');
 
@@ -160,6 +179,10 @@ async function handleVoiceEdit(request: Request): Promise<Response> {
       },
     });
     const { text } = await whisperResponse.json();
+    const resp = await supabase
+      .from('logs')
+      .insert([{ request: routes.edit, details: text }])
+      .select();
     const promptWrapped = `Apply the following instructions:\n---\n${text}\n---\n\nto the following text:\n---\n${contextText}\n---\n`;
     const gptResponse = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',

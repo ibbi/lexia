@@ -12,6 +12,7 @@
     "wrangler": "^3.0.0"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.32.0",
     "@vespaiach/axios-fetch-adapter": "^0.3.1",
     "openai": "^3.2.1",
     "webpack": "^5.86.0",
