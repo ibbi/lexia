@@ -51,8 +51,15 @@ addEventListener('fetch', (event: any) => {
   event.respondWith(handleRequest(event.request));
 });
 
-async function handleRequest(request: Request): Promise<Response> {
+const getRequestInfo = (request: Request) => {
   const url = new URL(request.url);
+  const ip = request.headers.get('x-forwarded-for') || request.headers.get('cf-connecting-ip');
+  const userAgent = request.headers.get('user-agent');
+  return { url, ip, userAgent };
+};
+
+async function handleRequest(request: Request): Promise<Response> {
+  const { url } = getRequestInfo(request);
   if (url.pathname === routes.transform) {
     if (request.method !== 'POST') {
       return new Response('Method not allowed', { status: 405 });
@@ -87,12 +94,15 @@ async function handleTransformerRequest(request: Request): Promise<Response> {
     if (requestBody.prompt in personaMap) {
       rewritePersona = personaMap[requestBody.prompt];
     }
-    const { data, error } = await supabase
-      .from('logs')
-      .insert([{ request: routes.transform, details: requestBody.prompt }])
-      .select();
     const promptWrapped = `${rewritePersona}\nRewrite this:\n\n"${userMessage}"`;
-    console.log(promptWrapped);
+    const { url, ip, userAgent } = getRequestInfo(request);
+    let insertData = {
+      request: url.pathname,
+      user_agent: userAgent,
+      user_ip: ip,
+      details: `${requestBody.prompt}: ${rewritePersona}`,
+    };
+    const resp = await supabase.from('logs').insert([insertData]).select();
 
     const response = await openai.createChatCompletion({
       model: 'gpt-4',
@@ -114,10 +124,13 @@ async function handleGeneratorRequest(request: Request): Promise<Response> {
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: genPrompts[Math.floor(Math.random() * genPrompts.length)] }],
     });
-    const { data, error } = await supabase
-      .from('logs')
-      .insert([{ request: routes.generate }])
-      .select();
+    const { url, ip, userAgent } = getRequestInfo(request);
+    let insertData = {
+      request: url.pathname,
+      user_agent: userAgent,
+      user_ip: ip,
+    };
+    const resp = await supabase.from('logs').insert([insertData]).select();
     const assistantMessage = response.data.choices[0].message?.content.replace(/^"(.*)"$/, '$1');
     return new Response(assistantMessage, {
       headers: { 'Content-Type': 'text/plain' },
@@ -129,16 +142,19 @@ async function handleGeneratorRequest(request: Request): Promise<Response> {
 
 async function handleWhisperRequest(request: Request): Promise<Response> {
   try {
-    const resp = await supabase
-      .from('logs')
-      .insert([{ request: routes.whisper }])
-      .select();
     const formData = await request.formData();
     const audioFile = formData.get('file');
 
     if (!(audioFile instanceof File)) {
       return new Response('Invalid file', { status: 400 });
     }
+    const { url, ip, userAgent } = getRequestInfo(request);
+    let insertData = {
+      request: url.pathname,
+      user_agent: userAgent,
+      user_ip: ip,
+    };
+    const resp = await supabase.from('logs').insert([insertData]).select();
 
     formData.append('model', 'whisper-1');
 
@@ -179,13 +195,17 @@ async function handleVoiceEdit(request: Request): Promise<Response> {
       },
     });
     const { text } = await whisperResponse.json();
-    const resp = await supabase
-      .from('logs')
-      .insert([{ request: routes.edit, details: text }])
-      .select();
+    const { url, ip, userAgent } = getRequestInfo(request);
+    let insertData = {
+      request: url.pathname,
+      user_agent: userAgent,
+      user_ip: ip,
+      details: text,
+    };
+    const resp = await supabase.from('logs').insert([insertData]).select();
     const promptWrapped = `Apply the following instructions:\n---\n${text}\n---\n\nto the following text:\n---\n${contextText}\n---\n`;
     const gptResponse = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       messages: [{ role: 'user', content: promptWrapped }],
     });
 
