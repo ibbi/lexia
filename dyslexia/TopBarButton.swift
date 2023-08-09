@@ -46,8 +46,7 @@ struct TopBarButton: View {
     var action: (() -> Void)?
     @Binding var isLoading: Bool
     let isInBadContext: Bool
-
-
+    
     var body: some View {
         Button(action: {
             isLoading = true
@@ -76,8 +75,8 @@ struct TopBarButton: View {
         .tint(.standardButtonBackground)
         .foregroundColor(buttonType.tint)
         .disabled(isLoading || isInBadContext)
-        }
     }
+}
 
 
 
