@@ -116,11 +116,11 @@ enum Coachy {
     var lowerText: [String: String] {
         switch self {
         case .selectLexi: return ["subText": "", "tipText": ""]
-        case .dictate: return ["subText": "Try saying 'I hate the smell of butter!'", "tipText": ""]
-        case .zapSelect: return ["subText": "Try selecting \(ZapOptions.medieval.icon) \(ZapOptions.medieval.description)", "tipText": "Tip: We always remember your last voice"]
+        case .dictate: return ["subText": "Try saying 'Are you crazy? That makes no sense.'", "tipText": ""]
+        case .zapSelect: return ["subText": "Try selecting \(ZapOptions.warm.icon) \(ZapOptions.warm.description)", "tipText": "Tip: We always remember your last voice"]
         case .zap: return ["subText": "", "tipText": "Tip: Editing is unavailable when there\nis no text around the cursor"]
-        case .edit: return ["subText": "Try saying 'Make this more aggressive, and all caps'", "tipText": "Tip: You can partially edit text by selecting it first"]
-        case .editMode: return ["subText": "The selected text, or the text around your cursor\nmoves with you", "tipText": "Tip: Use the sandbox to iterate"]
+        case .edit: return ["subText": "Try saying 'Make this rhyme, and all caps'", "tipText": "Tip: You can partially edit text by selecting it first"]
+        case .editMode: return ["subText": "The selected text, or the text around your cursor\nmoves with you", "tipText": "Tip: Use Longform to iterate"]
         case .confirm: return ["subText": "We will try to replace your older text with the new text", "tipText": "Tip: If we can't figure out what text to replace,\nwe put it on your clipboard"]
         }
     }
@@ -130,9 +130,9 @@ enum Coachy {
         case .selectLexi: return Text("Hold \(Image(systemName: "globe")) below, and select Lexi")
         case .dictate: return Text("Tap \(Image(systemName: "mic.fill")) to dictate, in any language")
         case .zapSelect: return Text("Tap \(Image(systemName: "arrowtriangle.down.fill")) to select a voice")
-        case .zap: return Text("Tap \(ZapOptions.getZapMode(from: UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0")?.icon ?? ZapOptions.medieval.icon) to speak like a knight")
+        case .zap: return Text("Tap \(ZapOptions.getZapMode(from: UserDefaults(suiteName: "group.lexia")?.string(forKey: "zap_mode_id") ?? "0")?.icon ?? ZapOptions.medieval.icon) to become professional")
         case .edit: return Text("Tap \(Image(systemName: "waveform.and.mic")) to make custom voice edits")
-        case .editMode: return Text("Tap \(Image(systemName: "rectangle.and.text.magnifyingglass")) to move your text into a sandbox")
+        case .editMode: return Text("Tap \(Image(systemName: "rectangle.and.text.magnifyingglass")) to move your text to Longform")
         case .confirm: return Text("Play around, then tap \(Image(systemName: "checkmark.circle.fill")) to confirm")
         }
     }

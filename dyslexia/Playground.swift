@@ -37,10 +37,10 @@ struct Playground: View {
                 }
             }, onPrev: nil),
             TutorialStep(id: .zapSelect, onNext: {
-                if zapModeID == ZapOptions.medieval.id {
+                if zapModeID == ZapOptions.warm.id {
                     withAnimation {currentStep += 1}
                 } else {
-                    sharedDefaults?.set(ZapOptions.medieval.id, forKey: "zap_mode_id")
+                    sharedDefaults?.set(ZapOptions.warm.id, forKey: "zap_mode_id")
                 }
             }, onPrev: {withAnimation {currentStep = currentStep - 1}}),
             TutorialStep(id: .zap, onNext: { withAnimation {currentStep += 1} }, onPrev: {withAnimation {currentStep = currentStep - 1}}),
@@ -155,7 +155,7 @@ struct Playground: View {
         }
         .onChange(of: zapModeID) { newValue in
             if !finishedTour && tutorialSteps[currentStep].id == .zapSelect {
-                if newValue == ZapOptions.medieval.id {
+                if newValue == ZapOptions.warm.id {
                     withAnimation {currentStep += 1}
                 }
             }
