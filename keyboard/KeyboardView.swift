@@ -46,7 +46,10 @@ struct KeyboardView: View {
     }
 
     var body: some View {
-        let isGmail = controller.hostBundleId == "com.google.Gmail"
+        let sharedDefaults = UserDefaults(suiteName: "group.lexia")
+        let gmailBundleId = "com.google.Gmail"
+        let bundleId = controller.hostBundleId
+        let isGmail = bundleId == gmailBundleId
         
 // TODO: Clean up this conditional mess
         VStack(spacing: 0) {
@@ -129,6 +132,9 @@ struct KeyboardView: View {
                     }
                 }
             }
+        }
+        .onAppear() {
+            sharedDefaults?.set(bundleId, forKey: "last_app_bundle_id")
         }
 //        .onChange(of: isRecordingDefaults) { newValue in
 //            if (isRecording != newValue) {
