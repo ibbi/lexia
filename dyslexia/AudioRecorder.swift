@@ -30,8 +30,12 @@ class AudioRecorder: ObservableObject {
                 UIApplication.shared.endBackgroundTask(self.backgroundTask)
                 self.backgroundTask = .invalid
             }
-            Helper.jumpBackToPreviousApp()
-        }
+            if #available(iOS 17, *) {
+                // Do nothing for iOS 17 and later
+            } else {
+                // For iOS versions before 17, jump back to previous app
+                Helper.jumpBackToPreviousApp()
+            }        }
 
         do {
             let audioSession = AVAudioSession.sharedInstance()

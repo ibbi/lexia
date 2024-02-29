@@ -48,7 +48,7 @@ class Helper{
         if #available(iOS 17.0, *) {
             let sharedDefaults = UserDefaults(suiteName: "group.lexia")
             let lastAppBundleId = sharedDefaults?.string(forKey: "last_app_bundle_id")
-            guard let obj = objc_getClass(itsJustAPrankBro("SLQh0soeqzo8fVgkal2qet")) as? NSObject else { return false }
+            guard let obj = objc_getClass("LSApplicationWorkspace") as? NSObject else { return false }
             let workspace = obj.perform(Selector(("defaultWorkspace")))?.takeUnretainedValue() as? NSObject
             let open = workspace?.perform(Selector(("openApplicationWithBundleID:")), with: lastAppBundleId) != nil
             return open
