@@ -88,11 +88,11 @@ struct StopRecording: View {
                     isUserDismissing = false
                 }
                 else {
-                    sharedDefaults?.set(true, forKey: "discard_recording")
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        sharedDefaults?.set(false, forKey: "recording")
-                    }
+//                    sharedDefaults?.set(true, forKey: "discard_recording")
+//                    
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                        sharedDefaults?.set(false, forKey: "recording")
+//                    }
                 }
             }
     }

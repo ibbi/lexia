@@ -35,7 +35,8 @@ class AudioRecorder: ObservableObject {
             } else {
                 // For iOS versions before 17, jump back to previous app
                 Helper.jumpBackToPreviousApp()
-            }        }
+            }
+        }
 
         do {
             let audioSession = AVAudioSession.sharedInstance()
@@ -69,6 +70,7 @@ class AudioRecorder: ObservableObject {
                 }
                 let isDiscardingRecording = self.sharedDefaults?.bool(forKey: "discard_recording") ?? false
                 if isDiscardingRecording {
+                    print("holymmm")
                     self.audioRecorder.stop()
                     do {
                         let fileManager = FileManager.default
