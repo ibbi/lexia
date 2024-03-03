@@ -18,7 +18,17 @@ struct DictationWhisper: View {
     
     var body: some View {
         VStack {
-            Text("Run tutorial")
+            HStack {
+                Image("ArrowTL")
+                Text("Tap here to go back")
+                    .font(.title2)
+                    .padding(.top)
+                Spacer()
+            }
+            .padding(.leading, 25)
+            Spacer()
+            Text("Sorry for the inconvenience, Apple forced me to do this")
+                .padding()
         }
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .active {

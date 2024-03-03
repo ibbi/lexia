@@ -10,31 +10,6 @@ import UIKit
 import SwiftUI
 import AVFoundation
 
-func itsJustAPrankBro(_ input: String) -> String {
-    let reverseCharMap: [Character: Character] = [
-        "q": "a", "w": "b", "e": "c", "r": "d", "t": "e", "y": "f", "u": "g",
-        "i": "h", "o": "i", "p": "j", "a": "k", "s": "l", "d": "m", "f": "n",
-        "g": "o", "8": "o", "h": "p", "j": "q", "k": "r", "l": "s", "z": "t", "x": "u",
-        "c": "v", "v": "w", "b": "x", "n": "y", "m": "z", "2": "p", "0": "p",
-        "Q": "A", "W": "B", "E": "C", "R": "D", "T": "E", "Y": "F", "U": "G",
-        "I": "H", "O": "I", "P": "J", "A": "K", "S": "L", "D": "M", "F": "N",
-        "G": "O", "H": "P", "J": "Q", "K": "R", "L": "S", "Z": "T", "X": "U",
-        "C": "V", "V": "W", "B": "X", "N": "Y", "M": "Z"
-    ]
-
-    var deobfuscatedString = ""
-
-    for character in input {
-        if let replacedChar = reverseCharMap[character] {
-            deobfuscatedString.append(replacedChar)
-        } else {
-            deobfuscatedString.append(character)  // Non-alphabetic characters remain unchanged
-        }
-    }
-
-    return deobfuscatedString
-}
-
 class Helper{
 
     static func openAppSettings() {
@@ -46,12 +21,7 @@ class Helper{
     }
     static func jumpBackToPreviousApp() -> Bool {
         if #available(iOS 17.0, *) {
-            let sharedDefaults = UserDefaults(suiteName: "group.lexia")
-            let lastAppBundleId = sharedDefaults?.string(forKey: "last_app_bundle_id")
-            guard let obj = objc_getClass("LSApplicationWorkspace") as? NSObject else { return false }
-            let workspace = obj.perform(Selector(("defaultWorkspace")))?.takeUnretainedValue() as? NSObject
-            let open = workspace?.perform(Selector(("openApplicationWithBundleID:")), with: lastAppBundleId) != nil
-            return open
+            return false
         } else {
             guard
                 let sysNavIvar = class_getInstanceVariable(UIApplication.self, "_systemNavigationAction"),
