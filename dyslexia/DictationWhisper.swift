@@ -14,12 +14,17 @@ struct DictationWhisper: View {
     
     @StateObject private var audioRecorder = AudioRecorder()
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.colorScheme) var colorScheme // Access the current color scheme
 
-    
     var body: some View {
         VStack {
             HStack {
-                Image("ArrowTL")
+                // Conditionally display the image based on the color scheme
+                if colorScheme == .dark {
+                    Image("ArrowTL") // Use this image in dark mode
+                } else {
+                    Image("ArrowTLL") // Use this image in light mode
+                }
                 Text("Tap here to go back")
                     .font(.title2)
                     .padding(.top)
